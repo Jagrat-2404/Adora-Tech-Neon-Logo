@@ -5,6 +5,7 @@ import Link from "next/link";
 import { ArrowRight, ChevronDown, Activity, Terminal, Layout, ShieldCheck, Zap } from "lucide-react";
 import { SITE_CONFIG } from "@/data/content";
 import { useIntro } from "./PageTransitionProvider";
+import { AnimatedCounter } from "./AnimatedCounter";
 
 interface HeroProps {
   isIntroActive?: boolean;
@@ -143,13 +144,17 @@ export const Hero: React.FC<HeroProps> = ({ isIntroActive: propIntroActive }) =>
         <div className="max-w-7xl mx-auto w-full grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center z-10">
           {/* Left Column: Editorial Copy */}
           <div className="lg:col-span-7 flex flex-col items-start text-left">
-            {/* Small Eyebrow Label */}
+            {/* Small Eyebrow Label with Multi-Ring Live Radar Indicator */}
             <div
-              className={`inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#102A26] border border-[#A4B7AF]/20 text-[#8DE0C1] text-xs font-mono uppercase tracking-widest mb-6 transition-all duration-700 ${
+              className={`inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full bg-[#102A26] border border-[#8DE0C1]/30 text-[#8DE0C1] text-xs font-mono uppercase tracking-widest mb-6 transition-all duration-700 shadow-sm ${
                 isIntroActive ? "opacity-0 translate-y-3" : "opacity-100 translate-y-0"
               }`}
               style={{ transitionDelay: "100ms" }}
             >
+              <span className="relative flex h-2 w-2">
+                <span className="animate-radar absolute inline-flex h-full w-full rounded-full bg-[#8DE0C1] opacity-75" />
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-[#8DE0C1]" />
+              </span>
               <span>{SITE_CONFIG.hero.smallLabel}</span>
             </div>
 
@@ -346,36 +351,36 @@ export const Hero: React.FC<HeroProps> = ({ isIntroActive: propIntroActive }) =>
       */}
       <section id="proof" className="border-y border-[#A4B7AF]/15 bg-[#0A1F1C]/90 py-8 px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-6 lg:gap-8">
-          <div className="p-4 rounded-2xl bg-[#0D2421]/60 border border-[#A4B7AF]/10 flex flex-col gap-1">
+          <div className="card-interactive p-5 rounded-2xl bg-[#0D2421]/60 border border-[#A4B7AF]/10 flex flex-col gap-1.5">
             <span className="font-[family-name:var(--font-outfit)] text-3xl sm:text-4xl font-light text-[#F1F3EB] tracking-tight">
-              99.8<span className="text-lg text-[#8DE0C1] font-mono">%</span>
+              <AnimatedCounter end={99.8} decimals={1} suffix="%" />
             </span>
             <span className="text-xs font-mono uppercase tracking-wider text-[#A4B7AF]/80">
               Operational Uptime &amp; Speed
             </span>
           </div>
 
-          <div className="p-4 rounded-2xl bg-[#0D2421]/60 border border-[#A4B7AF]/10 flex flex-col gap-1">
+          <div className="card-interactive p-5 rounded-2xl bg-[#0D2421]/60 border border-[#A4B7AF]/10 flex flex-col gap-1.5">
             <span className="font-[family-name:var(--font-outfit)] text-3xl sm:text-4xl font-light text-[#8DE0C1] tracking-tight">
-              &lt; 14<span className="text-lg text-[#8DE0C1] font-mono">ms</span>
+              <AnimatedCounter end={14} prefix="< " suffix="ms" />
             </span>
             <span className="text-xs font-mono uppercase tracking-wider text-[#A4B7AF]/80">
               Sub-Second Edge API Latency
             </span>
           </div>
 
-          <div className="p-4 rounded-2xl bg-[#0D2421]/60 border border-[#A4B7AF]/10 flex flex-col gap-1">
+          <div className="card-interactive p-5 rounded-2xl bg-[#0D2421]/60 border border-[#A4B7AF]/10 flex flex-col gap-1.5">
             <span className="font-[family-name:var(--font-outfit)] text-3xl sm:text-4xl font-light text-[#D5A17D] tracking-tight">
-              60 <span className="text-lg font-mono">FPS</span>
+              <AnimatedCounter end={60} suffix=" FPS" />
             </span>
             <span className="text-xs font-mono uppercase tracking-wider text-[#A4B7AF]/80">
               Fluid Gesture Micro-Interactions
             </span>
           </div>
 
-          <div className="p-4 rounded-2xl bg-[#0D2421]/60 border border-[#A4B7AF]/10 flex flex-col gap-1">
+          <div className="card-interactive p-5 rounded-2xl bg-[#0D2421]/60 border border-[#A4B7AF]/10 flex flex-col gap-1.5">
             <span className="font-[family-name:var(--font-outfit)] text-3xl sm:text-4xl font-light text-[#F1F3EB] tracking-tight">
-              100<span className="text-lg text-[#8DE0C1] font-mono">%</span>
+              <AnimatedCounter end={100} suffix="%" />
             </span>
             <span className="text-xs font-mono uppercase tracking-wider text-[#A4B7AF]/80">
               Bespoke Code, Zero Templates

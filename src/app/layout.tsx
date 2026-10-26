@@ -2,6 +2,8 @@ import type { Metadata, Viewport } from "next";
 import { Geist, Outfit } from "next/font/google";
 import "./globals.css";
 import { PageTransitionProvider } from "@/components/PageTransitionProvider";
+import { ThemeProvider } from "@/components/ThemeProvider";
+import { MouseSpotlight } from "@/components/MouseSpotlight";
 
 const geist = Geist({
   variable: "--font-geist",
@@ -99,9 +101,12 @@ export default function RootLayout({
         >
           Skip to main content
         </a>
-        <PageTransitionProvider>
-          {children}
-        </PageTransitionProvider>
+        <ThemeProvider>
+          <MouseSpotlight />
+          <PageTransitionProvider>
+            {children}
+          </PageTransitionProvider>
+        </ThemeProvider>
       </body>
     </html>
   );

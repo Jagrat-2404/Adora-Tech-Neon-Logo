@@ -8,6 +8,7 @@ import { BrandLogo } from "./BrandLogo";
 import { MobileNavigation } from "./MobileNavigation";
 import { SITE_CONFIG } from "@/data/content";
 import { useIntro } from "./PageTransitionProvider";
+import { ThemeToggle } from "./ThemeToggle";
 
 interface HeaderProps {
   isIntroActive?: boolean;
@@ -87,8 +88,17 @@ export const Header: React.FC<HeaderProps> = ({ isIntroActive: propIntroActive }
             })}
           </nav>
 
-          {/* Right Action: CTA & Mobile Hamburger */}
-          <div className="flex items-center gap-4">
+          {/* Right Action: Theme Toggle, CTA & Mobile Hamburger */}
+          <div className="flex items-center gap-3 sm:gap-4">
+            {/* Theme Toggle Button (Light/Dark View) */}
+            <div
+              className={`transition-opacity duration-300 ${
+                isIntroActive ? "opacity-0 pointer-events-none" : "opacity-100"
+              }`}
+            >
+              <ThemeToggle />
+            </div>
+
             {/* Desktop Start a Project CTA */}
             <Link
               href="/contact"

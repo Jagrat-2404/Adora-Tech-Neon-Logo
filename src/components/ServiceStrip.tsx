@@ -1,15 +1,46 @@
 "use client";
 
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import { SITE_CONFIG } from "@/data/content";
 
 export const ServiceStrip: React.FC = () => {
+  const trackRef = useRef<HTMLDivElement>(null);
+  const singleTrackRef = useRef<HTMLDivElement>(null);
+  const posRef = useRef(0);
+
   // Triple the array to guarantee enough length on any high-resolution or ultra-wide viewport
   const stripItems = [
     ...SITE_CONFIG.serviceStrip,
     ...SITE_CONFIG.serviceStrip,
     ...SITE_CONFIG.serviceStrip,
   ];
+
+  useEffect(() => {
+    let animId: number;
+    let lastTime = performance.now();
+    const speed = 48; // 48 pixels per second - stately, legible, continuous agency glide
+
+    const step = (currentTime: number) => {
+      const delta = (currentTime - lastTime) / 1000;
+      lastTime = currentTime;
+
+      if (trackRef.current && singleTrackRef.current) {
+        const trackWidth = singleTrackRef.current.offsetWidth;
+        if (trackWidth > 0) {
+          posRef.current += speed * delta;
+          if (posRef.current >= trackWidth) {
+            posRef.current %= trackWidth;
+          }
+          trackRef.current.style.transform = `translate3d(-${posRef.current.toFixed(2)}px, 0, 0)`;
+        }
+      }
+      animId = requestAnimationFrame(step);
+    };
+
+    animId = requestAnimationFrame(step);
+
+    return () => cancelAnimationFrame(animId);
+  }, []);
 
   return (
     <div className="relative border-y border-[#A4B7AF]/15 bg-[#081B19]/90 backdrop-blur-md overflow-hidden select-none py-4 sm:py-5">
@@ -18,9 +49,16 @@ export const ServiceStrip: React.FC = () => {
       <div className="pointer-events-none absolute right-0 top-0 bottom-0 w-16 sm:w-28 bg-gradient-to-l from-[#081B19] to-transparent z-10" />
 
       {/* Continuously Moving Track */}
-      <div className="flex w-max animate-ticker">
+      <div
+        ref={trackRef}
+        className="flex w-max will-change-transform"
+        style={{ transform: "translate3d(0, 0, 0)" }}
+      >
         {/* Track 1 */}
-        <div className="flex shrink-0 items-center gap-10 whitespace-nowrap pr-10">
+        <div
+          ref={singleTrackRef}
+          className="flex shrink-0 items-center gap-10 whitespace-nowrap pr-10"
+        >
           {stripItems.map((service, idx) => {
             const isSerif = idx % 2 === 1;
 

@@ -5,6 +5,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { ArrowRight, X } from "lucide-react";
 import { SITE_CONFIG } from "@/data/content";
+import { ThemeToggle } from "./ThemeToggle";
 
 interface MobileNavigationProps {
   isOpen: boolean;
@@ -82,11 +83,14 @@ export const MobileNavigation: React.FC<MobileNavigationProps> = ({
         }}
       />
 
-      {/* Top Header Row with Close Button */}
+      {/* Top Header Row with Theme Toggle & Close Button */}
       <div className="flex items-center justify-between px-6 py-5 border-b border-[#A4B7AF]/15">
-        <span className="text-xs uppercase tracking-widest text-[#8DE0C1] font-mono">
-          Menu
-        </span>
+        <div className="flex items-center gap-3">
+          <span className="text-xs uppercase tracking-widest text-[#8DE0C1] font-mono">
+            Menu
+          </span>
+          <ThemeToggle showLabel />
+        </div>
         <button
           ref={closeButtonRef}
           type="button"
