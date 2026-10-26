@@ -1,0 +1,143 @@
+@import "tailwindcss";
+
+:root {
+  --bg-main: #081B19;
+  --bg-surface: #102A26;
+  --bg-surface-elevated: #153833;
+  --bg-surface-card: #0D2421;
+  --text-primary: #F1F3EB;
+  --text-muted: #A4B7AF;
+  --text-dim: #688277;
+  --accent-mint: #8DE0C1;
+  --accent-mint-glow: rgba(141, 224, 193, 0.35);
+  --accent-copper: #D5A17D;
+  --accent-copper-glow: rgba(213, 161, 125, 0.35);
+  --border-subtle: rgba(164, 183, 175, 0.16);
+  --border-bright: rgba(141, 224, 193, 0.38);
+}
+
+html {
+  scroll-behavior: smooth;
+  color-scheme: dark;
+  background-color: #081B19;
+  color: #F1F3EB;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto !important;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+body {
+  background-color: #081B19;
+  color: #F1F3EB;
+  overflow-x: hidden;
+  font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Subtle background subtle noise / glow utilities */
+.bg-atmospheric {
+  background: 
+    radial-gradient(circle at 50% 0%, rgba(141, 224, 193, 0.07) 0%, transparent 60%),
+    radial-gradient(circle at 100% 50%, rgba(213, 161, 125, 0.05) 0%, transparent 50%),
+    radial-gradient(circle at 0% 80%, rgba(16, 42, 38, 0.6) 0%, transparent 50%),
+    #081B19;
+}
+
+/* Glass panel */
+.glass-panel {
+  background: rgba(16, 42, 38, 0.7);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(164, 183, 175, 0.16);
+}
+
+.glass-panel-elevated {
+  background: rgba(21, 56, 51, 0.8);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(141, 224, 193, 0.22);
+}
+
+/* Neon halo ring */
+.neon-halo {
+  background: conic-gradient(
+    from 210deg at 50% 50%,
+    #8DE0C1 0deg,
+    #5bc8a5 110deg,
+    #D5A17D 180deg,
+    #f3be9b 270deg,
+    #8DE0C1 360deg
+  );
+  filter: blur(18px);
+}
+
+/* Text glow */
+.text-glow-mint {
+  text-shadow: 0 0 20px rgba(141, 224, 193, 0.45);
+}
+
+.text-glow-copper {
+  text-shadow: 0 0 20px rgba(213, 161, 125, 0.45);
+}
+
+/* Fine border shine */
+.card-hover-border {
+  position: relative;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.card-hover-border::before {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(135deg, rgba(141, 224, 193, 0.4), transparent 40%, rgba(213, 161, 125, 0.3));
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+
+.card-hover-border:hover::before {
+  opacity: 1;
+}
+
+/* Screen blend utility for raster logo */
+.blend-screen {
+  mix-blend-mode: screen;
+}
+
+/* Scroll margin for fixed header */
+section[id] {
+  scroll-margin-top: 6.5rem;
+}
+
+/* Subtle scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #081B19;
+}
+::-webkit-scrollbar-thumb {
+  background: #163631;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #23544d;
+}
