@@ -17,49 +17,45 @@ const sizeConfig: Record<
   { width: number; height: number; classNames: string }
 > = {
   sm: {
-    width: 130,
-    height: 76,
-    classNames: "w-[120px] sm:w-[130px] h-auto",
+    width: 120,
+    height: 43,
+    classNames: "w-[110px] sm:w-[125px] h-auto",
   },
   md: {
-    width: 175,
-    height: 102,
-    classNames: "w-[155px] sm:w-[175px] h-auto",
+    width: 160,
+    height: 57,
+    classNames: "w-[140px] sm:w-[160px] h-auto",
   },
   lg: {
-    width: 240,
-    height: 140,
-    classNames: "w-[200px] sm:w-[240px] h-auto",
+    width: 220,
+    height: 78,
+    classNames: "w-[190px] sm:w-[220px] h-auto",
   },
   xl: {
-    width: 300,
-    height: 175,
-    classNames: "w-[260px] sm:w-[300px] h-auto",
+    width: 280,
+    height: 100,
+    classNames: "w-[240px] sm:w-[280px] h-auto",
   },
   hero: {
-    width: 360,
-    height: 210,
-    classNames: "w-[240px] xs:w-[290px] sm:w-[340px] md:w-[370px] h-auto",
+    width: 340,
+    height: 121,
+    classNames: "w-[240px] xs:w-[280px] sm:w-[320px] md:w-[340px] h-auto",
   },
   intro: {
-    width: 380,
-    height: 222,
-    classNames: "w-[280px] xs:w-[330px] sm:w-[380px] h-auto",
+    width: 420,
+    height: 150,
+    classNames: "w-[290px] xs:w-[340px] sm:w-[400px] md:w-[420px] h-auto",
   },
 };
 
 /**
  * BrandLogo Component
  *
- * Renders the authentic ADORA TECH logo image against a matching deep emerald background (#081B19).
- * Uses CSS mix-blend-mode: screen so the deep dark background of the raster merges seamlessly
- * without harsh borders.
+ * Renders the authentic transparent ADORA TECH logo with the vibrant neon circular "O".
+ * Preserves exact proportions (808 x 288) and crisp transparent alpha channel.
  *
- * Glowing rings are rendered on a separate decorative layer behind the central "O" emblem
+ * Glow effects are rendered on a separate decorative layer behind the central "O" emblem
  * to preserve the original asset while creating a subtle neon ambient aura.
- *
- * Structured cleanly so that if a vector SVG is provided in the future, it can easily
- * replace the image below.
  */
 export const BrandLogo: React.FC<BrandLogoProps> = ({
   size = "md",
@@ -85,7 +81,7 @@ export const BrandLogo: React.FC<BrandLogoProps> = ({
         >
           {/* Dual-color neon halo (mint left, copper right) centered on the logo's "O" */}
           <div
-            className="w-[28%] h-[48%] rounded-full opacity-60 blur-xl transform -translate-y-[6%]"
+            className="w-[26%] h-[68%] rounded-full opacity-60 blur-md transform -translate-y-[8%]"
             style={{
               background:
                 "radial-gradient(circle at 35% 50%, rgba(141, 224, 193, 0.7) 0%, transparent 70%), radial-gradient(circle at 65% 50%, rgba(213, 161, 125, 0.6) 0%, transparent 70%)",
@@ -94,24 +90,20 @@ export const BrandLogo: React.FC<BrandLogoProps> = ({
         </div>
       )}
 
-      {/* 
-        Raster Image Implementation:
-        Rendered using Next.js Image with exact dimensions and 'screen' blend mode 
-        for a flawless dark integration.
-      */}
+      {/* Transparent Logo Image Asset */}
       <div
-        className={`relative overflow-hidden rounded-lg transition-transform duration-300 ${
+        className={`relative transition-transform duration-300 ${
           interactive ? "hover:scale-[1.02]" : ""
         } ${config.classNames}`}
       >
         <Image
-          src="/logo-attached.jpg"
+          src="/logo-cropped.png"
           alt="ADORA TECH"
           width={config.width}
           height={config.height}
           priority={priority}
-          className="w-full h-auto object-contain blend-screen filter brightness-[1.03] contrast-[1.05]"
-          sizes="(max-width: 640px) 160px, (max-width: 1024px) 240px, 380px"
+          className="w-full h-auto object-contain filter drop-shadow-[0_0_12px_rgba(141,224,193,0.18)]"
+          sizes="(max-width: 640px) 140px, (max-width: 1024px) 220px, 420px"
         />
       </div>
     </div>

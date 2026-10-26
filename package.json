@@ -23,6 +23,7 @@
     "eslint": "^9",
     "eslint-config-next": "16.4.3",
     "jpeg-js": "^0.4.4",
+    "pngjs": "^7.0.0",
     "tailwindcss": "^4",
     "typescript": "^5"
   }
