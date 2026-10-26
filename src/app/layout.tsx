@@ -53,7 +53,13 @@ export const metadata: Metadata = {
     ],
   },
   icons: {
-    icon: "/favicon.ico",
+    icon: [
+      { url: "/logo-o-only.png", type: "image/png" },
+      { url: "/logo-o-only.png", sizes: "32x32", type: "image/png" },
+      { url: "/logo-o-only.png", sizes: "16x16", type: "image/png" },
+    ],
+    shortcut: "/logo-o-only.png",
+    apple: "/logo-o-only.png",
   },
 };
 
@@ -68,6 +74,10 @@ export default function RootLayout({
       className={`${geist.variable} ${outfit.variable} dark scroll-smooth`}
     >
       <head>
+        <link rel="icon" type="image/png" sizes="32x32" href="/logo-o-only.png" />
+        <link rel="icon" type="image/png" sizes="16x16" href="/logo-o-only.png" />
+        <link rel="apple-touch-icon" sizes="180x180" href="/logo-o-only.png" />
+        <link rel="shortcut icon" href="/logo-o-only.png" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link
           rel="preconnect"
