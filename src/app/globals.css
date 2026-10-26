@@ -1,28 +1,87 @@
 @import "tailwindcss";
 
 :root {
-  --bg-main: #081B19;
-  --bg-surface: #102A26;
-  --bg-surface-elevated: #153833;
-  --bg-surface-card: #0D2421;
-  --text-primary: #F1F3EB;
-  --text-muted: #A4B7AF;
-  --text-dim: #688277;
+  --bg-main: #0E2925;
+  --bg-surface: #163E38;
+  --bg-surface-elevated: #1D4E47;
+  --bg-surface-card: #133934;
+  --text-primary: #F8FAF6;
+  --text-muted: #B4CBC1;
+  --text-dim: #7B9C90;
   --accent-mint: #8DE0C1;
-  --accent-mint-glow: rgba(141, 224, 193, 0.35);
+  --accent-mint-glow: rgba(141, 224, 193, 0.4);
   --accent-copper: #D5A17D;
-  --accent-copper-glow: rgba(213, 161, 125, 0.35);
-  --border-subtle: rgba(164, 183, 175, 0.16);
-  --border-bright: rgba(141, 224, 193, 0.38);
+  --accent-copper-glow: rgba(213, 161, 125, 0.4);
+  --border-subtle: rgba(180, 203, 193, 0.22);
+  --border-bright: rgba(141, 224, 193, 0.45);
   --font-serif: 'Instrument Serif', Georgia, serif;
 }
 
 html {
   scroll-behavior: smooth;
   color-scheme: dark light;
-  background-color: #081B19;
-  color: #F1F3EB;
+  background-color: #0E2925;
+  color: #F8FAF6;
   transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Lightened Default Palette Overrides across all components */
+body {
+  background-color: #0E2925 !important;
+  color: #F8FAF6 !important;
+}
+
+.bg-\[\#081B19\] {
+  background-color: #0E2925 !important;
+}
+
+.bg-\[\#081B19\]\/90 {
+  background-color: rgba(14, 41, 37, 0.92) !important;
+}
+
+.bg-\[\#081B19\]\/85 {
+  background-color: rgba(14, 41, 37, 0.88) !important;
+}
+
+.bg-\[\#081B19\]\/80 {
+  background-color: rgba(14, 41, 37, 0.82) !important;
+}
+
+.bg-\[\#081B19\]\/60 {
+  background-color: rgba(14, 41, 37, 0.60) !important;
+}
+
+.bg-\[\#102A26\] {
+  background-color: #163E38 !important;
+}
+
+.bg-\[\#153833\] {
+  background-color: #1D4E47 !important;
+}
+
+.bg-\[\#0D2421\],
+.bg-\[\#0A1F1C\] {
+  background-color: #133934 !important;
+}
+
+.text-\[\#F1F3EB\] {
+  color: #F8FAF6 !important;
+}
+
+.text-\[\#A4B7AF\] {
+  color: #B4CBC1 !important;
+}
+
+.border-\[\#A4B7AF\]\/10 {
+  border-color: rgba(180, 203, 193, 0.16) !important;
+}
+
+.border-\[\#A4B7AF\]\/15 {
+  border-color: rgba(180, 203, 193, 0.22) !important;
+}
+
+.border-\[\#A4B7AF\]\/20 {
+  border-color: rgba(180, 203, 193, 0.28) !important;
 }
 
 /* Light Theme Variables & Overrides */
@@ -332,15 +391,15 @@ section[id] {
   inset: -25%;
   pointer-events: none;
   overflow: hidden;
-  opacity: 0.22;
-  filter: contrast(120%) brightness(0.95);
+  opacity: 0.85;
+  filter: contrast(112%) brightness(1.08);
   display: flex;
   flex-direction: column;
   justify-content: center;
   gap: 2rem;
   z-index: 0;
-  mask-image: radial-gradient(ellipse at center, rgba(0,0,0,1) 0%, rgba(0,0,0,0.15) 75%);
-  -webkit-mask-image: radial-gradient(ellipse at center, rgba(0,0,0,1) 0%, rgba(0,0,0,0.15) 75%);
+  mask-image: radial-gradient(ellipse at center, rgba(0,0,0,1) 45%, rgba(0,0,0,0.65) 80%, rgba(0,0,0,0.25) 100%);
+  -webkit-mask-image: radial-gradient(ellipse at center, rgba(0,0,0,1) 45%, rgba(0,0,0,0.65) 80%, rgba(0,0,0,0.25) 100%);
 }
 
 @keyframes crossway-slide-left {

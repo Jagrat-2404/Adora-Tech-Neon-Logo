@@ -102,34 +102,36 @@ export const Hero: React.FC<HeroProps> = ({ isIntroActive: propIntroActive }) =>
           className="animate-crossway-left"
           style={{ transform: "rotate(-7deg)" }}
         >
-          <div className="flex items-center gap-6 pr-6">
+          <div className="flex items-center gap-8 pr-8">
             {carouselItems.map((card, idx) => {
               const Icon = card.icon;
               return (
                 <div
                   key={`trackA-${idx}`}
-                  className="relative w-80 sm:w-96 h-48 sm:h-56 rounded-2xl overflow-hidden bg-[#0A1F1C] border border-[#8DE0C1]/20 shadow-2xl flex-shrink-0 group"
+                  className="relative w-80 sm:w-[440px] md:w-[480px] h-56 sm:h-64 rounded-3xl overflow-hidden bg-[#102A26] border-2 border-[#8DE0C1]/40 shadow-2xl shadow-black/60 flex-shrink-0 group"
                 >
                   <Image
                     src={card.img}
                     alt={card.title}
                     fill
-                    className="object-cover opacity-60 filter saturate-120 group-hover:scale-105 transition-transform duration-700"
-                    sizes="400px"
+                    className="object-cover opacity-90 filter saturate-125 brightness-105 group-hover:scale-105 transition-transform duration-700"
+                    sizes="(max-width: 768px) 320px, 480px"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#081B19] via-[#081B19]/50 to-transparent" />
-                  <div className="absolute top-3 left-3 right-3 flex items-center justify-between text-[10px] font-mono text-[#8DE0C1]">
-                    <span className="px-2 py-0.5 rounded bg-[#081B19]/80 border border-[#8DE0C1]/30 backdrop-blur-xs">
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#0E2925] via-[#0E2925]/30 to-transparent" />
+                  <div className="absolute top-4 left-4 right-4 flex items-center justify-between text-[11px] font-mono text-[#8DE0C1]">
+                    <span className="px-3 py-1 rounded-full bg-[#0E2925]/90 border border-[#8DE0C1]/40 backdrop-blur-md font-semibold shadow-md">
                       {card.tag}
                     </span>
-                    <Icon className="w-3.5 h-3.5 text-[#8DE0C1]" />
+                    <div className="p-1.5 rounded-full bg-[#0E2925]/90 border border-[#8DE0C1]/40">
+                      <Icon className="w-4 h-4 text-[#8DE0C1]" />
+                    </div>
                   </div>
-                  <div className="absolute bottom-3 left-3 right-3">
-                    <div className="text-xs font-mono text-[#F1F3EB] font-medium truncate">
+                  <div className="absolute bottom-4 left-4 right-4 p-3 rounded-xl bg-[#0E2925]/85 border border-[#8DE0C1]/20 backdrop-blur-md">
+                    <div className="text-sm font-mono text-[#F8FAF6] font-medium truncate">
                       {card.title}
                     </div>
-                    <div className="text-[10px] font-mono text-[#D5A17D] flex items-center gap-1.5 mt-0.5">
-                      <span className="w-1.5 h-1.5 rounded-full bg-[#8DE0C1] animate-pulse" />
+                    <div className="text-xs font-mono text-[#D5A17D] flex items-center gap-2 mt-1">
+                      <span className="w-2 h-2 rounded-full bg-[#8DE0C1] animate-pulse" />
                       {card.metric}
                     </div>
                   </div>
@@ -144,34 +146,36 @@ export const Hero: React.FC<HeroProps> = ({ isIntroActive: propIntroActive }) =>
           className="animate-crossway-right"
           style={{ transform: "rotate(7deg)" }}
         >
-          <div className="flex items-center gap-6 pr-6">
+          <div className="flex items-center gap-8 pr-8">
             {carouselItems.slice().reverse().map((card, idx) => {
               const Icon = card.icon;
               return (
                 <div
                   key={`trackB-${idx}`}
-                  className="relative w-80 sm:w-96 h-48 sm:h-56 rounded-2xl overflow-hidden bg-[#0A1F1C] border border-[#D5A17D]/20 shadow-2xl flex-shrink-0 group"
+                  className="relative w-80 sm:w-[440px] md:w-[480px] h-56 sm:h-64 rounded-3xl overflow-hidden bg-[#102A26] border-2 border-[#D5A17D]/40 shadow-2xl shadow-black/60 flex-shrink-0 group"
                 >
                   <Image
                     src={card.img}
                     alt={card.title}
                     fill
-                    className="object-cover opacity-55 filter saturate-120 group-hover:scale-105 transition-transform duration-700"
-                    sizes="400px"
+                    className="object-cover opacity-90 filter saturate-125 brightness-105 group-hover:scale-105 transition-transform duration-700"
+                    sizes="(max-width: 768px) 320px, 480px"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#081B19] via-[#081B19]/50 to-transparent" />
-                  <div className="absolute top-3 left-3 right-3 flex items-center justify-between text-[10px] font-mono text-[#D5A17D]">
-                    <span className="px-2 py-0.5 rounded bg-[#081B19]/80 border border-[#D5A17D]/30 backdrop-blur-xs">
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#0E2925] via-[#0E2925]/30 to-transparent" />
+                  <div className="absolute top-4 left-4 right-4 flex items-center justify-between text-[11px] font-mono text-[#D5A17D]">
+                    <span className="px-3 py-1 rounded-full bg-[#0E2925]/90 border border-[#D5A17D]/40 backdrop-blur-md font-semibold shadow-md">
                       {card.tag}
                     </span>
-                    <Icon className="w-3.5 h-3.5 text-[#D5A17D]" />
+                    <div className="p-1.5 rounded-full bg-[#0E2925]/90 border border-[#D5A17D]/40">
+                      <Icon className="w-4 h-4 text-[#D5A17D]" />
+                    </div>
                   </div>
-                  <div className="absolute bottom-3 left-3 right-3">
-                    <div className="text-xs font-mono text-[#F1F3EB] font-medium truncate">
+                  <div className="absolute bottom-4 left-4 right-4 p-3 rounded-xl bg-[#0E2925]/85 border border-[#D5A17D]/20 backdrop-blur-md">
+                    <div className="text-sm font-mono text-[#F8FAF6] font-medium truncate">
                       {card.title}
                     </div>
-                    <div className="text-[10px] font-mono text-[#8DE0C1] flex items-center gap-1.5 mt-0.5">
-                      <span className="w-1.5 h-1.5 rounded-full bg-[#8DE0C1] animate-pulse" />
+                    <div className="text-xs font-mono text-[#8DE0C1] flex items-center gap-2 mt-1">
+                      <span className="w-2 h-2 rounded-full bg-[#8DE0C1] animate-pulse" />
                       {card.metric}
                     </div>
                   </div>
@@ -182,10 +186,10 @@ export const Hero: React.FC<HeroProps> = ({ isIntroActive: propIntroActive }) =>
         </div>
       </div>
 
-      {/* Hero Radial Contrast Mask for Pristine Text Readability */}
+      {/* Hero Radial Contrast Mask for High Readability with Vibrant Background */}
       <div
         aria-hidden="true"
-        className="absolute inset-0 pointer-events-none bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-[#081B19]/80 via-[#081B19]/90 to-[#081B19] z-0"
+        className="absolute inset-0 pointer-events-none bg-[radial-gradient(ellipse_at_center,rgba(14,41,37,0.72)_0%,rgba(14,41,37,0.50)_60%,rgba(14,41,37,0.85)_100%)] z-0"
       />
 
       {/* Centered Main Content Container */}

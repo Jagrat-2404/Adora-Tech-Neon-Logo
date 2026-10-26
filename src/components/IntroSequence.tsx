@@ -82,29 +82,29 @@ export const IntroSequence: React.FC<IntroSequenceProps> = ({
       });
       timelineRef.current = tl;
 
-      // STAGE 1: Animate the "O" First (Center stage ignition)
+      // STAGE 1: Animate the "O" First (Center stage ignition & shockwave)
       tl.to(
         oRing,
         {
           opacity: 1,
-          scale: 1.15,
+          scale: 1.18,
           rotation: 0,
-          duration: 0.45,
-          ease: "back.out(2)",
+          duration: 0.8,
+          ease: "back.out(1.8)",
         },
-        0.05
+        0.1
       );
 
       if (halo) {
         tl.to(
           halo,
           {
-            opacity: 0.9,
-            scale: 1.25,
-            duration: 0.45,
+            opacity: 1,
+            scale: 1.35,
+            duration: 0.85,
             ease: "power2.out",
           },
-          0.08
+          0.15
         );
       }
 
@@ -112,22 +112,22 @@ export const IntroSequence: React.FC<IntroSequenceProps> = ({
         tl.to(
           shockwave,
           {
-            opacity: 0.8,
-            scale: 1.1,
-            duration: 0.15,
+            opacity: 0.85,
+            scale: 1.15,
+            duration: 0.25,
             ease: "power1.out",
           },
-          0.15
+          0.2
         );
         tl.to(
           shockwave,
           {
             opacity: 0,
-            scale: 2.2,
-            duration: 0.45,
+            scale: 2.5,
+            duration: 0.75,
             ease: "power2.out",
           },
-          0.25
+          0.4
         );
       }
 
@@ -135,10 +135,10 @@ export const IntroSequence: React.FC<IntroSequenceProps> = ({
         oRing,
         {
           scale: 1.0,
-          duration: 0.25,
+          duration: 0.45,
           ease: "power2.inOut",
         },
-        0.5
+        0.85
       );
 
       // STAGE 2: Reveal the letters around the "O"
@@ -147,13 +147,27 @@ export const IntroSequence: React.FC<IntroSequenceProps> = ({
         {
           opacity: 1,
           scale: 1.0,
-          duration: 0.35,
+          duration: 0.75,
           ease: "power2.out",
         },
-        0.65
+        1.1
       );
 
-      // STAGE 3: "Put it in the corner" (Fly to header top-left)
+      // Extra center-stage appreciation plateau (glow pulse while fully assembled)
+      if (halo) {
+        tl.to(
+          halo,
+          {
+            opacity: 0.85,
+            scale: 1.2,
+            duration: 0.5,
+            ease: "sine.inOut",
+          },
+          1.5
+        );
+      }
+
+      // STAGE 3: "Put it in the corner" (Smooth glide into header top-left)
       tl.add(() => {
         const headerTarget = document.getElementById(headerLogoTargetId);
         const currentRect = logoWrapper.getBoundingClientRect();
@@ -177,12 +191,12 @@ export const IntroSequence: React.FC<IntroSequenceProps> = ({
           }
         }
 
-        // Smooth flight into header
+        // Smooth flight into header (extended for luxury fluid motion)
         gsap.to(logoWrapper, {
           x: deltaX,
           y: deltaY,
           scale: scaleFactor,
-          duration: 0.65,
+          duration: 1.0,
           ease: "power3.inOut",
         });
 
@@ -190,7 +204,7 @@ export const IntroSequence: React.FC<IntroSequenceProps> = ({
           gsap.to(halo, {
             opacity: 0.15,
             scale: 0.6,
-            duration: 0.45,
+            duration: 0.7,
             ease: "power2.in",
           });
         }
@@ -198,14 +212,14 @@ export const IntroSequence: React.FC<IntroSequenceProps> = ({
         // Dissolve dark intro background to reveal page underneath
         gsap.to(container, {
           opacity: 0,
-          duration: 0.45,
-          delay: 0.15,
+          duration: 0.65,
+          delay: 0.35,
           ease: "power2.inOut",
         });
-      }, 1.0);
+      }, 2.0);
 
-      // Finish cleanly
-      tl.to({}, { duration: 0.6 });
+      // Finish cleanly after full flight and dissolve
+      tl.to({}, { duration: 1.1 });
     }, 40);
 
     return () => {
