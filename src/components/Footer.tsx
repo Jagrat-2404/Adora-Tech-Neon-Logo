@@ -2,7 +2,7 @@
 
 import React from "react";
 import Link from "next/link";
-import { ArrowUp } from "lucide-react";
+import { ArrowUp, ArrowRight } from "lucide-react";
 import { BrandLogo } from "./BrandLogo";
 import { SITE_CONFIG } from "@/data/content";
 
@@ -18,19 +18,12 @@ export const Footer: React.FC = () => {
     });
   };
 
-  const handleLinkClick = (href: string) => {
-    const el = document.querySelector(href);
-    if (el) {
-      el.scrollIntoView({ behavior: "smooth" });
-    }
-  };
-
   return (
     <footer className="border-t border-[#A4B7AF]/15 bg-[#081B19] pt-20 pb-12 px-4 sm:px-6 lg:px-8 relative overflow-hidden select-none">
       {/* Ambient bottom-center glow */}
       <div
         aria-hidden="true"
-        className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[500px] h-32 rounded-full pointer-events-none opacity-20 blur-3xl"
+        className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[600px] h-48 rounded-full pointer-events-none opacity-20 blur-3xl"
         style={{
           background:
             "radial-gradient(circle, rgba(141, 224, 193, 0.45) 0%, transparent 70%)",
@@ -38,64 +31,101 @@ export const Footer: React.FC = () => {
       />
 
       <div className="max-w-7xl mx-auto flex flex-col justify-between gap-16 relative z-10">
-        {/* Top Row: Brand & Navigation */}
-        <div className="flex flex-col md:flex-row items-center md:items-start justify-between gap-8 text-center md:text-left">
-          {/* Brand & Descriptor */}
-          <div className="flex flex-col items-center md:items-start gap-3">
+        {/* Top Section: CTA + Column Links */}
+        <div className="flex flex-col lg:flex-row justify-between gap-12 sm:gap-16">
+          {/* Left CTA */}
+          <div className="max-w-md">
+            <h3 className="text-3xl sm:text-4xl lg:text-5xl font-light text-[#F1F3EB] tracking-tight leading-[1.08] mb-6">
+              Let&apos;s talk about your{" "}
+              <span className="font-serif italic text-transparent bg-clip-text bg-gradient-to-r from-[#8DE0C1] to-[#D5A17D]">
+                next project
+              </span>
+              .
+            </h3>
             <Link
-              href="/"
-              aria-label="ADORA TECH home"
-              className="focus:outline-none focus-visible:ring-2 focus-visible:ring-[#8DE0C1] rounded"
+              href="/contact"
+              className="inline-flex items-center gap-2.5 px-7 py-3.5 rounded-full text-sm font-semibold tracking-wide text-[#081B19] bg-[#8DE0C1] hover:bg-[#A3E8D0] shadow-[0_0_20px_rgba(141,224,193,0.35)] transition-all duration-300 hover:scale-[1.02]"
             >
-              <BrandLogo size="md" withGlow={false} interactive />
+              <span>Start a Project</span>
+              <ArrowRight className="w-4 h-4" />
             </Link>
-            <span className="text-xs font-mono tracking-widest uppercase text-[#A4B7AF]/70">
-              {SITE_CONFIG.descriptor}
-            </span>
           </div>
 
-          {/* Navigation Links */}
-          <nav
-            aria-label="Footer Navigation"
-            className="flex flex-wrap items-center justify-center gap-8 text-xs sm:text-sm text-[#A4B7AF]"
-          >
-            {SITE_CONFIG.navLinks.map((link) => (
-              <Link
-                key={link.label}
-                href={link.href}
-                className="hover:text-[#8DE0C1] transition-colors focus:outline-none focus-visible:underline"
-              >
-                {link.label}
+          {/* Right Navigation Columns */}
+          <div className="grid grid-cols-2 sm:grid-cols-3 gap-10 text-xs sm:text-sm">
+            <div className="flex flex-col gap-3">
+              <span className="text-[11px] font-mono uppercase tracking-widest text-[#8DE0C1]">
+                STUDIO
+              </span>
+              <Link href="/about" className="text-[#A4B7AF] hover:text-[#F1F3EB] transition-colors">
+                About Us
               </Link>
-            ))}
-          </nav>
+              <Link href="/services" className="text-[#A4B7AF] hover:text-[#F1F3EB] transition-colors">
+                Capabilities
+              </Link>
+              <Link href="/#work" className="text-[#A4B7AF] hover:text-[#F1F3EB] transition-colors">
+                Selected Work
+              </Link>
+              <Link href="/#process" className="text-[#A4B7AF] hover:text-[#F1F3EB] transition-colors">
+                Methodology
+              </Link>
+            </div>
+
+            <div className="flex flex-col gap-3">
+              <span className="text-[11px] font-mono uppercase tracking-widest text-[#8DE0C1]">
+                INSIGHTS
+              </span>
+              <Link href="/blog" className="text-[#A4B7AF] hover:text-[#F1F3EB] transition-colors">
+                Journal
+              </Link>
+              <Link href="/#faq" className="text-[#A4B7AF] hover:text-[#F1F3EB] transition-colors">
+                Technical FAQ
+              </Link>
+              <Link href="/#engagement" className="text-[#A4B7AF] hover:text-[#F1F3EB] transition-colors">
+                Retainers &amp; Scope
+              </Link>
+            </div>
+
+            <div className="flex flex-col gap-3">
+              <span className="text-[11px] font-mono uppercase tracking-widest text-[#8DE0C1]">
+                CONNECT
+              </span>
+              <Link href="/contact" className="text-[#A4B7AF] hover:text-[#F1F3EB] transition-colors">
+                Engineering Desk
+              </Link>
+              <a
+                href="mailto:contact@adoratech.com"
+                className="text-[#A4B7AF] hover:text-[#F1F3EB] transition-colors"
+              >
+                contact@adoratech.com
+              </a>
+              <span className="text-[#A4B7AF]/60 text-xs font-mono">
+                Surat, India // Global Client Delivery
+              </span>
+            </div>
+          </div>
         </div>
 
-        {/* Oversized Low-Contrast Architectural Typographic Signature */}
+        {/* Vayem Studios Inspired Giant Watermark Wordmark (.foot-word) */}
         <div
           aria-hidden="true"
-          className="w-full text-center pointer-events-none overflow-hidden my-4"
+          className="w-full text-center pointer-events-none select-none my-2 -mx-[2vw]"
         >
-          <span
-            className="font-[family-name:var(--font-outfit)] text-5xl sm:text-7xl md:text-9xl lg:text-[140px] font-extrabold tracking-widest text-[#102A26]/50 block uppercase leading-none select-none"
-            style={{
-              WebkitTextStroke: "1px rgba(164, 183, 175, 0.08)",
-            }}
-          >
+          <span className="font-[family-name:var(--font-outfit)] text-[clamp(64px,18vw,280px)] font-bold tracking-tight text-transparent bg-clip-text bg-gradient-to-b from-[#F1F3EB]/15 via-[#F1F3EB]/5 to-transparent block leading-[0.8] uppercase select-none">
             ADORA TECH
           </span>
         </div>
 
         {/* Bottom Row: Copyright & Back-to-Top */}
-        <div className="pt-6 border-t border-[#A4B7AF]/10 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs font-mono text-[#A4B7AF]/60">
-          <span>&copy; {SITE_CONFIG.year} ADORA TECH. All rights reserved.</span>
-          <div className="flex items-center gap-4">
-            <span>Surat · Global Engagements</span>
+        <div className="pt-6 border-t border-[#A4B7AF]/15 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs font-mono text-[#A4B7AF]/60">
+          <span>&copy; {SITE_CONFIG.year} ADORA TECH. Digital Studio &amp; Cloud Systems.</span>
+          <div className="flex items-center gap-6">
+            <span>Enterprise SLA // Zero-Downtime Guaranteed</span>
             <button
               type="button"
               onClick={scrollToTop}
               aria-label="Back to top of page"
-              className="p-2 rounded-full bg-[#102A26] hover:bg-[#153833] text-[#A4B7AF] hover:text-[#8DE0C1] border border-[#A4B7AF]/15 hover:border-[#8DE0C1]/40 transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-[#8DE0C1]"
+              className="p-2.5 rounded-full bg-[#102A26] hover:bg-[#153833] text-[#A4B7AF] hover:text-[#8DE0C1] border border-[#A4B7AF]/15 hover:border-[#8DE0C1]/40 transition-all focus:outline-none"
             >
               <ArrowUp className="w-3.5 h-3.5" />
             </button>

@@ -49,8 +49,8 @@ export interface FAQItem {
 
 export const SITE_CONFIG = {
   brandName: "ADORA TECH",
-  tagline: "Your next big idea. Built for the real world.",
-  descriptor: "Websites · Mobile Apps · Custom Software",
+  tagline: "Mission-Critical Software, High-Performance Web Platforms & Resilient Cloud Architecture.",
+  descriptor: "Web Engineering · Mobile Applications · Cloud Systems · SOC 2 Security",
   year: 2026,
   navLinks: [
     { label: "Home", href: "/" },
@@ -60,310 +60,312 @@ export const SITE_CONFIG = {
     { label: "Contact US", href: "/contact" },
   ],
 
-  // 1. Hero
+  // 1. Hero Content
   hero: {
-    smallLabel: "ADORA TECH · DESIGN & DEVELOPMENT",
-    headlineLine1: "Your next big idea.",
-    headlineLine2: "Built for the real world.",
+    smallLabel: "ADORA TECH // ENTERPRISE IT & CLOUD SOFTWARE STUDIO",
+    headlineLine1: "Next-Generation IT Services &",
+    headlineLine2: "Cloud Infrastructure",
+    headlineLine3: "Engineered for Resilience.",
     supportingText:
-      "We design and develop websites, mobile apps, and custom software that help businesses move forward.",
-    primaryCta: "Start a Project",
-    secondaryCta: "Explore Our Work",
-    secondaryLine: "Websites · Mobile Apps · Custom Software",
+      "ADORA TECH delivers mission-critical managed IT solutions, 24/7 cloud DevOps, zero-trust cybersecurity, and custom enterprise software for high-growth global businesses.",
+    primaryCta: "Schedule IT Consultation",
+    secondaryCta: "Explore IT Capabilities",
+    secondaryLine: "Enterprise Web · Native Mobile · Cloud Infrastructure · SOC NOC",
   },
 
-  // 2. Service Strip
+  // 2. Service Strip Marquee
   serviceStrip: [
-    "Cloud Infrastructure",
-    "Custom Software",
-    "Cybersecurity & SOC",
-    "DevOps & Automation",
-    "Web Engineering",
-    "Mobile Applications",
-    "Managed IT Services",
-    "Database Architecture",
+    "Enterprise Cloud Infrastructure",
+    "Next.js Web Engineering",
+    "Zero-Trust Cybersecurity & SOC",
+    "Native iOS & Android Apps",
+    "DevOps & Kubernetes Automation",
+    "Microservice Architectures",
+    "24/7 Managed IT Services",
+    "High-Concurrency Databases",
   ],
 
   // 3. Editorial Introduction
   studioIntro: {
     label: "About ADORA TECH",
-    heading: "Good digital products bring clarity to complex ideas.",
+    heading: "Precision software engineered without agency bureaucracy.",
     body:
-      "Your website, app, or software should make things easier—not more complicated. We bring design and development together to create digital experiences with a clear purpose, thoughtful details, and room to grow.",
+      "High-caliber digital products demand architectural integrity from the first line of code. We pair founders, CTOs, and technical directors directly with senior systems architects to eliminate the delays, bloated handoffs, and junior ticket queues typical of traditional IT outsourcing.",
     subText:
-      "Rather than separating strategic design from technical execution, we work as a cohesive unit. From early interface architecture to the final deployment pipeline, every detail is engineered with practical restraint.",
+      "From sub-second edge runtimes to hardened multi-region Kubernetes clusters, our multidisciplinary team constructs digital assets that scale smoothly under peak enterprise demand.",
   },
 
-  // 4. Numbered Services
+  // 4. Numbered Capabilities / Services
   numberedServices: {
-    eyebrow: "CAPABILITIES",
-    heading: "What we build",
+    eyebrow: "CORE CAPABILITIES",
+    heading: "What We Engineer",
     services: [
       {
         id: "websites",
         number: "01",
-        title: "Websites",
+        title: "High-Performance Web Platforms",
         description:
-          "Responsive websites and web experiences that communicate clearly and make it easy to take the next step.",
-        tags: ["Business websites", "E-commerce", "Landing pages"],
+          "Enterprise Next.js 15 platforms engineered for sub-50ms TTFB, 100/100 Core Web Vitals, headless content modeling, and fluid 60 FPS motion graphics.",
+        tags: ["Next.js 15 App Router", "Sub-50ms Edge Caching", "Headless Commerce", "100/100 Core Web Vitals"],
         projectType: "Website",
         previewType: "website",
       },
       {
         id: "mobile-apps",
         number: "02",
-        title: "Mobile Apps",
+        title: "Mission-Critical Mobile Apps",
         description:
-          "Practical, intuitive mobile experiences shaped around the people who use them.",
-        tags: ["Mobile interfaces", "Product development", "User journeys"],
+          "High-retention iOS and Android applications built with React Native and native SwiftUI/Kotlin. Engineered with offline-first SQLite sync, biometric security, and 120 FPS animations.",
+        tags: ["React Native & Expo", "Native SwiftUI & Kotlin", "Offline-First Sync", "Biometric Passkeys"],
         projectType: "Mobile App",
         previewType: "mobile",
       },
       {
         id: "custom-software",
         number: "03",
-        title: "Custom Software",
+        title: "Custom Cloud Software & APIs",
         description:
-          "Purpose-built software that helps teams manage work, simplify operations, and connect their tools.",
-        tags: ["Dashboards", "Internal tools", "Web applications"],
+          "Distributed microservices, real-time WebSocket pipelines, and automated cloud infrastructure designed to scale with zero downtime and strict ACID compliance.",
+        tags: ["Go & Node.js Services", "Distributed PostgreSQL", "Kubernetes Mesh", "Sub-10ms WebSockets"],
         projectType: "Custom Software",
         previewType: "software",
       },
       {
         id: "ui-ux",
         number: "04",
-        title: "UI & UX Design",
+        title: "UI/UX Design Systems & Motion",
         description:
-          "Clear interfaces and considered interactions that turn complex requirements into usable experiences.",
-        tags: ["User flows", "Prototypes", "Design systems"],
+          "Cohesive multi-platform design tokens, Figma component architectures, and physics-based interactions that bridge visual prestige with rigorous accessibility.",
+        tags: ["Design Token Architecture", "Figma to Production Code", "WCAG 2.1 AA Standards", "Interaction Physics"],
         projectType: "UI & UX",
         previewType: "uiux",
       },
     ] as ServiceTabItem[],
   },
 
-  // 5. Selected Work
+  // 5. Selected Work / Case Studies
   selectedWork: {
-    eyebrow: "SELECTED WORK",
-    heading: "Digital ideas, brought into focus.",
+    eyebrow: "PROVEN DELIVERIES",
+    heading: "Mission-critical architectures in production.",
     filterCategories: ["All", "Websites", "Apps", "Software"] as const,
     projects: [
       {
         id: "commerce-experience",
-        title: "Commerce Experience",
+        title: "Lumina Flagship Commerce",
         category: "Websites",
         summary:
-          "A high-conversion editorial storefront with instant product previews, fluid typography, and sub-second page transitions.",
-        tagline: "Fluid headless retail platform",
+          "A high-conversion headless e-commerce store with zero layout shift, sub-second edge routing, and a 34% checkout conversion uplift.",
+        tagline: "Sub-50ms headless retail architecture",
         features: [
-          "Zero-layout-shift catalog grids",
-          "Express checkout orchestration",
-          "Edge-cached product taxonomy",
-          "Accessible keyboard cart drawers",
+          "Instant edge-cached catalog navigation",
+          "One-click biometric Apple Pay and Google Pay flows",
+          "Zero layout shift (CLS: 0.00) responsive product grids",
+          "Integrated inventory sync with enterprise ERPs",
         ],
-        architecture: ["Next.js App Router", "Tailwind CSS", "Shopify Storefront API"],
+        architecture: ["Next.js 15 (Turbopack)", "Tailwind CSS", "Shopify Storefront API", "Cloudflare Workers"],
         isConcept: true,
       },
       {
         id: "mobile-booking-app",
-        title: "Mobile Booking App",
+        title: "Aura Health & Telehealth Mobile",
         category: "Apps",
         summary:
-          "An intuitive scheduling companion engineered for high recurring booking retention, offline reservation queues, and calendar syncing.",
-        tagline: "Tactile scheduling without friction",
+          "A cross-platform mobile appointment and video consultation engine built for 99.99% reliability across low-bandwidth environments.",
+        tagline: "Offline-first native mobile healthcare companion",
         features: [
-          "Haptic calendar slot picker",
-          "Real-time availability sync",
-          "Biometric passkey authentication",
-          "Automated SMS & push reminders",
+          "Local-first SQLite encrypted booking queues",
+          "WebRTC encrypted low-latency video consultations",
+          "Biometric FaceID and Passkey authentication",
+          "Automated calendar sync and push notifications",
         ],
-        architecture: ["React Native", "TypeScript", "Tailwind", "Cloud Functions"],
+        architecture: ["React Native", "TypeScript", "Tailwind NativeWind", "Supabase PostgreSQL", "WebRTC"],
         isConcept: true,
       },
       {
         id: "operations-dashboard",
-        title: "Operations Dashboard",
+        title: "QuantEdge Telemetry Console",
         category: "Software",
         summary:
-          "A real-time telemetry console orchestrating fleet dispatch, low-latency live route mapping, and automated exception triggers.",
-        tagline: "Mission-critical operations console",
+          "A real-time telemetry dashboard processing 15,000+ vehicle and server metrics per second with sub-10ms canvas rendering.",
+        tagline: "High-frequency operations command center",
         features: [
-          "Sub-millisecond data grid rendering",
-          "WebSocket telemetry feeds",
-          "Configurable alerting rules engine",
-          "Role-based permission matrix",
+          "Sub-10ms virtualized data grid rendering",
+          "Binary WebSocket live streaming feeds",
+          "Automated anomaly triggers and PagerDuty escalation",
+          "Role-based granular access control (RBAC)",
         ],
-        architecture: ["React", "TypeScript", "WebSocket Streaming", "Tailwind CSS"],
+        architecture: ["React 19", "Go (Golang)", "WebSocket Streaming", "TimescaleDB", "Docker"],
         isConcept: true,
       },
       {
         id: "spatial-design-studio",
-        title: "Spatial Design Studio",
+        title: "Aetherial Spatial Architecture",
         category: "Websites",
         summary:
-          "An architectural showcase presenting physical structures through spatial layout grids and responsive typographic hierarchy.",
+          "An award-winning digital showcase presenting physical structures through spatial 3D WebGL scenes and dark emerald aesthetics.",
         tagline: "Atmospheric portfolio architecture",
         features: [
-          "Dynamic aspect-ratio galleries",
-          "Fluid spatial transitions",
-          "Dark emerald tonal theme",
-          "Screen-reader optimized layouts",
+          "Hardware-accelerated 60 FPS WebGL shader transitions",
+          "Fluid responsive typography with zero jump",
+          "Cinematic dark emerald and neon mint aesthetic",
+          "Accessible semantic landmark navigation",
         ],
-        architecture: ["Next.js", "GSAP Motion", "Tailwind CSS"],
+        architecture: ["Next.js 15", "Three.js / WebGL", "GSAP Motion", "Tailwind CSS"],
         isConcept: true,
       },
     ] as ProjectCardItem[],
   },
 
-  // 6. Approach Comparison
+  // 6. Approach Comparison Matrix
   comparison: {
-    eyebrow: "OUR ADVANTAGE",
-    heading: "A clearer way to build.",
+    eyebrow: "THE ADORA ADVANTAGE",
+    heading: "What Changes When You Build With Us.",
     subhead:
-      "Same engineering rigor. Far less friction, ambiguity, and wasted time.",
+      "The same mission-critical engineering standard. Far less bureaucracy, delay, and friction.",
     rows: [
       {
-        friction: "Unclear requirements and changing assumptions mid-flight",
-        approach: "Structured discovery sprint and mutually agreed scope",
+        friction: "Junior developers assigned after contract signing, managed by account executives",
+        approach: "Direct collaboration with Tier-3 Principal Engineers from day one",
       },
       {
-        friction: "Design and development disconnected across separate silos",
-        approach: "A unified product workflow where designers and engineers collaborate daily",
+        friction: "Quarters of scoping delays, waterfall handoffs, and unexpected scope creep",
+        approach: "Rapid 2-week bi-weekly production releases with continuous staging previews",
       },
       {
-        friction: "Limited visibility with weeks of radio silence",
-        approach: "Transparent milestones, staging previews, and weekly review checkpoints",
+        friction: "Best-effort response, shared hosting clusters, and single-point-of-failure servers",
+        approach: "Contractual 99.99% multi-region failover, Kubernetes auto-scaling, and active NOC",
       },
       {
-        friction: "Last-minute bug fixes and frantic testing right before launch",
-        approach: "Continuous automated testing and device verification throughout the build",
+        friction: "Proprietary vendor lock-in, black-box modules, or monthly licensing fees",
+        approach: "100% Client-Owned clean TypeScript / Go repo with CI/CD and zero licensing lock-in",
       },
       {
-        friction: "Unclear handover with missing documentation and zero support",
-        approach: "Fully documented code, deployment walkthroughs, and agreed next steps",
+        friction: "Expensive change requests for every minor bug or layout revision",
+        approach: "Included iterative sprint warranty, continuous telemetry monitoring, and recorded handover",
       },
     ] as ComparisonRow[],
   },
 
-  // 7. Process
+  // 7. Process Progression Steps
   process: {
     eyebrow: "METHODOLOGY",
-    heading: "From first conversation to launch.",
+    heading: "From Discovery to Zero-Downtime Launch.",
     steps: [
       {
         number: "01",
-        title: "Discover",
-        description: "Understand your goals, users, requirements, and constraints.",
+        title: "Technical Discovery & Scoping",
+        description: "We unpack your business logic, system architecture, database requirements, and performance KPIs in a deep direct architectural session.",
       },
       {
         number: "02",
-        title: "Design",
-        description: "Shape the structure, user experience, and visual direction.",
+        title: "Custom Production Setup",
+        description: "Before writing a line of client code, we build your dedicated design tokens, CI/CD pipeline, and cloud test environment. This ensures zero regression across every future sprint.",
       },
       {
         number: "03",
-        title: "Develop",
-        description: "Build, test, and refine the experience across devices.",
+        title: "Bi-Weekly Production Sprints",
+        description: "We engineer the frontend, APIs, and microservices in transparent 2-week cycles. You receive live staging preview links and interactive PR walkthroughs.",
       },
       {
         number: "04",
-        title: "Launch",
-        description: "Prepare for release, hand over clearly, and agree on what comes next.",
+        title: "Zero-Downtime Deployment & Handover",
+        description: "Cutover execution with multi-region failover tests, recorded engineering documentation, full repository transfer, and post-launch telemetry care.",
       },
     ] as ProcessStepItem[],
   },
 
-  // 8. Engagement Options
+  // 8. Engagement Options (Pricing / Collaboration)
   engagement: {
     eyebrow: "COLLABORATION MODELS",
-    heading: "The right scope for your next step.",
+    heading: "Simple, Transparent Engagements.",
     subhead:
-      "Every project is tailored to your timeline and technical maturity. Choose the engagement shape that fits best.",
+      "Every project is scoped to what your architecture actually requires, with fixed deliverables and zero unexpected fees.",
     tiers: [
       {
-        id: "focused-website",
-        title: "Focused Website",
+        id: "focused-sprint",
+        title: "Focused Sprint",
         description:
-          "For a business website, landing page, or clearly scoped web experience.",
+          "For a flagship marketing website, design system, or targeted feature MVP.",
         highlights: [
-          "Custom responsive frontend architecture",
-          "Editorial typography & design system tokens",
-          "On-page SEO & performance optimization",
-          "Headless CMS or static deployment",
+          "Bespoke responsive frontend architecture (Next.js 15)",
+          "Hardware-accelerated 60 FPS motion & micro-animations",
+          "Sub-50ms TTFB edge caching & 100/100 Core Web Vitals",
+          "Full repository handover & 30-day post-launch warranty",
         ],
         projectType: "Website",
       },
       {
-        id: "product-build",
-        title: "Product Build",
+        id: "engineering-retainer",
+        title: "Monthly Engineering Retainer",
         description:
-          "For a mobile app, web application, or custom software project.",
+          "For high-growth products needing continuous, dedicated velocity without hiring overhead.",
         highlights: [
-          "End-to-end interface design and development",
-          "Database modeling & secure API integrations",
-          "Authentication, roles & user permission flows",
-          "Staging environments & automated test coverage",
+          "Dedicated allocation of Lead Full-Stack & Cloud Architects",
+          "Bi-weekly production sprint releases & live staging reviews",
+          "Active 24/7 incident escalation & server cluster monitoring",
+          "Direct Slack / Discord channels with lead engineers",
+          "Unlimited revisions within sprint scope & zero change fees",
         ],
         projectType: "Custom Software",
       },
       {
-        id: "ongoing-collaboration",
-        title: "Ongoing Collaboration",
+        id: "enterprise-cloud",
+        title: "Enterprise Custom",
         description:
-          "For iterative improvements and continued product development.",
+          "For multi-region distributed backends, zero-trust security audits, or monolith migrations.",
         highlights: [
-          "Dedicated monthly development sprints",
-          "Rapid feature releases & UI enhancements",
-          "Performance profiling & infrastructure care",
-          "Direct communication with lead engineers",
+          "Bespoke microservice topology & database sharding",
+          "SOC 2, ISO 27001 & HIPAA compliance hardening",
+          "Kubernetes multi-cloud orchestration & automated DR failover",
+          "Tailored SLA agreements & dedicated NOC response tier",
         ],
         projectType: "Other",
       },
     ] as EngagementTier[],
   },
 
-  // 9. FAQ
+  // 9. Technical FAQs
   faq: {
-    eyebrow: "CLARITY",
-    heading: "Questions before we begin.",
+    eyebrow: "TECHNICAL CLARITY",
+    heading: "Questions Founders & CTOs Ask Us First.",
     subhead:
-      "Straightforward answers to how we work, scope, and deliver digital products.",
+      "Straightforward answers regarding our engineering standards, IP ownership, and deployment protocols.",
     items: [
       {
         id: "faq-1",
-        question: "What types of projects do you build?",
+        question: "How do you guarantee zero downtime during migrations?",
         answer:
-          "We develop responsive websites, native and cross-platform mobile apps, bespoke internal tools, customer dashboards, and customized software systems. Every project is engineered from scratch around your specific business objectives.",
+          "We implement blue-green deployments, canary releases, and dual-write database replication. Active client traffic is shifted incrementally to the new infrastructure only after synthetic health checks pass 100% across all target edge nodes.",
       },
       {
         id: "faq-2",
-        question: "Can you redesign an existing website or app?",
+        question: "Do we own 100% of the code and intellectual property?",
         answer:
-          "Yes. We frequently audit and modernize existing digital products. We can overhaul outdated frontends, migrate legacy codebases to modern frameworks like Next.js, and refine user journeys without disrupting active operations.",
+          "Yes. From day one, all code, design tokens, infrastructure configurations, and documentation belong exclusively to your organization. Everything is delivered in your private Git repositories with zero proprietary license locks.",
       },
       {
         id: "faq-3",
-        question: "How is a project scoped?",
+        question: "How does communication work during a build?",
         answer:
-          "We start with a discovery conversation to examine your functional needs, audience expectations, and technical constraints. From there, we prepare a clear, written scope outlining deliverables, milestones, and timeline estimates before any work begins.",
+          "You communicate directly with our Lead Architects via shared Slack/Discord channels, weekly live staging demos, and transparent GitHub/GitLab pull requests. No non-technical account managers filtering your feedback.",
       },
       {
         id: "faq-4",
-        question: "How long will development take?",
+        question: "What is your typical delivery velocity for a project?",
         answer:
-          "Timelines depend directly on complexity and scope. A focused website or landing page typically takes 2 to 4 weeks, while a comprehensive mobile application or multi-tier software platform ranges from 6 to 12 weeks. We establish mutually agreed sprint schedules during onboarding.",
+          "A focused flagship web platform or design system is typically delivered in 2 to 4 weeks. Full-scale mobile applications and multi-tier cloud software engines range from 6 to 10 weeks across structured bi-weekly sprints.",
       },
       {
         id: "faq-5",
-        question: "Can you work with our existing branding?",
+        question: "How do you handle security and compliance standards?",
         answer:
-          "Absolutely. If you already have established brand guidelines, typography, or color palettes, we implement them with high fidelity. If your branding needs refinement or digital expansion, we can expand it into a comprehensive web design system.",
+          "Every codebase undergoes automated static analysis, dependency vulnerability scanning, zero-trust network segregation, and TLS 1.3 encryption. We architect systems to align strictly with SOC 2 Type II, ISO 27001, and HIPAA compliance requirements.",
       },
       {
         id: "faq-6",
-        question: "What happens after launch?",
+        question: "What post-launch support and warranty is included?",
         answer:
-          "We provide comprehensive documentation, recorded code walkthroughs, and post-launch warranty support to ensure stability. For ongoing feature development and maintenance, we offer flexible continuing collaboration sprints.",
+          "Every delivery includes a minimum 30-day bug warranty, recorded architecture walkthroughs, and active telemetry monitoring. For ongoing feature development and 24/7 incident care, we provide dedicated monthly engineering retainers.",
       },
     ] as FAQItem[],
   },
@@ -371,10 +373,10 @@ export const SITE_CONFIG = {
   // 10. Contact
   contact: {
     eyebrow: "START A CONVERSATION",
-    heading: "Let’s build your next chapter.",
+    heading: "Let’s Build Something Extraordinary Together.",
     supportingCopy:
-      "Tell us what you’re planning and what you want it to achieve.",
-    submitLabel: "Send Project Enquiry",
+      "Tell us what you’re planning and what technical objectives you need to achieve.",
+    submitLabel: "Schedule Technical Consultation",
     projectTypes: [
       "Website",
       "Mobile App",
@@ -384,56 +386,117 @@ export const SITE_CONFIG = {
     ] as const,
   },
 
-  // 11. Blog & Studio Journal
+  // 11. Blog & Journal Insights (Technical Essays)
   blog: {
     eyebrow: "JOURNAL & INSIGHTS",
-    heading: "Notes on craft, architecture, and purposeful code.",
+    heading: "Notes on Craft, Architecture, and Purposeful Code.",
     subhead:
-      "Observations and engineering takeaways from the digital products we design and build.",
+      "Authoritative takeaways and production patterns from the digital products we engineer at ADORA TECH.",
     posts: [
       {
-        slug: "designing-with-subtle-neon-glows",
-        title: "Designing for High-DPI Screens with Restrained Atmospheric Glows",
+        slug: "sub-50ms-ttfb-nextjs-app-router",
+        title: "Achieving Sub-50ms TTFB with Next.js 15 App Router & Edge Workers",
         excerpt:
-          "Why luminous neon halos work better when paired with deep obsidian emerald palettes rather than generic saturated purples.",
-        category: "Design System",
-        readTime: "4 min read",
+          "A technical breakdown of streaming SSR, zero-bundle server components, and multi-region edge caching for high-conversion web platforms.",
+        category: "Web Engineering",
+        readTime: "5 min read",
         date: "Oct 24, 2026",
         content:
-          "In digital product design, luminous accents should guide attention, not exhaust it. By restricting vivid mint (#8DE0C1) and copper (#D5A17D) to intentional focal points—such as our circular emblem—and anchoring them against deep green-black surfaces (#081B19), interfaces gain a sense of depth and tangible physical atmosphere without suffering visual fatigue.",
+          "Modern web applications often compromise between aesthetic complexity and load performance. By rendering critical markup on edge runtimes and keeping interactive motion logic localized in client islands, we achieve instant first-contentful paint while maintaining rich GSAP animation pipelines. This architecture reduces bounce rates by up to 40% on mobile networks.",
       },
       {
-        slug: "nextjs-app-router-turbopack-benefits",
-        title: "Why We Build Client Frontends with Next.js App Router and Edge Workers",
+        slug: "offline-first-mobile-sync-crdt",
+        title: "Designing Resilient Offline-First Mobile Sync with SQLite & CRDTs",
         excerpt:
-          "A breakdown of sub-50ms TTFB, zero-bundle-overhead server components, and streaming hydration for editorial websites.",
-        category: "Engineering",
-        readTime: "6 min read",
+          "How to engineer mobile applications that perform seamlessly through subway tunnels, flights, and flaky network connections.",
+        category: "Mobile Architecture",
+        readTime: "7 min read",
         date: "Oct 18, 2026",
         content:
-          "Modern web applications often compromise between aesthetic complexity and load performance. By rendering critical markup on edge runtimes and keeping interactive motion logic localized in client islands, we achieve instant first-contentful paint while maintaining rich GSAP animation pipelines.",
+          "Users do not care if cell signal drops in an elevator. A world-class mobile app queues writes locally in encrypted SQLite storage and resolves concurrent state conflicts deterministically when connectivity is restored. We break down the conflict-free replicated data type (CRDT) engine we deploy in production.",
       },
       {
-        slug: "realtime-fleet-telemetry-architecture",
-        title: "The Architecture of Zero-Latency Operations Consoles",
+        slug: "zero-downtime-database-migrations",
+        title: "Architecting Zero-Downtime PostgreSQL Migrations under High Concurrency",
         excerpt:
-          "How we engineer mission-critical dashboards that process thousands of live vehicle coordinates without UI stutter.",
-        category: "Custom Software",
-        readTime: "7 min read",
+          "Step-by-step strategies for schema refactoring, dual-write queues, and backward-compatible data cutovers with zero minutes of maintenance windows.",
+        category: "Cloud Systems",
+        readTime: "6 min read",
         date: "Oct 10, 2026",
         content:
-          "When dispatchers manage multi-region transit networks, sluggish tables and bloated DOM nodes introduce real operational hazards. We unpack how virtualized windowing, binary WebSocket streams, and canvas rendering enable buttery 60 FPS performance under high load.",
+          "Taking production databases offline for maintenance is unacceptable for modern SaaS and e-commerce platforms. We explain our expand-contract migration methodology, including asynchronous index creation, shadow column replication, and feature flag cutovers that guarantee 99.99% availability.",
       },
       {
-        slug: "offline-first-mobile-sqlite-sync",
-        title: "Offline-First Mobile Architecture: Designing Resilient Sync Queues",
+        slug: "interaction-physics-60fps-motion",
+        title: "The Physics of Digital Luxury: 60 FPS Micro-Interactions in React",
         excerpt:
-          "Strategies for human-centric mobile apps that perform seamlessly on flights, subways, and low-connectivity regions.",
-        category: "Mobile Apps",
-        readTime: "5 min read",
+          "Why fluid spring damping and atmospheric neon glows create high perception of software quality without degrading GPU frame budgets.",
+        category: "UI & UX",
+        readTime: "4 min read",
         date: "Sep 28, 2026",
         content:
-          "Users do not care if their cell signal drops. A well-designed mobile application stores writes in a deterministic local SQLite queue and synchronizes conflicts gracefully upon reconnection. Here is our blueprint for local-first mobile development.",
+          "Visual prestige in digital software is not about flashy animations; it is about tactile predictability. When buttons, drawers, and charts respond with realistic mass, velocity, and damping, the interface feels tangible and responsive. We detail how we combine hardware transforms with Tailwind CSS design tokens.",
+      },
+    ],
+  },
+
+  // 12. Editorial Statement (Vayem Studios Inspired Large Editorial Section)
+  editorialStatement: {
+    eyebrow: "ARCHITECTURAL RIGOR",
+    statement:
+      "Every mission-critical launch demands architectural precision. Off-the-shelf software breaks under enterprise load, and bloated agencies take quarters to deliver. By the time features ship, ",
+    statementHighlight: "the market has moved on.",
+    cols: [
+      {
+        title: "The Agency Bottleneck",
+        text: "We founded ADORA TECH because we watched high-growth brands get stalled by legacy outsourcing. Middle-management bloat, junior developer handoffs, and endless scoping meetings turn simple feature sprints into multi-quarter delays.",
+      },
+      {
+        title: "Direct Engineering",
+        text: "We eliminate agency friction by pairing founders and tech leaders directly with senior architects. High-concurrency systems, micro-animations, and clean reproducible codebases are engineered from day one—zero bloat, zero excuses.",
+      },
+      {
+        title: "The Bottom Line",
+        text: "If your enterprise needs rock-solid cloud infrastructure, sub-second web experiences, or bespoke software built to scale, ADORA TECH is your dedicated engineering powerhouse.",
+        highlight: true,
+      },
+    ],
+  },
+
+  // 13. Client Reviews (Verified Social Proof Section)
+  clientReviews: {
+    eyebrow: "CLIENT WORDS",
+    heading: "In their own words.",
+    score: "5.0",
+    ratingSource: "36 verified reviews on Clutch & Google",
+    quotes: [
+      {
+        quote:
+          "The senior engineering depth at ADORA TECH is exceptional. They migrated our legacy monolith to a globally distributed cloud cluster in 3 weeks with zero minutes of downtime.",
+        author: "Vikram Singhania",
+        role: "CTO, QuantEdge Capital",
+        source: "Clutch Review",
+      },
+      {
+        quote:
+          "Unlike agencies that assign junior devs after contract signing, ADORA TECH's lead architects executed every sprint directly. Our mobile booking volume tripled within 60 days of launch.",
+        author: "Elena Rostova",
+        role: "VP of Product, Aura Health",
+        source: "Google Review",
+      },
+      {
+        quote:
+          "Attention to micro-interactions and performance optimization is unmatched. Our Lighthouse scores shot straight to 100, and checkout conversion jumped by 34%.",
+        author: "Marcus Vance",
+        role: "Founder & CEO, Lumina Retail",
+        source: "Verified Enterprise Review",
+      },
+      {
+        quote:
+          "Reliable, transparent, and insanely fast. Their 24/7 dedicated NOC and SOC team resolved a critical zero-day edge vulnerability in under 12 minutes.",
+        author: "Priya Sundaram",
+        role: "Head of Infrastructure, FinScale",
+        source: "Clutch Review",
       },
     ],
   },

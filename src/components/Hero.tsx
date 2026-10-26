@@ -52,7 +52,7 @@ export const Hero: React.FC<HeroProps> = ({ isIntroActive: propIntroActive }) =>
     }
   };
 
-  // IT Company visual cards for the crossway background carousel
+  // IT Company visual cards for the 5-column vertical background carousel
   const itVisualCards = [
     {
       title: "ENTERPRISE_DATACENTER // NODE_01",
@@ -77,126 +77,203 @@ export const Hero: React.FC<HeroProps> = ({ isIntroActive: propIntroActive }) =>
     },
   ];
 
-  const carouselItems = [...itVisualCards, ...itVisualCards, ...itVisualCards];
+  // Alternating sets for the 5 vertical columns (each repeated to loop infinitely)
+  const col1Items = [...itVisualCards, ...itVisualCards];
+  const col2Items = [...itVisualCards.slice(1), ...itVisualCards, itVisualCards[0]];
+  const col3Items = [...itVisualCards.slice(2), ...itVisualCards, ...itVisualCards.slice(0, 2)];
+  const col4Items = [...itVisualCards, ...itVisualCards];
+  const col5Items = [...itVisualCards.slice(1), ...itVisualCards, itVisualCards[0]];
 
   return (
     <section
       id="hero"
       ref={containerRef}
-      className="relative min-h-[92vh] flex flex-col justify-center items-center pt-32 pb-20 px-4 sm:px-6 lg:px-8 overflow-hidden select-none bg-atmospheric"
+      className="relative min-h-[96vh] flex flex-col justify-center items-center pt-28 pb-16 px-4 sm:px-6 lg:px-8 overflow-hidden select-none bg-[#081B19]"
     >
       {/* 
-        Crossway Background Image Carousel:
-        Two intersecting diagonal carousel tracks running in opposite directions
-        featuring enterprise IT data centers, cybersecurity NOCs, and cloud DevOps environments.
+        Vertical Multi-Column Background Carousel (4-5 Columns):
+        Faded appearance allowing high contrast for the centered headline,
+        flowing rhythmically with alternating vertical directions.
       */}
       <div
         aria-hidden="true"
-        className="crossway-container"
+        className="absolute inset-0 overflow-hidden pointer-events-none z-0 flex justify-center gap-4 sm:gap-6 lg:gap-8 opacity-35 select-none px-4"
         style={{
-          transform: `translate3d(${mouseOffset.x * -1}px, ${mouseOffset.y * -1}px, 0)`,
+          transform: `translate3d(${mouseOffset.x * -0.5}px, ${mouseOffset.y * -0.5}px, 0)`,
         }}
       >
-        {/* Track A: Angled at -7deg, sliding continuously to the left */}
-        <div
-          className="animate-crossway-left"
-          style={{ transform: "rotate(-7deg)" }}
-        >
-          <div className="flex items-center gap-8 pr-8">
-            {carouselItems.map((card, idx) => {
-              const Icon = card.icon;
-              return (
-                <div
-                  key={`trackA-${idx}`}
-                  className="relative w-80 sm:w-[440px] md:w-[480px] h-56 sm:h-64 rounded-3xl overflow-hidden bg-[#102A26] border-2 border-[#8DE0C1]/40 shadow-2xl shadow-black/60 flex-shrink-0 group"
-                >
-                  <Image
-                    src={card.img}
-                    alt={card.title}
-                    fill
-                    className="object-cover opacity-90 filter saturate-125 brightness-105 group-hover:scale-105 transition-transform duration-700"
-                    sizes="(max-width: 768px) 320px, 480px"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#0E2925] via-[#0E2925]/30 to-transparent" />
-                  <div className="absolute top-4 left-4 right-4 flex items-center justify-between text-[11px] font-mono text-[#8DE0C1]">
-                    <span className="px-3 py-1 rounded-full bg-[#0E2925]/90 border border-[#8DE0C1]/40 backdrop-blur-md font-semibold shadow-md">
-                      {card.tag}
-                    </span>
-                    <div className="p-1.5 rounded-full bg-[#0E2925]/90 border border-[#8DE0C1]/40">
-                      <Icon className="w-4 h-4 text-[#8DE0C1]" />
-                    </div>
-                  </div>
-                  <div className="absolute bottom-4 left-4 right-4 p-3 rounded-xl bg-[#0E2925]/85 border border-[#8DE0C1]/20 backdrop-blur-md">
-                    <div className="text-sm font-mono text-[#F8FAF6] font-medium truncate">
-                      {card.title}
-                    </div>
-                    <div className="text-xs font-mono text-[#D5A17D] flex items-center gap-2 mt-1">
-                      <span className="w-2 h-2 rounded-full bg-[#8DE0C1] animate-pulse" />
-                      {card.metric}
-                    </div>
-                  </div>
+        {/* Column 1: Slides Up */}
+        <div className="w-52 sm:w-60 lg:w-68 shrink-0 flex flex-col gap-5 animate-col-up-1">
+          {col1Items.map((card, idx) => (
+            <div
+              key={`col1-${idx}`}
+              className="relative w-full h-44 sm:h-52 rounded-2xl overflow-hidden bg-[#102A26] border border-[#8DE0C1]/25 shadow-lg shrink-0 group"
+            >
+              <Image
+                src={card.img}
+                alt={card.title}
+                fill
+                className="object-cover opacity-90 filter contrast-110 brightness-100"
+                sizes="280px"
+                loading="eager"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#081B19]/90 via-[#081B19]/30 to-transparent" />
+              <div className="absolute top-3 left-3 right-3 flex items-center justify-between text-[10px] font-mono">
+                <span className="px-2.5 py-0.5 rounded-full bg-[#081B19]/85 border border-[#8DE0C1]/40 text-[#8DE0C1] backdrop-blur-md font-medium">
+                  {card.tag}
+                </span>
+                <div className="p-1.5 rounded-full bg-[#081B19]/85 border border-[#8DE0C1]/40 text-[#8DE0C1]">
+                  <card.icon className="w-3.5 h-3.5" />
                 </div>
-              );
-            })}
-          </div>
+              </div>
+              <div className="absolute bottom-3 left-3 right-3 flex items-center justify-between text-[11px] font-mono">
+                <span className="text-white/90 truncate mr-2 font-medium">{card.title}</span>
+                <span className="shrink-0 text-[10px] text-[#8DE0C1]">{card.metric}</span>
+              </div>
+            </div>
+          ))}
         </div>
 
-        {/* Track B: Angled at +7deg, sliding continuously to the right (Crossing Track A) */}
-        <div
-          className="animate-crossway-right"
-          style={{ transform: "rotate(7deg)" }}
-        >
-          <div className="flex items-center gap-8 pr-8">
-            {carouselItems.slice().reverse().map((card, idx) => {
-              const Icon = card.icon;
-              return (
-                <div
-                  key={`trackB-${idx}`}
-                  className="relative w-80 sm:w-[440px] md:w-[480px] h-56 sm:h-64 rounded-3xl overflow-hidden bg-[#102A26] border-2 border-[#D5A17D]/40 shadow-2xl shadow-black/60 flex-shrink-0 group"
-                >
-                  <Image
-                    src={card.img}
-                    alt={card.title}
-                    fill
-                    className="object-cover opacity-90 filter saturate-125 brightness-105 group-hover:scale-105 transition-transform duration-700"
-                    sizes="(max-width: 768px) 320px, 480px"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#0E2925] via-[#0E2925]/30 to-transparent" />
-                  <div className="absolute top-4 left-4 right-4 flex items-center justify-between text-[11px] font-mono text-[#D5A17D]">
-                    <span className="px-3 py-1 rounded-full bg-[#0E2925]/90 border border-[#D5A17D]/40 backdrop-blur-md font-semibold shadow-md">
-                      {card.tag}
-                    </span>
-                    <div className="p-1.5 rounded-full bg-[#0E2925]/90 border border-[#D5A17D]/40">
-                      <Icon className="w-4 h-4 text-[#D5A17D]" />
-                    </div>
-                  </div>
-                  <div className="absolute bottom-4 left-4 right-4 p-3 rounded-xl bg-[#0E2925]/85 border border-[#D5A17D]/20 backdrop-blur-md">
-                    <div className="text-sm font-mono text-[#F8FAF6] font-medium truncate">
-                      {card.title}
-                    </div>
-                    <div className="text-xs font-mono text-[#8DE0C1] flex items-center gap-2 mt-1">
-                      <span className="w-2 h-2 rounded-full bg-[#8DE0C1] animate-pulse" />
-                      {card.metric}
-                    </div>
-                  </div>
+        {/* Column 2: Slides Down */}
+        <div className="w-52 sm:w-60 lg:w-68 shrink-0 flex flex-col gap-5 animate-col-down-2">
+          {col2Items.map((card, idx) => (
+            <div
+              key={`col2-${idx}`}
+              className="relative w-full h-44 sm:h-52 rounded-2xl overflow-hidden bg-[#102A26] border border-[#D5A17D]/25 shadow-lg shrink-0 group"
+            >
+              <Image
+                src={card.img}
+                alt={card.title}
+                fill
+                className="object-cover opacity-90 filter contrast-110 brightness-100"
+                sizes="280px"
+                loading="eager"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#081B19]/90 via-[#081B19]/30 to-transparent" />
+              <div className="absolute top-3 left-3 right-3 flex items-center justify-between text-[10px] font-mono">
+                <span className="px-2.5 py-0.5 rounded-full bg-[#081B19]/85 border border-[#D5A17D]/40 text-[#D5A17D] backdrop-blur-md font-medium">
+                  {card.tag}
+                </span>
+                <div className="p-1.5 rounded-full bg-[#081B19]/85 border border-[#D5A17D]/40 text-[#D5A17D]">
+                  <card.icon className="w-3.5 h-3.5" />
                 </div>
-              );
-            })}
-          </div>
+              </div>
+              <div className="absolute bottom-3 left-3 right-3 flex items-center justify-between text-[11px] font-mono">
+                <span className="text-white/90 truncate mr-2 font-medium">{card.title}</span>
+                <span className="shrink-0 text-[10px] text-[#D5A17D]">{card.metric}</span>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {/* Column 3: Slides Up */}
+        <div className="w-52 sm:w-60 lg:w-68 shrink-0 flex flex-col gap-5 animate-col-up-3">
+          {col3Items.map((card, idx) => (
+            <div
+              key={`col3-${idx}`}
+              className="relative w-full h-44 sm:h-52 rounded-2xl overflow-hidden bg-[#102A26] border border-[#8DE0C1]/25 shadow-lg shrink-0 group"
+            >
+              <Image
+                src={card.img}
+                alt={card.title}
+                fill
+                className="object-cover opacity-90 filter contrast-110 brightness-100"
+                sizes="280px"
+                loading="eager"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#081B19]/90 via-[#081B19]/30 to-transparent" />
+              <div className="absolute top-3 left-3 right-3 flex items-center justify-between text-[10px] font-mono">
+                <span className="px-2.5 py-0.5 rounded-full bg-[#081B19]/85 border border-[#8DE0C1]/40 text-[#8DE0C1] backdrop-blur-md font-medium">
+                  {card.tag}
+                </span>
+                <div className="p-1.5 rounded-full bg-[#081B19]/85 border border-[#8DE0C1]/40 text-[#8DE0C1]">
+                  <card.icon className="w-3.5 h-3.5" />
+                </div>
+              </div>
+              <div className="absolute bottom-3 left-3 right-3 flex items-center justify-between text-[11px] font-mono">
+                <span className="text-white/90 truncate mr-2 font-medium">{card.title}</span>
+                <span className="shrink-0 text-[10px] text-[#8DE0C1]">{card.metric}</span>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {/* Column 4: Slides Down (Hidden on small mobile) */}
+        <div className="hidden sm:flex w-52 sm:w-60 lg:w-68 shrink-0 flex flex-col gap-5 animate-col-down-4">
+          {col4Items.map((card, idx) => (
+            <div
+              key={`col4-${idx}`}
+              className="relative w-full h-44 sm:h-52 rounded-2xl overflow-hidden bg-[#102A26] border border-[#D5A17D]/25 shadow-lg shrink-0 group"
+            >
+              <Image
+                src={card.img}
+                alt={card.title}
+                fill
+                className="object-cover opacity-90 filter contrast-110 brightness-100"
+                sizes="280px"
+                loading="eager"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#081B19]/90 via-[#081B19]/30 to-transparent" />
+              <div className="absolute top-3 left-3 right-3 flex items-center justify-between text-[10px] font-mono">
+                <span className="px-2.5 py-0.5 rounded-full bg-[#081B19]/85 border border-[#D5A17D]/40 text-[#D5A17D] backdrop-blur-md font-medium">
+                  {card.tag}
+                </span>
+                <div className="p-1.5 rounded-full bg-[#081B19]/85 border border-[#D5A17D]/40 text-[#D5A17D]">
+                  <card.icon className="w-3.5 h-3.5" />
+                </div>
+              </div>
+              <div className="absolute bottom-3 left-3 right-3 flex items-center justify-between text-[11px] font-mono">
+                <span className="text-white/90 truncate mr-2 font-medium">{card.title}</span>
+                <span className="shrink-0 text-[10px] text-[#D5A17D]">{card.metric}</span>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {/* Column 5: Slides Up (Visible on lg+) */}
+        <div className="hidden lg:flex w-68 shrink-0 flex flex-col gap-5 animate-col-up-5">
+          {col5Items.map((card, idx) => (
+            <div
+              key={`col5-${idx}`}
+              className="relative w-full h-44 sm:h-52 rounded-2xl overflow-hidden bg-[#102A26] border border-[#8DE0C1]/25 shadow-lg shrink-0 group"
+            >
+              <Image
+                src={card.img}
+                alt={card.title}
+                fill
+                className="object-cover opacity-90 filter contrast-110 brightness-100"
+                sizes="280px"
+                loading="eager"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#081B19]/90 via-[#081B19]/30 to-transparent" />
+              <div className="absolute top-3 left-3 right-3 flex items-center justify-between text-[10px] font-mono">
+                <span className="px-2.5 py-0.5 rounded-full bg-[#081B19]/85 border border-[#8DE0C1]/40 text-[#8DE0C1] backdrop-blur-md font-medium">
+                  {card.tag}
+                </span>
+                <div className="p-1.5 rounded-full bg-[#081B19]/85 border border-[#8DE0C1]/40 text-[#8DE0C1]">
+                  <card.icon className="w-3.5 h-3.5" />
+                </div>
+              </div>
+              <div className="absolute bottom-3 left-3 right-3 flex items-center justify-between text-[11px] font-mono">
+                <span className="text-white/90 truncate mr-2 font-medium">{card.title}</span>
+                <span className="shrink-0 text-[10px] text-[#8DE0C1]">{card.metric}</span>
+              </div>
+            </div>
+          ))}
         </div>
       </div>
 
-      {/* Hero Radial Contrast Mask for High Readability with Vibrant Background */}
+      {/* Gentle Center Radial Fade for Optimal Readability */}
       <div
         aria-hidden="true"
-        className="absolute inset-0 pointer-events-none bg-[radial-gradient(ellipse_at_center,rgba(14,41,37,0.72)_0%,rgba(14,41,37,0.50)_60%,rgba(14,41,37,0.85)_100%)] z-0"
+        className="absolute inset-0 pointer-events-none bg-[radial-gradient(ellipse_at_center,rgba(8,27,25,0.78)_0%,rgba(8,27,25,0.52)_55%,rgba(8,27,25,0.92)_100%)] z-10"
       />
 
-      {/* Centered Main Content Container */}
-      <div className="relative z-10 max-w-4xl mx-auto flex flex-col items-center text-center my-auto">
+      {/* Centered Main Content Container (Open & Clean - No Box) */}
+      <div className="relative z-20 max-w-4xl mx-auto flex flex-col items-center text-center my-auto px-4">
         {/* Status Eyebrow Badge with Radar Sonar Beacon */}
         <div
-          className={`inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-[#102A26]/90 border border-[#8DE0C1]/40 text-[#8DE0C1] text-xs font-mono uppercase tracking-widest mb-8 backdrop-blur-md transition-all duration-700 shadow-lg shadow-black/30 ${
+          className={`inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-[#102A26]/90 border border-[#8DE0C1]/40 text-[#8DE0C1] text-xs font-mono uppercase tracking-widest mb-8 backdrop-blur-md transition-all duration-700 shadow-xl shadow-black/40 ${
             isIntroActive ? "opacity-0 translate-y-3" : "opacity-100 translate-y-0"
           }`}
           style={{ transitionDelay: "150ms" }}
@@ -208,15 +285,15 @@ export const Hero: React.FC<HeroProps> = ({ isIntroActive: propIntroActive }) =>
           <span>[ ENTERPRISE IT SERVICES &amp; MANAGED CLOUD ]</span>
         </div>
 
-        {/* Centered Headline with Vayem-style Luxury Serif Italic Accent */}
+        {/* Centered Headline with Luxury Serif Italic Accent and High Legibility Drop Shadow */}
         <h1
-          className={`text-4xl sm:text-6xl md:text-7xl font-normal tracking-tight text-[#F1F3EB] leading-[1.08] mb-8 transition-all duration-800 ${
+          className={`text-4xl sm:text-6xl md:text-7xl font-normal tracking-tight text-white leading-[1.08] mb-8 transition-all duration-800 drop-shadow-[0_4px_24px_rgba(0,0,0,0.85)] ${
             isIntroActive ? "opacity-0 translate-y-6" : "opacity-100 translate-y-0"
           }`}
           style={{ transitionDelay: "250ms" }}
         >
           <span className="block font-light">Next-Generation IT Services &amp;</span>
-          <span className="block font-serif italic font-normal bg-gradient-to-r from-[#F1F3EB] via-[#8DE0C1] to-[#D5A17D] bg-clip-text text-transparent">
+          <span className="block font-serif italic font-normal bg-gradient-to-r from-white via-[#8DE0C1] to-[#D5A17D] bg-clip-text text-transparent">
             Cloud Infrastructure
           </span>
           <span className="block font-light">Engineered for Resilience.</span>
@@ -224,7 +301,7 @@ export const Hero: React.FC<HeroProps> = ({ isIntroActive: propIntroActive }) =>
 
         {/* Centered Supporting Paragraph */}
         <p
-          className={`text-base sm:text-xl text-[#A4B7AF] font-light max-w-2xl leading-relaxed mb-10 transition-all duration-800 ${
+          className={`text-base sm:text-xl text-[#F1F3EB] font-light max-w-2xl leading-relaxed mb-10 transition-all duration-800 drop-shadow-[0_2px_14px_rgba(0,0,0,0.9)] ${
             isIntroActive ? "opacity-0 translate-y-4" : "opacity-100 translate-y-0"
           }`}
           style={{ transitionDelay: "350ms" }}
@@ -242,7 +319,7 @@ export const Hero: React.FC<HeroProps> = ({ isIntroActive: propIntroActive }) =>
         >
           <Link
             href="/contact"
-            className="inline-flex items-center gap-2 px-8 py-4 rounded-full text-sm font-semibold tracking-wide text-[#081B19] bg-[#8DE0C1] hover:bg-[#A3E8D0] shadow-[0_0_25px_rgba(141,224,193,0.35)] hover:shadow-[0_0_35px_rgba(141,224,193,0.5)] transition-all duration-300 hover:scale-[1.02] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#8DE0C1]"
+            className="inline-flex items-center gap-2 px-8 py-4 rounded-full text-sm font-semibold tracking-wide text-[#081B19] bg-[#8DE0C1] hover:bg-[#A3E8D0] shadow-[0_0_30px_rgba(141,224,193,0.45)] hover:shadow-[0_0_40px_rgba(141,224,193,0.6)] transition-all duration-300 hover:scale-[1.02] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#8DE0C1]"
           >
             <span>Schedule IT Consultation</span>
             <ArrowRight className="w-4 h-4 transition-transform duration-200 group-hover:translate-x-1" />
@@ -250,7 +327,7 @@ export const Hero: React.FC<HeroProps> = ({ isIntroActive: propIntroActive }) =>
 
           <Link
             href="/services"
-            className="inline-flex items-center gap-2 px-8 py-4 rounded-full text-sm font-medium tracking-wide text-[#F1F3EB] bg-[#102A26]/80 hover:bg-[#153833] border border-[#A4B7AF]/20 hover:border-[#8DE0C1]/40 backdrop-blur-md transition-all duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#8DE0C1]"
+            className="inline-flex items-center gap-2 px-8 py-4 rounded-full text-sm font-medium tracking-wide text-[#F1F3EB] bg-[#102A26]/80 hover:bg-[#153833] border border-[#A4B7AF]/20 hover:border-[#8DE0C1]/40 backdrop-blur-md shadow-xl transition-all duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#8DE0C1]"
           >
             <span>Explore IT Capabilities</span>
           </Link>
@@ -258,7 +335,7 @@ export const Hero: React.FC<HeroProps> = ({ isIntroActive: propIntroActive }) =>
 
         {/* Centered Trust Indicators Bar */}
         <div
-          className={`flex flex-wrap items-center justify-center gap-6 sm:gap-8 text-xs font-mono text-[#A4B7AF]/70 pt-6 border-t border-[#A4B7AF]/15 transition-all duration-800 ${
+          className={`flex flex-wrap items-center justify-center gap-6 sm:gap-8 text-xs font-mono text-[#A4B7AF]/80 pt-6 border-t border-[#A4B7AF]/15 transition-all duration-800 drop-shadow-[0_2px_10px_rgba(0,0,0,0.85)] ${
             isIntroActive ? "opacity-0" : "opacity-100"
           }`}
           style={{ transitionDelay: "550ms" }}

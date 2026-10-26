@@ -8,6 +8,12 @@ interface EngagementOptionsProps {
   onSelectProjectType?: (type: string) => void;
 }
 
+/**
+ * EngagementOptions Component
+ *
+ * Inspired by Vayem Studios' pricing layout (.prices):
+ * Clear, transparent collaboration tiers with an elevated "Most Popular" retainer card.
+ */
 export const EngagementOptions: React.FC<EngagementOptionsProps> = ({
   onSelectProjectType,
 }) => {
@@ -21,107 +27,144 @@ export const EngagementOptions: React.FC<EngagementOptionsProps> = ({
     }
   };
 
+  const tiers = [
+    {
+      id: "focused-sprint",
+      title: "Focused Sprint",
+      tagline: "For a flagship marketing website, design system, or targeted feature MVP.",
+      popular: false,
+      deliverables: [
+        "Bespoke responsive frontend architecture (Next.js 15)",
+        "Hardware-accelerated 60 FPS motion & micro-animations",
+        "Sub-50ms TTFB edge caching & 100/100 Core Web Vitals",
+        "Full repository handover & 30-day post-launch warranty",
+      ],
+      projectType: "Website",
+      cta: "Scope a Sprint",
+    },
+    {
+      id: "engineering-retainer",
+      title: "Monthly Engineering Retainer",
+      tagline: "For high-growth products needing continuous, dedicated velocity without hiring overhead.",
+      popular: true,
+      deliverables: [
+        "Dedicated allocation of Lead Full-Stack & Cloud Architects",
+        "Bi-weekly production sprint releases & live staging reviews",
+        "Active 24/7 incident escalation & server cluster monitoring",
+        "Direct Slack / Discord channels with lead engineers",
+        "Unlimited revisions within sprint scope & zero change fees",
+      ],
+      projectType: "Custom Software",
+      cta: "Start Retainer",
+    },
+    {
+      id: "enterprise-cloud",
+      title: "Enterprise Custom",
+      tagline: "For multi-region distributed backends, zero-trust security audits, or monolith migrations.",
+      popular: false,
+      deliverables: [
+        "Bespoke microservice topology & database sharding",
+        "SOC 2, ISO 27001 & HIPAA compliance hardening",
+        "Kubernetes multi-cloud orchestration & automated DR failover",
+        "Tailored SLA agreements & dedicated NOC response tier",
+      ],
+      projectType: "Other",
+      cta: "Schedule Architecture Call",
+    },
+  ];
+
   return (
     <section
       id="engagement"
-      className="py-24 sm:py-32 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto border-b border-[#A4B7AF]/10"
+      className="py-24 sm:py-36 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto border-b border-[#A4B7AF]/10 relative overflow-hidden"
       aria-labelledby="engagement-heading"
     >
-      {/* Header */}
-      <div className="max-w-3xl mb-16 sm:mb-20">
-        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#102A26] border border-[#A4B7AF]/20 text-[#8DE0C1] text-xs font-mono uppercase tracking-widest mb-4">
-          <span>{SITE_CONFIG.engagement.eyebrow}</span>
+      {/* Section Header */}
+      <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-14 sm:mb-20">
+        <div className="max-w-2xl">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#102A26] border border-[#8DE0C1]/30 text-[#8DE0C1] text-xs font-mono uppercase tracking-widest mb-4">
+            <span className="w-1.5 h-1.5 rounded-full bg-[#8DE0C1] animate-pulse" />
+            <span>[ {SITE_CONFIG.engagement.eyebrow} ]</span>
+          </div>
+          <h2
+            id="engagement-heading"
+            className="text-3xl sm:text-5xl lg:text-6xl font-normal tracking-tight text-[#F1F3EB] leading-[1.08]"
+          >
+            Simple, Transparent{" "}
+            <span className="font-serif italic font-normal text-transparent bg-clip-text bg-gradient-to-r from-[#8DE0C1] via-[#B8F2DC] to-[#D5A17D]">
+              Engagement
+            </span>
+            .
+          </h2>
         </div>
-        <h2
-          id="engagement-heading"
-          className="font-[family-name:var(--font-outfit)] text-3xl sm:text-5xl font-light tracking-tight text-[#F1F3EB] mb-4"
-        >
-          {SITE_CONFIG.engagement.heading}
-        </h2>
-        <p className="text-base sm:text-lg text-[#A4B7AF] font-light leading-relaxed">
-          {SITE_CONFIG.engagement.subhead}
+        <p className="text-base sm:text-lg text-[#A4B7AF] font-light max-w-md leading-relaxed">
+          Every project is scoped to what your architecture actually requires, with fixed deliverables and zero unexpected fees.
         </p>
       </div>
 
-      {/* 3 Scope Panels */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-8 items-stretch">
-        {SITE_CONFIG.engagement.tiers.map((tier, idx) => {
-          const isFeatured = idx === 1; // Middle "Product Build" card subtle emphasis
-
-          return (
-            <div
-              key={tier.id}
-              className={`rounded-3xl p-8 flex flex-col justify-between border transition-all duration-300 relative overflow-hidden group ${
-                isFeatured
-                  ? "bg-[#102A26] border-[#8DE0C1]/50 shadow-2xl shadow-black/40"
-                  : "bg-[#0D2421]/80 border-[#A4B7AF]/15 hover:border-[#8DE0C1]/30 hover:bg-[#102A26]/90 shadow-xl"
-              }`}
-            >
-              {/* Subtle top ambient glow for featured card */}
-              {isFeatured && (
-                <div
-                  aria-hidden="true"
-                  className="absolute -top-16 left-1/2 -translate-x-1/2 w-48 h-24 rounded-full opacity-35 blur-2xl pointer-events-none"
-                  style={{
-                    background:
-                      "radial-gradient(circle, rgba(141, 224, 193, 0.6) 0%, transparent 70%)",
-                  }}
-                />
-              )}
-
-              <div>
-                <div className="flex items-center justify-between mb-4">
-                  <span className="font-mono text-xs text-[#8DE0C1] uppercase tracking-wider">
-                    Model 0{idx + 1}
+      {/* Vayem Studios Inspired 3-Tier Grid (.prices) */}
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 items-stretch">
+        {tiers.map((tier) => (
+          <div
+            key={tier.id}
+            className={`relative rounded-3xl p-8 sm:p-10 flex flex-col justify-between border transition-all duration-500 group ${
+              tier.popular
+                ? "bg-gradient-to-b from-[#183933] to-[#0E2622] border-[#8DE0C1] shadow-2xl shadow-black/60 scale-[1.02] z-10"
+                : "bg-[#0B201D]/60 border-[#A4B7AF]/15 hover:border-[#8DE0C1]/40 hover:bg-[#102A26]/80"
+            }`}
+          >
+            {/* Top Bar */}
+            <div>
+              <div className="flex items-center justify-between mb-4">
+                <span className="text-xs font-mono uppercase tracking-widest text-[#8DE0C1]">
+                  TIER // {tier.id.toUpperCase()}
+                </span>
+                {tier.popular && (
+                  <span className="px-3 py-1 rounded-full text-[10px] font-mono tracking-widest uppercase bg-[#8DE0C1] text-[#081B19] font-bold">
+                    MOST POPULAR
                   </span>
-                  {isFeatured && (
-                    <span className="px-2.5 py-0.5 rounded-full text-[10px] font-mono uppercase tracking-wider bg-[#153833] text-[#8DE0C1] border border-[#8DE0C1]/30">
-                      High Impact
-                    </span>
-                  )}
-                </div>
-
-                <h3 className="font-[family-name:var(--font-outfit)] text-2xl font-medium text-[#F1F3EB] mb-3">
-                  {tier.title}
-                </h3>
-
-                <p className="text-sm text-[#A4B7AF] font-light leading-relaxed mb-8">
-                  {tier.description}
-                </p>
-
-                {/* Scope Highlights Checklist */}
-                <div className="pt-6 border-t border-[#A4B7AF]/10 space-y-3 mb-8">
-                  {tier.highlights.map((highlight, hIdx) => (
-                    <div
-                      key={hIdx}
-                      className="flex items-start gap-2.5 text-xs text-[#A4B7AF]/90"
-                    >
-                      <Check className="w-3.5 h-3.5 text-[#8DE0C1] mt-0.5 shrink-0" />
-                      <span>{highlight}</span>
-                    </div>
-                  ))}
-                </div>
+                )}
               </div>
 
-              {/* Action Button */}
-              <div className="pt-4 border-t border-[#A4B7AF]/10">
-                <button
-                  type="button"
-                  onClick={() => handleSelectTier(tier.projectType)}
-                  className={`w-full py-3.5 px-6 rounded-full text-xs font-semibold uppercase tracking-wider flex items-center justify-center gap-2 transition-all duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#8DE0C1] ${
-                    isFeatured
-                      ? "bg-[#8DE0C1] hover:bg-[#A1E8D0] text-[#081B19] shadow-[0_0_20px_rgba(141,224,193,0.3)]"
-                      : "bg-[#081B19] hover:bg-[#153833] text-[#F1F3EB] border border-[#A4B7AF]/20 hover:border-[#8DE0C1]/40"
-                  }`}
-                >
-                  <span>Discuss Your Project</span>
-                  <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
-                </button>
-              </div>
+              <h3 className="text-2xl sm:text-3xl font-light text-[#F1F3EB] mb-3">
+                {tier.title}
+              </h3>
+              <p className="text-sm text-[#A4B7AF] font-light leading-relaxed mb-8">
+                {tier.tagline}
+              </p>
+
+              {/* Deliverables List */}
+              <ul className="space-y-3.5 pt-6 border-t border-[#A4B7AF]/15 mb-10">
+                {tier.deliverables.map((item, idx) => (
+                  <li key={idx} className="flex items-start gap-3 text-sm text-[#A4B7AF] font-light">
+                    <span className="text-[#8DE0C1] font-mono text-xs mt-0.5">—</span>
+                    <span className="leading-relaxed">{item}</span>
+                  </li>
+                ))}
+              </ul>
             </div>
-          );
-        })}
+
+            {/* CTA Button */}
+            <div>
+              <button
+                onClick={() => handleSelectTier(tier.projectType)}
+                className={`w-full py-4 rounded-full text-sm font-semibold tracking-wide transition-all duration-300 flex items-center justify-center gap-2 focus:outline-none ${
+                  tier.popular
+                    ? "bg-[#8DE0C1] text-[#081B19] hover:bg-[#A3E8D0] shadow-[0_0_25px_rgba(141,224,193,0.35)] hover:scale-[1.01]"
+                    : "bg-[#102A26] text-[#F1F3EB] border border-[#A4B7AF]/20 hover:border-[#8DE0C1]/50 hover:text-[#8DE0C1]"
+                }`}
+              >
+                <span>{tier.cta}</span>
+                <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
+              </button>
+            </div>
+          </div>
+        ))}
       </div>
+
+      <p className="text-center text-xs font-mono text-[#A4B7AF]/60 mt-10">
+        All engagements include non-disclosure agreements (NDA), clean Git repositories, and automated test pipelines.
+      </p>
     </section>
   );
 };

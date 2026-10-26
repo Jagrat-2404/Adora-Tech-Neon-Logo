@@ -1,131 +1,106 @@
 "use client";
 
 import React from "react";
-import { Server, ShieldCheck, Clock, Cloud, Zap, ArrowUpRight } from "lucide-react";
+import { Server, ShieldCheck, Clock, Cloud } from "lucide-react";
 import { AnimatedCounter } from "./AnimatedCounter";
 
+/**
+ * ITProofMetrics Component
+ * 
+ * Vayem Studios inspired Editorial Typographic Proof Ribbon:
+ * Replaces boxy cards with a clean, border-divided architectural metric ribbon.
+ */
 export const ITProofMetrics: React.FC = () => {
   return (
     <section
       id="proof"
-      className="border-b border-[#A4B7AF]/15 bg-[#081B19] py-12 px-4 sm:px-6 lg:px-8 relative overflow-hidden"
+      className="border-b border-[#A4B7AF]/15 bg-[#081B19] py-10 sm:py-16 relative overflow-hidden"
       aria-label="Enterprise IT Service Proof and Performance Metrics"
     >
-      <div className="max-w-7xl mx-auto">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          {/* Card 1: Cloud Uptime SLA */}
-          <div className="card-interactive p-6 rounded-2xl bg-[#102A26] border border-[#A4B7AF]/15 hover:border-[#8DE0C1]/50 flex flex-col justify-between group shadow-lg shadow-black/20">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 border border-[#A4B7AF]/15 rounded-3xl bg-[#0B201D]/60 backdrop-blur-md overflow-hidden divide-y sm:divide-y-0 sm:divide-x divide-[#A4B7AF]/15">
+          {/* Column 1: Cloud Uptime SLA */}
+          <div className="p-8 sm:p-10 flex flex-col justify-between group hover:bg-[#102A26]/50 transition-colors duration-300 reveal-item">
             <div>
-              <div className="flex items-center justify-between text-xs font-mono text-[#8DE0C1] mb-4">
-                <span className="px-2 py-0.5 rounded bg-[#081B19] border border-[#8DE0C1]/20">
-                  [ 01 // INFRASTRUCTURE ]
-                </span>
-                <Server className="w-4 h-4 text-[#8DE0C1] group-hover:scale-110 transition-transform" />
+              <div className="flex items-center justify-between text-xs font-mono text-[#8DE0C1] mb-6">
+                <span className="tracking-widest uppercase text-[11px]">[ 01 // UPTIME ]</span>
+                <Server className="w-4 h-4 text-[#8DE0C1]/80 group-hover:scale-110 transition-transform" />
               </div>
-
-              <div className="text-3xl sm:text-4xl font-light text-[#F1F3EB] tracking-tight mb-2">
-                <AnimatedCounter end={99.99} decimals={2} suffix="%" />
+              <div className="text-4xl sm:text-5xl lg:text-6xl font-light text-[#F1F3EB] tracking-tight">
+                <AnimatedCounter end={99.99} decimals={2} />
+                <i className="font-serif italic font-normal text-transparent bg-clip-text bg-gradient-to-r from-[#8DE0C1] to-[#B8F2DC] text-3xl sm:text-4xl ml-1 not-italic">
+                  %
+                </i>
               </div>
-
-              <h3 className="text-sm font-medium text-[#F1F3EB] mb-2 leading-snug">
-                Enterprise Cloud &amp; Server Uptime SLA
-              </h3>
-
-              <p className="text-xs text-[#A4B7AF] font-light leading-relaxed">
-                24/7 automated multi-region failover, Kubernetes orchestration, and sub-second edge routing.
-              </p>
             </div>
-
-            <div className="mt-5 pt-3 border-t border-[#A4B7AF]/10 flex items-center justify-between text-[11px] font-mono text-[#8DE0C1]">
-              <span>ACTIVE NOC MONITORING</span>
-              <ArrowUpRight className="w-3.5 h-3.5 opacity-60 group-hover:opacity-100 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all" />
+            <div className="mt-8 pt-4 border-t border-[#A4B7AF]/10">
+              <span className="text-xs sm:text-sm text-[#A4B7AF] font-light leading-relaxed block">
+                Enterprise Cloud &amp; Server Uptime SLA with automated multi-region failover.
+              </span>
             </div>
           </div>
 
-          {/* Card 2: Incident Response SLA */}
-          <div className="card-interactive p-6 rounded-2xl bg-[#102A26] border border-[#A4B7AF]/15 hover:border-[#D5A17D]/50 flex flex-col justify-between group shadow-lg shadow-black/20">
+          {/* Column 2: Incident Response SLA */}
+          <div className="p-8 sm:p-10 flex flex-col justify-between group hover:bg-[#102A26]/50 transition-colors duration-300 reveal-item">
             <div>
-              <div className="flex items-center justify-between text-xs font-mono text-[#D5A17D] mb-4">
-                <span className="px-2 py-0.5 rounded bg-[#081B19] border border-[#D5A17D]/20">
-                  [ 02 // 24/7 IT DESK ]
-                </span>
-                <Clock className="w-4 h-4 text-[#D5A17D] group-hover:scale-110 transition-transform" />
+              <div className="flex items-center justify-between text-xs font-mono text-[#D5A17D] mb-6">
+                <span className="tracking-widest uppercase text-[11px]">[ 02 // NOC DESK ]</span>
+                <Clock className="w-4 h-4 text-[#D5A17D]/80 group-hover:scale-110 transition-transform" />
               </div>
-
-              <div className="text-3xl sm:text-4xl font-light text-[#D5A17D] tracking-tight mb-2">
-                <AnimatedCounter end={15} prefix="< " suffix=" min" />
+              <div className="text-4xl sm:text-5xl lg:text-6xl font-light text-[#F1F3EB] tracking-tight">
+                <span className="text-3xl sm:text-4xl font-light text-[#A4B7AF] mr-1">&lt;</span>
+                <AnimatedCounter end={15} />
+                <i className="font-serif italic font-normal text-transparent bg-clip-text bg-gradient-to-r from-[#D5A17D] to-[#E8C2A8] text-2xl sm:text-3xl ml-1.5 not-italic">
+                  min
+                </i>
               </div>
-
-              <h3 className="text-sm font-medium text-[#F1F3EB] mb-2 leading-snug">
-                Critical Incident Mean Response Time
-              </h3>
-
-              <p className="text-xs text-[#A4B7AF] font-light leading-relaxed">
-                Dedicated Tier-3 systems architects and network engineers on standby around the clock.
-              </p>
             </div>
-
-            <div className="mt-5 pt-3 border-t border-[#A4B7AF]/10 flex items-center justify-between text-[11px] font-mono text-[#D5A17D]">
-              <span>GUARANTEED 15M ESCALATION</span>
-              <ArrowUpRight className="w-3.5 h-3.5 opacity-60 group-hover:opacity-100 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all" />
+            <div className="mt-8 pt-4 border-t border-[#A4B7AF]/10">
+              <span className="text-xs sm:text-sm text-[#A4B7AF] font-light leading-relaxed block">
+                Guaranteed Tier-3 engineering escalation and critical incident mean response.
+              </span>
             </div>
           </div>
 
-          {/* Card 3: Zero-Trust Cybersecurity */}
-          <div className="card-interactive p-6 rounded-2xl bg-[#102A26] border border-[#A4B7AF]/15 hover:border-[#8DE0C1]/50 flex flex-col justify-between group shadow-lg shadow-black/20">
+          {/* Column 3: Zero-Trust Cybersecurity */}
+          <div className="p-8 sm:p-10 flex flex-col justify-between group hover:bg-[#102A26]/50 transition-colors duration-300 reveal-item">
             <div>
-              <div className="flex items-center justify-between text-xs font-mono text-[#8DE0C1] mb-4">
-                <span className="px-2 py-0.5 rounded bg-[#081B19] border border-[#8DE0C1]/20">
-                  [ 03 // CYBERSECURITY ]
-                </span>
-                <ShieldCheck className="w-4 h-4 text-[#8DE0C1] group-hover:scale-110 transition-transform" />
+              <div className="flex items-center justify-between text-xs font-mono text-[#8DE0C1] mb-6">
+                <span className="tracking-widest uppercase text-[11px]">[ 03 // COMPLIANCE ]</span>
+                <ShieldCheck className="w-4 h-4 text-[#8DE0C1]/80 group-hover:scale-110 transition-transform" />
               </div>
-
-              <div className="text-3xl sm:text-4xl font-light text-[#F1F3EB] tracking-tight mb-2">
-                <AnimatedCounter end={100} suffix="%" />
+              <div className="text-4xl sm:text-5xl lg:text-6xl font-light text-[#F1F3EB] tracking-tight">
+                <AnimatedCounter end={100} />
+                <i className="font-serif italic font-normal text-transparent bg-clip-text bg-gradient-to-r from-[#8DE0C1] to-[#B8F2DC] text-3xl sm:text-4xl ml-1 not-italic">
+                  %
+                </i>
               </div>
-
-              <h3 className="text-sm font-medium text-[#F1F3EB] mb-2 leading-snug">
-                Zero-Trust Compliance &amp; Hardened Defense
-              </h3>
-
-              <p className="text-xs text-[#A4B7AF] font-light leading-relaxed">
-                SOC 2, ISO 27001, HIPAA-aligned architecture with real-time intrusion prevention and encrypted backups.
-              </p>
             </div>
-
-            <div className="mt-5 pt-3 border-t border-[#A4B7AF]/10 flex items-center justify-between text-[11px] font-mono text-[#8DE0C1]">
-              <span>ZERO-TRUST ARCHITECTURE</span>
-              <ArrowUpRight className="w-3.5 h-3.5 opacity-60 group-hover:opacity-100 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all" />
+            <div className="mt-8 pt-4 border-t border-[#A4B7AF]/10">
+              <span className="text-xs sm:text-sm text-[#A4B7AF] font-light leading-relaxed block">
+                SOC 2, ISO 27001 &amp; HIPAA-audited zero-trust hardened defense architecture.
+              </span>
             </div>
           </div>
 
-          {/* Card 4: Cloud Migrations */}
-          <div className="card-interactive p-6 rounded-2xl bg-[#102A26] border border-[#A4B7AF]/15 hover:border-[#D5A17D]/50 flex flex-col justify-between group shadow-lg shadow-black/20">
+          {/* Column 4: Cloud Migrations */}
+          <div className="p-8 sm:p-10 flex flex-col justify-between group hover:bg-[#102A26]/50 transition-colors duration-300 reveal-item">
             <div>
-              <div className="flex items-center justify-between text-xs font-mono text-[#D5A17D] mb-4">
-                <span className="px-2 py-0.5 rounded bg-[#081B19] border border-[#D5A17D]/20">
-                  [ 04 // MIGRATIONS ]
-                </span>
-                <Cloud className="w-4 h-4 text-[#D5A17D] group-hover:scale-110 transition-transform" />
+              <div className="flex items-center justify-between text-xs font-mono text-[#D5A17D] mb-6">
+                <span className="tracking-widest uppercase text-[11px]">[ 04 // MIGRATIONS ]</span>
+                <Cloud className="w-4 h-4 text-[#D5A17D]/80 group-hover:scale-110 transition-transform" />
               </div>
-
-              <div className="text-3xl sm:text-4xl font-light text-[#F1F3EB] tracking-tight mb-2">
-                <AnimatedCounter end={250} suffix="+" />
+              <div className="text-4xl sm:text-5xl lg:text-6xl font-light text-[#F1F3EB] tracking-tight">
+                <AnimatedCounter end={250} />
+                <i className="font-serif italic font-normal text-transparent bg-clip-text bg-gradient-to-r from-[#D5A17D] to-[#E8C2A8] text-3xl sm:text-4xl ml-1 not-italic">
+                  +
+                </i>
               </div>
-
-              <h3 className="text-sm font-medium text-[#F1F3EB] mb-2 leading-snug">
-                Seamless Enterprise Cloud Migrations
-              </h3>
-
-              <p className="text-xs text-[#A4B7AF] font-light leading-relaxed">
-                Zero-data-loss cutovers across AWS, Azure, Google Cloud, and high-performance hybrid infrastructure.
-              </p>
             </div>
-
-            <div className="mt-5 pt-3 border-t border-[#A4B7AF]/10 flex items-center justify-between text-[11px] font-mono text-[#D5A17D]">
-              <span>AWS &amp; AZURE PARTNER</span>
-              <ArrowUpRight className="w-3.5 h-3.5 opacity-60 group-hover:opacity-100 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all" />
+            <div className="mt-8 pt-4 border-t border-[#A4B7AF]/10">
+              <span className="text-xs sm:text-sm text-[#A4B7AF] font-light leading-relaxed block">
+                Seamless enterprise cloud cutovers with zero downtime and zero data loss.
+              </span>
             </div>
           </div>
         </div>

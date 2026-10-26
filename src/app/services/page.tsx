@@ -2,18 +2,22 @@
 
 import React, { useState } from "react";
 import Link from "next/link";
-import { ArrowRight, Globe, Smartphone, Cpu, Palette, CheckCircle2, Zap, Layers, Server, Code2 } from "lucide-react";
+import { ArrowRight, Code2 } from "lucide-react";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { Services } from "@/components/Services";
-import { ApproachComparison } from "@/components/ApproachComparison";
-import { EngagementOptions } from "@/components/EngagementOptions";
-import { FAQ } from "@/components/FAQ";
 import { ServiceStrip } from "@/components/ServiceStrip";
-import { SITE_CONFIG } from "@/data/content";
+import { ITProofMetrics } from "@/components/ITProofMetrics";
+import { EditorialStatement } from "@/components/EditorialStatement";
+import { SelectedWork } from "@/components/SelectedWork";
+import { ApproachComparison } from "@/components/ApproachComparison";
+import { Process } from "@/components/Process";
+import { ClientReviews } from "@/components/ClientReviews";
+import { useIntro } from "@/components/PageTransitionProvider";
 
 export default function ServicesPage() {
   const [activeCategory, setActiveCategory] = useState<"all" | "frontend" | "mobile" | "backend" | "cloud">("all");
+  const { isIntroActive } = useIntro();
 
   const techStack = [
     { name: "Next.js 15 (Turbopack)", category: "frontend", desc: "Server components, streaming SSR, and sub-second page transitions." },
@@ -36,7 +40,14 @@ export default function ServicesPage() {
     <div className="relative min-h-screen bg-[#081B19] text-[#F1F3EB] selection:bg-[#8DE0C1]/20 selection:text-[#8DE0C1]">
       <Header />
 
-      <main id="main-content" className="pt-28 pb-20 sm:pt-36 sm:pb-28">
+      <main
+        id="main-content"
+        className={`pt-28 pb-16 sm:pt-36 transition-all duration-1000 ease-out ${
+          isIntroActive
+            ? "opacity-0 translate-y-16 pointer-events-none"
+            : "opacity-100 translate-y-0 pointer-events-auto"
+        }`}
+      >
         {/* 1. Hero Section */}
         <section className="px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto mb-16 sm:mb-24">
           <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#102A26] border border-[#8DE0C1]/30 text-[#8DE0C1] text-xs font-mono uppercase tracking-widest mb-6">
@@ -62,19 +73,31 @@ export default function ServicesPage() {
           </p>
         </section>
 
-        {/* 2. Interactive Numbered Services Breakdown */}
-        <Services />
-
-        {/* 3. Marquee Ticker */}
+        {/* 2. Marquee Ticker */}
         <ServiceStrip />
 
-        {/* 4. Technology Ecosystem Matrix */}
-        <section className="py-24 sm:py-32 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+        {/* 3. Typographic Proof Ribbon (No Cards) */}
+        <div className="reveal-section">
+          <ITProofMetrics />
+        </div>
+
+        {/* 4. Panoramic Interactive Capabilities Stage */}
+        <div className="reveal-section">
+          <Services />
+        </div>
+
+        {/* 5. Editorial Statement */}
+        <div className="reveal-section">
+          <EditorialStatement />
+        </div>
+
+        {/* 6. Technology Stack Ecosystem */}
+        <section className="py-24 sm:py-36 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto border-b border-[#A4B7AF]/10 relative overflow-hidden reveal-section">
           <div className="max-w-3xl mb-12 sm:mb-16">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#102A26] border border-[#A4B7AF]/20 text-[#8DE0C1] text-xs font-mono uppercase tracking-widest mb-4">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#102A26] border border-[#8DE0C1]/30 text-[#8DE0C1] text-xs font-mono uppercase tracking-widest mb-4">
               <span>[ MODERN PRODUCTION STACK ]</span>
             </div>
-            <h2 className="text-3xl sm:text-5xl font-light tracking-tight text-[#F1F3EB]">
+            <h2 className="text-3xl sm:text-5xl font-light tracking-tight text-[#F1F3EB] leading-[1.1]">
               Handpicked Technologies.{" "}
               <span className="font-serif italic text-transparent bg-clip-text bg-gradient-to-r from-[#8DE0C1] via-[#B8F2DC] to-[#D5A17D]">
                 Zero Obsolete
@@ -95,7 +118,7 @@ export default function ServicesPage() {
               <button
                 key={cat.id}
                 onClick={() => setActiveCategory(cat.id as any)}
-                className={`px-4 py-2 rounded-xl text-xs font-mono uppercase tracking-wider transition-all ${
+                className={`px-4 py-2 rounded-full text-xs font-mono uppercase tracking-wider transition-all duration-300 ${
                   activeCategory === cat.id
                     ? "bg-[#8DE0C1] text-[#081B19] font-semibold shadow-md shadow-[#8DE0C1]/20"
                     : "bg-[#102A26] border border-[#A4B7AF]/20 text-[#A4B7AF] hover:text-[#F1F3EB] hover:border-[#8DE0C1]/40"
@@ -106,65 +129,50 @@ export default function ServicesPage() {
             ))}
           </div>
 
-          {/* Grid of Tech Cards */}
+          {/* Grid of Tech Items */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {filteredStack.map((tech) => (
               <div
                 key={tech.name}
-                className="p-6 rounded-2xl bg-[#102A26] border border-[#A4B7AF]/15 hover:border-[#8DE0C1]/40 transition-all duration-300 flex flex-col justify-between group"
+                className="p-6 rounded-2xl bg-[#0B201D]/70 border border-[#A4B7AF]/15 hover:border-[#8DE0C1]/40 transition-all duration-300 flex flex-col justify-between group"
               >
                 <div>
                   <div className="flex items-center justify-between mb-4">
-                    <span className="text-xs font-mono uppercase text-[#8DE0C1] tracking-wider px-2.5 py-1 rounded-md bg-[#081B19] border border-[#8DE0C1]/20">
+                    <span className="text-[10px] font-mono uppercase text-[#8DE0C1] tracking-wider px-2.5 py-1 rounded bg-[#081B19] border border-[#8DE0C1]/20">
                       {tech.category}
                     </span>
                     <Code2 className="w-4 h-4 text-[#A4B7AF]/50 group-hover:text-[#8DE0C1] transition-colors" />
                   </div>
                   <h3 className="text-lg font-medium text-[#F1F3EB] mb-2">{tech.name}</h3>
-                  <p className="text-sm text-[#A4B7AF] leading-relaxed">{tech.desc}</p>
+                  <p className="text-sm text-[#A4B7AF] font-light leading-relaxed">{tech.desc}</p>
                 </div>
               </div>
             ))}
           </div>
         </section>
 
-        {/* 5. Approach Comparison Matrix */}
-        <ApproachComparison />
+        {/* 7. Horizontal Scrolling Selected Work Track */}
+        <div className="reveal-section">
+          <SelectedWork />
+        </div>
 
-        {/* 6. Engagement Options */}
-        <EngagementOptions />
+        {/* 8. Editorial Comparison Matrix Table */}
+        <div className="reveal-section">
+          <ApproachComparison />
+        </div>
 
-        {/* 7. Service FAQs */}
-        <FAQ />
+        {/* 9. Connected Progression Flow */}
+        <div className="reveal-section">
+          <Process />
+        </div>
 
-        {/* 8. Call to Action */}
-        <section className="py-20 sm:py-28 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
-          <div className="rounded-3xl bg-gradient-to-r from-[#102A26] via-[#153833] to-[#102A26] border border-[#8DE0C1]/30 p-10 sm:p-16 text-center relative overflow-hidden shadow-2xl">
-            <div className="relative z-10 max-w-3xl mx-auto space-y-6">
-              <h2 className="text-3xl sm:text-5xl font-light text-[#F1F3EB]">
-                Have a specification ready, or need{" "}
-                <span className="font-serif italic text-transparent bg-clip-text bg-gradient-to-r from-[#8DE0C1] via-[#B8F2DC] to-[#D5A17D]">
-                  architecture advice
-                </span>
-                ?
-              </h2>
-              <p className="text-[#A4B7AF] text-base sm:text-lg">
-                Book a direct technical consultation with our engineering team. We provide honest feasibility analysis, architectural roadmaps, and fixed-cost scoping.
-              </p>
-              <div className="flex flex-wrap items-center justify-center gap-4 pt-4">
-                <Link
-                  href="/contact"
-                  className="inline-flex items-center gap-2 px-8 py-4 rounded-xl bg-[#8DE0C1] text-[#081B19] font-medium tracking-wide hover:bg-[#A3E8D0] transition-all shadow-lg shadow-[#8DE0C1]/20 hover:scale-[1.02]"
-                >
-                  <span>Request Engineering Proposal</span>
-                  <ArrowRight className="w-4 h-4" />
-                </Link>
-              </div>
-            </div>
-          </div>
-        </section>
+        {/* 10. Client Reviews & Verified 5.0 Rating Score Bar */}
+        <div className="reveal-section">
+          <ClientReviews />
+        </div>
       </main>
 
+      {/* Global Footer with Giant "ADORA TECH" Watermark */}
       <Footer />
     </div>
   );

@@ -6,7 +6,10 @@ import { ArrowRight, BookOpen, Clock, Calendar, Tag, X, CheckCircle2, Share2, Sp
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { ServiceStrip } from "@/components/ServiceStrip";
+import { ITProofMetrics } from "@/components/ITProofMetrics";
+import { ClientReviews } from "@/components/ClientReviews";
 import { SITE_CONFIG } from "@/data/content";
+import { useIntro } from "@/components/PageTransitionProvider";
 
 interface BlogPost {
   slug: string;
@@ -21,6 +24,7 @@ interface BlogPost {
 export default function BlogPage() {
   const [selectedCategory, setSelectedCategory] = useState<string>("All");
   const [activeArticle, setActiveArticle] = useState<BlogPost | null>(null);
+  const { isIntroActive } = useIntro();
 
   const posts = SITE_CONFIG.blog.posts;
   const categories = ["All", ...Array.from(new Set(posts.map((p) => p.category)))];
@@ -37,7 +41,14 @@ export default function BlogPage() {
     <div className="relative min-h-screen bg-[#081B19] text-[#F1F3EB] selection:bg-[#8DE0C1]/20 selection:text-[#8DE0C1]">
       <Header />
 
-      <main id="main-content" className="pt-28 pb-20 sm:pt-36 sm:pb-28">
+      <main
+        id="main-content"
+        className={`pt-28 pb-16 sm:pt-36 transition-all duration-1000 ease-out ${
+          isIntroActive
+            ? "opacity-0 translate-y-16 pointer-events-none"
+            : "opacity-100 translate-y-0 pointer-events-auto"
+        }`}
+      >
         {/* 1. Hero Section */}
         <section className="px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto mb-16 sm:mb-20">
           <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#102A26] border border-[#8DE0C1]/30 text-[#8DE0C1] text-xs font-mono uppercase tracking-widest mb-6">
@@ -59,55 +70,39 @@ export default function BlogPage() {
           </p>
         </section>
 
-        {/* 2. Category Filter Pills */}
-        <section className="px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto mb-12">
-          <div className="flex flex-wrap gap-2 border-b border-[#A4B7AF]/15 pb-6">
-            {categories.map((cat) => (
-              <button
-                key={cat}
-                onClick={() => setSelectedCategory(cat)}
-                className={`px-4 py-2 rounded-xl text-xs font-mono uppercase tracking-wider transition-all ${
-                  selectedCategory === cat
-                    ? "bg-[#8DE0C1] text-[#081B19] font-semibold shadow-md shadow-[#8DE0C1]/20"
-                    : "bg-[#102A26] border border-[#A4B7AF]/20 text-[#A4B7AF] hover:text-[#F1F3EB] hover:border-[#8DE0C1]/40"
-                }`}
-              >
-                {cat}
-              </button>
-            ))}
-          </div>
-        </section>
+        {/* 2. Marquee Ticker */}
+        <ServiceStrip />
 
-        {/* 3. Featured Article (when viewing All) */}
+        {/* 3. Typographic Proof Ribbon (No Cards) */}
+        <div className="reveal-section">
+          <ITProofMetrics />
+        </div>
+
+        {/* 4. Featured Article Panoramic Stage */}
         {selectedCategory === "All" && featuredPost && (
-          <section className="px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto mb-16">
+          <section className="py-16 sm:py-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto border-b border-[#A4B7AF]/10 reveal-section">
             <div
               onClick={() => setActiveArticle(featuredPost)}
-              className="cursor-pointer group relative rounded-3xl bg-gradient-to-br from-[#102A26] via-[#153833] to-[#0A1F1C] border border-[#8DE0C1]/30 p-8 sm:p-12 overflow-hidden shadow-2xl transition-all duration-300 hover:border-[#8DE0C1]/60 hover:shadow-black/60"
+              className="cursor-pointer group relative rounded-3xl bg-gradient-to-br from-[#102A26] via-[#153833] to-[#0A1F1C] border border-[#8DE0C1]/30 p-8 sm:p-12 lg:p-14 overflow-hidden shadow-2xl transition-all duration-500 hover:border-[#8DE0C1] hover:shadow-black/70"
             >
-              {/* Background ambient light */}
               <div className="absolute top-0 right-0 w-96 h-96 bg-[#8DE0C1]/10 rounded-full blur-3xl pointer-events-none group-hover:bg-[#8DE0C1]/20 transition-all duration-500" />
 
               <div className="relative z-10 max-w-3xl space-y-6">
                 <div className="flex flex-wrap items-center gap-4 text-xs font-mono text-[#A4B7AF]">
                   <span className="px-3 py-1 rounded-full bg-[#081B19] border border-[#8DE0C1]/30 text-[#8DE0C1]">
-                    FEATURED DISPATCH
+                    FEATURED ESSAY // {featuredPost.category}
                   </span>
-                  <span className="flex items-center gap-1">
-                    <Tag className="w-3.5 h-3.5 text-[#D5A17D]" />
-                    {featuredPost.category}
-                  </span>
-                  <span className="flex items-center gap-1">
-                    <Clock className="w-3.5 h-3.5" />
+                  <span className="flex items-center gap-1.5">
+                    <Clock className="w-3.5 h-3.5 text-[#8DE0C1]" />
                     {featuredPost.readTime}
                   </span>
-                  <span className="flex items-center gap-1">
-                    <Calendar className="w-3.5 h-3.5" />
+                  <span className="flex items-center gap-1.5">
+                    <Calendar className="w-3.5 h-3.5 text-[#D5A17D]" />
                     {featuredPost.date}
                   </span>
                 </div>
 
-                <h2 className="text-2xl sm:text-4xl font-light text-[#F1F3EB] group-hover:text-[#8DE0C1] transition-colors leading-snug">
+                <h2 className="text-3xl sm:text-5xl font-light text-[#F1F3EB] group-hover:text-[#8DE0C1] transition-colors leading-[1.1]">
                   {featuredPost.title}
                 </h2>
 
@@ -115,127 +110,105 @@ export default function BlogPage() {
                   {featuredPost.excerpt}
                 </p>
 
-                <div className="pt-4 flex items-center gap-2 text-sm font-medium text-[#8DE0C1] group-hover:translate-x-1 transition-transform">
-                  <span>Read Full Dispatch</span>
-                  <ArrowRight className="w-4 h-4" />
+                <div className="pt-4 flex items-center gap-3 text-sm font-semibold text-[#8DE0C1]">
+                  <span>Read Full Technical Essay</span>
+                  <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-2" />
                 </div>
               </div>
             </div>
           </section>
         )}
 
-        {/* 4. Grid of Articles */}
-        <section className="px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto mb-28">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {/* 5. Filter Chips & Articles Grid */}
+        <section className="py-20 sm:py-28 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto border-b border-[#A4B7AF]/10 reveal-section">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-6 mb-12">
+            <div>
+              <h2 className="text-2xl sm:text-4xl font-light text-[#F1F3EB]">
+                Engineering Insights
+              </h2>
+              <p className="text-sm text-[#A4B7AF] font-light mt-1">
+                Deep architectural breakdowns and system patterns.
+              </p>
+            </div>
+
+            {/* Filter Chips */}
+            <div className="flex flex-wrap gap-2">
+              {categories.map((cat) => (
+                <button
+                  key={cat}
+                  onClick={() => setSelectedCategory(cat)}
+                  className={`px-4 py-2 rounded-full text-xs font-mono uppercase tracking-wider transition-all duration-300 ${
+                    selectedCategory === cat
+                      ? "bg-[#8DE0C1] text-[#081B19] font-semibold shadow-md shadow-[#8DE0C1]/20"
+                      : "bg-[#102A26] border border-[#A4B7AF]/20 text-[#A4B7AF] hover:text-[#F1F3EB] hover:border-[#8DE0C1]/40"
+                  }`}
+                >
+                  {cat}
+                </button>
+              ))}
+            </div>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {gridPosts.map((post) => (
               <article
                 key={post.slug}
                 onClick={() => setActiveArticle(post)}
-                className="cursor-pointer group flex flex-col justify-between p-7 rounded-2xl bg-[#102A26] border border-[#A4B7AF]/15 hover:border-[#8DE0C1]/50 hover:bg-[#13332E] transition-all duration-300 shadow-lg shadow-black/20"
+                className="cursor-pointer group rounded-3xl p-8 bg-[#0B201D]/60 border border-[#A4B7AF]/15 hover:border-[#8DE0C1]/40 hover:bg-[#102A26]/80 transition-all duration-300 flex flex-col justify-between shadow-lg"
               >
                 <div>
-                  <div className="flex items-center justify-between text-xs font-mono text-[#A4B7AF]/80 mb-4">
-                    <span className="px-2.5 py-1 rounded-md bg-[#081B19] border border-[#8DE0C1]/20 text-[#8DE0C1]">
+                  <div className="flex items-center justify-between text-xs font-mono text-[#A4B7AF] mb-4">
+                    <span className="px-2.5 py-0.5 rounded-full bg-[#081B19] text-[#8DE0C1] border border-[#8DE0C1]/20">
                       {post.category}
                     </span>
-                    <span className="flex items-center gap-1">
-                      <Clock className="w-3 h-3" />
-                      {post.readTime}
-                    </span>
+                    <span>{post.readTime}</span>
                   </div>
 
-                  <h3 className="text-xl font-medium text-[#F1F3EB] group-hover:text-[#8DE0C1] transition-colors mb-3 leading-snug">
+                  <h3 className="text-xl font-light text-[#F1F3EB] group-hover:text-[#8DE0C1] transition-colors mb-3 leading-snug">
                     {post.title}
                   </h3>
 
-                  <p className="text-sm text-[#A4B7AF] font-light leading-relaxed line-clamp-3 mb-6">
+                  <p className="text-sm text-[#A4B7AF] font-light leading-relaxed mb-6">
                     {post.excerpt}
                   </p>
                 </div>
 
-                <div className="pt-4 border-t border-[#A4B7AF]/10 flex items-center justify-between text-xs font-mono text-[#A4B7AF]">
+                <div className="pt-4 border-t border-[#A4B7AF]/15 flex items-center justify-between text-xs font-mono text-[#8DE0C1]">
                   <span>{post.date}</span>
-                  <span className="text-[#8DE0C1] flex items-center gap-1 group-hover:translate-x-1 transition-transform">
-                    Read &rarr;
-                  </span>
+                  <div className="flex items-center gap-1 group-hover:translate-x-1 transition-transform">
+                    <span>Read</span>
+                    <ArrowRight className="w-3.5 h-3.5" />
+                  </div>
                 </div>
               </article>
             ))}
           </div>
         </section>
 
-        {/* 5. Marquee Ticker */}
-        <ServiceStrip />
-
-        {/* 6. Newsletter / Studio Dispatch Signup */}
-        <section className="py-20 sm:py-28 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
-          <div className="rounded-3xl bg-gradient-to-r from-[#102A26] via-[#153833] to-[#102A26] border border-[#8DE0C1]/30 p-10 sm:p-16 relative overflow-hidden shadow-2xl">
-            <div className="relative z-10 max-w-2xl mx-auto text-center space-y-6">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#081B19] border border-[#8DE0C1]/30 text-[#8DE0C1] text-xs font-mono uppercase tracking-widest">
-                <span>[ MONTHLY DISPATCH ]</span>
-              </div>
-              <h2 className="text-3xl sm:text-4xl font-light text-[#F1F3EB]">
-                Receive our private{" "}
-                <span className="font-serif italic text-transparent bg-clip-text bg-gradient-to-r from-[#8DE0C1] via-[#B8F2DC] to-[#D5A17D]">
-                  architecture notes
-                </span>
-                .
-              </h2>
-              <p className="text-[#A4B7AF] text-sm sm:text-base leading-relaxed">
-                Zero marketing spam. Only concrete technical breakdowns, performance benchmarks, and
-                design system patterns delivered once a month.
-              </p>
-
-              <form
-                onSubmit={(e) => {
-                  e.preventDefault();
-                  alert("Thank you for subscribing to ADORA TECH Studio Dispatches.");
-                }}
-                className="flex flex-col sm:flex-row gap-3 justify-center max-w-md mx-auto pt-2"
-              >
-                <input
-                  type="email"
-                  required
-                  placeholder="name@company.com"
-                  className="px-4 py-3 rounded-xl bg-[#081B19] border border-[#A4B7AF]/20 text-[#F1F3EB] placeholder-[#A4B7AF]/50 text-sm focus:outline-none focus:border-[#8DE0C1] focus:ring-1 focus:ring-[#8DE0C1]"
-                />
-                <button
-                  type="submit"
-                  className="px-6 py-3 rounded-xl bg-[#8DE0C1] text-[#081B19] font-medium text-sm hover:bg-[#A3E8D0] transition-all whitespace-nowrap shadow-md shadow-[#8DE0C1]/20"
-                >
-                  Subscribe
-                </button>
-              </form>
-            </div>
-          </div>
-        </section>
+        {/* 6. Client Reviews & Verified 5.0 Rating Score Bar */}
+        <div className="reveal-section">
+          <ClientReviews />
+        </div>
       </main>
 
-      {/* 7. Interactive Full Article Reader Modal */}
+      {/* Article Modal */}
       {activeArticle && (
         <div
           role="dialog"
           aria-modal="true"
-          className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 bg-black/80 backdrop-blur-md animate-in fade-in duration-200"
-          onClick={() => setActiveArticle(null)}
+          className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 bg-black/85 backdrop-blur-md"
         >
-          <div
-            className="relative w-full max-w-3xl max-h-[85vh] overflow-y-auto rounded-3xl bg-[#081B19] border border-[#8DE0C1]/40 p-6 sm:p-10 shadow-2xl shadow-black/80 text-[#F1F3EB]"
-            onClick={(e) => e.stopPropagation()}
-          >
-            {/* Close Button */}
+          <div className="relative w-full max-w-3xl max-h-[85vh] overflow-y-auto rounded-3xl bg-[#0D2421] border border-[#8DE0C1]/40 p-8 sm:p-12 shadow-2xl text-left">
             <button
               onClick={() => setActiveArticle(null)}
-              className="absolute top-6 right-6 p-2 rounded-full bg-[#102A26] border border-[#A4B7AF]/20 text-[#A4B7AF] hover:text-[#F1F3EB] hover:border-[#8DE0C1] transition-all"
-              aria-label="Close article"
+              className="absolute top-6 right-6 p-2 rounded-full bg-[#102A26] border border-[#A4B7AF]/20 text-[#A4B7AF] hover:text-[#8DE0C1] transition-all"
             >
               <X className="w-5 h-5" />
             </button>
 
-            {/* Article Header */}
-            <div className="space-y-4 mb-8 pr-12">
-              <div className="flex flex-wrap items-center gap-3 text-xs font-mono text-[#A4B7AF]">
-                <span className="px-3 py-1 rounded-full bg-[#102A26] border border-[#8DE0C1]/30 text-[#8DE0C1]">
+            <div className="space-y-6">
+              <div className="flex flex-wrap items-center gap-3 text-xs font-mono text-[#8DE0C1]">
+                <span className="px-3 py-1 rounded-full bg-[#081B19] border border-[#8DE0C1]/30">
                   {activeArticle.category}
                 </span>
                 <span>{activeArticle.readTime}</span>
@@ -243,64 +216,41 @@ export default function BlogPage() {
                 <span>{activeArticle.date}</span>
               </div>
 
-              <h2 className="text-2xl sm:text-4xl font-light text-[#F1F3EB] leading-tight">
+              <h2 className="text-3xl sm:text-4xl font-light text-[#F1F3EB] leading-tight">
                 {activeArticle.title}
               </h2>
-            </div>
 
-            {/* Article Body */}
-            <div className="space-y-6 text-[#A4B7AF] text-base sm:text-lg font-light leading-relaxed border-t border-[#A4B7AF]/15 pt-8">
-              <p className="text-xl text-[#F1F3EB] font-normal leading-relaxed">
+              <p className="text-base text-[#8DE0C1] font-mono leading-relaxed pb-4 border-b border-[#A4B7AF]/15">
                 {activeArticle.excerpt}
               </p>
 
-              <p>{activeArticle.content}</p>
-
-              {/* Architectural Key Takeaway Box */}
-              <div className="my-8 p-6 rounded-2xl bg-[#102A26] border border-[#8DE0C1]/30 space-y-3">
-                <div className="flex items-center gap-2 text-xs font-mono text-[#8DE0C1] uppercase tracking-wider">
-                  <Sparkles className="w-4 h-4" />
-                  <span>Key Architectural Takeaway</span>
-                </div>
-                <p className="text-sm text-[#F1F3EB] leading-relaxed">
-                  Avoid premature abstraction. Build each feature with direct zero-overhead primitives first,
-                  measure latency metrics under peak concurrent load, and isolate state mutations to local island boundaries.
+              <div className="text-base text-[#F1F3EB]/90 leading-relaxed font-light space-y-4">
+                <p>{activeArticle.content}</p>
+                <p>
+                  At ADORA TECH, our production methodology centers on reproducible pipelines.
+                  Whether structuring a zero-loss database cutover or tuning WebGL shader uniforms,
+                  we ensure every technical choice creates compounding reliability for your team.
                 </p>
               </div>
 
-              <p>
-                At ADORA TECH, our engineering process centers on continuous profiling. We deliver
-                clean, well-commented codebases that your internal teams can maintain, extend, and deploy with confidence.
-              </p>
-            </div>
-
-            {/* Author Footer */}
-            <div className="mt-10 pt-6 border-t border-[#A4B7AF]/15 flex items-center justify-between">
-              <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-full bg-[#102A26] border border-[#8DE0C1]/30 flex items-center justify-center text-xs font-mono text-[#8DE0C1]">
-                  AT
-                </div>
-                <div>
-                  <div className="text-sm font-medium text-[#F1F3EB]">ADORA TECH Engineering Team</div>
-                  <div className="text-xs text-[#A4B7AF]">Studio Research &amp; Architecture Group</div>
-                </div>
+              <div className="pt-6 border-t border-[#A4B7AF]/15 flex items-center justify-between">
+                <span className="text-xs font-mono text-[#A4B7AF]">
+                  WRITTEN BY ADORA TECH ENGINEERING LABS
+                </span>
+                <Link
+                  href="/contact"
+                  className="inline-flex items-center gap-2 text-xs font-mono text-[#8DE0C1] hover:underline"
+                >
+                  <span>Discuss This Architecture</span>
+                  <ArrowRight className="w-3.5 h-3.5" />
+                </Link>
               </div>
-
-              <button
-                onClick={() => {
-                  navigator.clipboard?.writeText(window.location.href);
-                  alert("Article link copied to clipboard!");
-                }}
-                className="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-[#102A26] border border-[#A4B7AF]/20 text-xs text-[#A4B7AF] hover:text-[#8DE0C1] hover:border-[#8DE0C1]/40 transition-all"
-              >
-                <Share2 className="w-3.5 h-3.5" />
-                <span>Share</span>
-              </button>
             </div>
           </div>
         </div>
       )}
 
+      {/* Global Footer with Giant "ADORA TECH" Watermark */}
       <Footer />
     </div>
   );

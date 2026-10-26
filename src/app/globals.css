@@ -1,87 +1,91 @@
 @import "tailwindcss";
 
 :root {
-  --bg-main: #0E2925;
-  --bg-surface: #163E38;
-  --bg-surface-elevated: #1D4E47;
-  --bg-surface-card: #133934;
-  --text-primary: #F8FAF6;
-  --text-muted: #B4CBC1;
-  --text-dim: #7B9C90;
+  --bg-main: #081B19;
+  --bg-surface: #102A26;
+  --bg-surface-elevated: #153833;
+  --bg-surface-card: #0D2421;
+  --text-primary: #F1F3EB;
+  --text-muted: #A4B7AF;
+  --text-dim: #6B877E;
   --accent-mint: #8DE0C1;
-  --accent-mint-glow: rgba(141, 224, 193, 0.4);
+  --accent-mint-glow: rgba(141, 224, 193, 0.45);
   --accent-copper: #D5A17D;
-  --accent-copper-glow: rgba(213, 161, 125, 0.4);
-  --border-subtle: rgba(180, 203, 193, 0.22);
-  --border-bright: rgba(141, 224, 193, 0.45);
+  --accent-copper-glow: rgba(213, 161, 125, 0.45);
+  --border-subtle: rgba(164, 183, 175, 0.16);
+  --border-bright: rgba(141, 224, 193, 0.35);
   --font-serif: 'Instrument Serif', Georgia, serif;
 }
 
 html {
   scroll-behavior: smooth;
-  color-scheme: dark light;
-  background-color: #0E2925;
-  color: #F8FAF6;
+  color-scheme: dark;
+  background-color: #081B19;
+  color: #F1F3EB;
   transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-/* Lightened Default Palette Overrides across all components */
+/* Rich Cinematic Dark Theme Defaults */
 body {
-  background-color: #0E2925 !important;
-  color: #F8FAF6 !important;
+  background-color: #081B19 !important;
+  color: #F1F3EB !important;
 }
 
 .bg-\[\#081B19\] {
-  background-color: #0E2925 !important;
+  background-color: #081B19 !important;
 }
 
 .bg-\[\#081B19\]\/90 {
-  background-color: rgba(14, 41, 37, 0.92) !important;
+  background-color: rgba(8, 27, 25, 0.92) !important;
 }
 
 .bg-\[\#081B19\]\/85 {
-  background-color: rgba(14, 41, 37, 0.88) !important;
+  background-color: rgba(8, 27, 25, 0.88) !important;
 }
 
 .bg-\[\#081B19\]\/80 {
-  background-color: rgba(14, 41, 37, 0.82) !important;
+  background-color: rgba(8, 27, 25, 0.82) !important;
 }
 
 .bg-\[\#081B19\]\/60 {
-  background-color: rgba(14, 41, 37, 0.60) !important;
+  background-color: rgba(8, 27, 25, 0.60) !important;
+}
+
+.bg-\[\#0E2925\] {
+  background-color: #081B19 !important;
 }
 
 .bg-\[\#102A26\] {
-  background-color: #163E38 !important;
+  background-color: #102A26 !important;
 }
 
 .bg-\[\#153833\] {
-  background-color: #1D4E47 !important;
+  background-color: #153833 !important;
 }
 
 .bg-\[\#0D2421\],
 .bg-\[\#0A1F1C\] {
-  background-color: #133934 !important;
+  background-color: #0D2421 !important;
 }
 
 .text-\[\#F1F3EB\] {
-  color: #F8FAF6 !important;
+  color: #F1F3EB !important;
 }
 
 .text-\[\#A4B7AF\] {
-  color: #B4CBC1 !important;
+  color: #A4B7AF !important;
 }
 
 .border-\[\#A4B7AF\]\/10 {
-  border-color: rgba(180, 203, 193, 0.16) !important;
+  border-color: rgba(164, 183, 175, 0.12) !important;
 }
 
 .border-\[\#A4B7AF\]\/15 {
-  border-color: rgba(180, 203, 193, 0.22) !important;
+  border-color: rgba(164, 183, 175, 0.16) !important;
 }
 
 .border-\[\#A4B7AF\]\/20 {
-  border-color: rgba(180, 203, 193, 0.28) !important;
+  border-color: rgba(164, 183, 175, 0.22) !important;
 }
 
 /* Light Theme Variables & Overrides */
@@ -178,9 +182,9 @@ body {
 /* Subtle background subtle noise / glow utilities */
 .bg-atmospheric {
   background: 
-    radial-gradient(circle at 50% 0%, rgba(141, 224, 193, 0.07) 0%, transparent 60%),
+    radial-gradient(circle at 50% 0%, rgba(141, 224, 193, 0.08) 0%, transparent 60%),
     radial-gradient(circle at 100% 50%, rgba(213, 161, 125, 0.05) 0%, transparent 50%),
-    radial-gradient(circle at 0% 80%, rgba(16, 42, 38, 0.6) 0%, transparent 50%),
+    radial-gradient(circle at 0% 80%, rgba(16, 42, 38, 0.5) 0%, transparent 50%),
     #081B19;
 }
 
@@ -385,51 +389,129 @@ section[id] {
   box-shadow: 0 16px 36px -12px rgba(0, 0, 0, 0.5), 0 0 24px rgba(141, 224, 193, 0.12);
 }
 
-/* Crossway Background Carousel for Hero */
-.crossway-container {
-  position: absolute;
-  inset: -25%;
-  pointer-events: none;
-  overflow: hidden;
-  opacity: 0.85;
-  filter: contrast(112%) brightness(1.08);
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  gap: 2rem;
-  z-index: 0;
-  mask-image: radial-gradient(ellipse at center, rgba(0,0,0,1) 45%, rgba(0,0,0,0.65) 80%, rgba(0,0,0,0.25) 100%);
-  -webkit-mask-image: radial-gradient(ellipse at center, rgba(0,0,0,1) 45%, rgba(0,0,0,0.65) 80%, rgba(0,0,0,0.25) 100%);
-}
-
-@keyframes crossway-slide-left {
+/* 4-5 Column Vertical Background Carousel for Hero */
+@keyframes vertical-scroll-up {
   0% {
     transform: translate3d(0, 0, 0);
   }
   100% {
-    transform: translate3d(-50%, 0, 0);
+    transform: translate3d(0, -50%, 0);
   }
 }
 
-@keyframes crossway-slide-right {
+@keyframes vertical-scroll-down {
   0% {
-    transform: translate3d(-50%, 0, 0);
+    transform: translate3d(0, -50%, 0);
   }
   100% {
     transform: translate3d(0, 0, 0);
   }
 }
 
-.animate-crossway-left {
-  display: flex !important;
-  width: max-content !important;
-  animation: crossway-slide-left 50s linear infinite !important;
+.animate-col-up-1 {
+  animation: vertical-scroll-up 38s linear infinite;
   will-change: transform;
 }
 
-.animate-crossway-right {
-  display: flex !important;
-  width: max-content !important;
-  animation: crossway-slide-right 55s linear infinite !important;
+.animate-col-down-2 {
+  animation: vertical-scroll-down 44s linear infinite;
   will-change: transform;
 }
+
+.animate-col-up-3 {
+  animation: vertical-scroll-up 34s linear infinite;
+  will-change: transform;
+}
+
+.animate-col-down-4 {
+  animation: vertical-scroll-down 48s linear infinite;
+  will-change: transform;
+}
+
+.animate-col-up-5 {
+  animation: vertical-scroll-up 40s linear infinite;
+  will-change: transform;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-col-up-1,
+  .animate-col-down-2,
+  .animate-col-up-3,
+  .animate-col-down-4,
+  .animate-col-up-5 {
+    animation: none !important;
+  }
+}
+
+/* Vayem Studios High-Impact Section Animation Suite */
+.reveal-section {
+  transition: opacity 0.85s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.85s cubic-bezier(0.16, 1, 0.3, 1),
+              filter 0.75s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform, filter;
+}
+
+/* Below-the-fold sections waiting for scroll reveal */
+.reveal-section.will-reveal {
+  opacity: 0 !important;
+  transform: translateY(36px) scale(0.985) !important;
+  filter: blur(4px) !important;
+}
+
+/* Revealed and default state - always fully visible and sharp */
+.reveal-section.is-revealed,
+.reveal-section:not(.will-reveal) {
+  opacity: 1 !important;
+  transform: translateY(0) scale(1) !important;
+  filter: blur(0) !important;
+}
+
+/* Staggered Children inside Revealed Sections */
+.reveal-section.will-reveal .reveal-item {
+  opacity: 0 !important;
+  transform: translateY(24px) !important;
+}
+
+.reveal-section.is-revealed .reveal-item,
+.reveal-section:not(.will-reveal) .reveal-item {
+  opacity: 1 !important;
+  transform: translateY(0) !important;
+  transition: opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.75s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.reveal-section.is-revealed .reveal-item:nth-child(1) { transition-delay: 0.08s; }
+.reveal-section.is-revealed .reveal-item:nth-child(2) { transition-delay: 0.16s; }
+.reveal-section.is-revealed .reveal-item:nth-child(3) { transition-delay: 0.24s; }
+.reveal-section.is-revealed .reveal-item:nth-child(4) { transition-delay: 0.32s; }
+
+.d1 { transition-delay: 0.1s !important; }
+.d2 { transition-delay: 0.2s !important; }
+.d3 { transition-delay: 0.3s !important; }
+.d4 { transition-delay: 0.4s !important; }
+.d5 { transition-delay: 0.5s !important; }
+
+@keyframes ambient-drift {
+  0% { transform: translate(0, 0) scale(1); }
+  50% { transform: translate(18px, -18px) scale(1.06); }
+  100% { transform: translate(-12px, 12px) scale(0.96); }
+}
+
+.animate-ambient-drift {
+  animation: ambient-drift 18s ease-in-out infinite alternate;
+}
+
+/* Hide Next.js Dev Badge & Overlay Indicators Permanently */
+nextjs-portal,
+[data-nextjs-toast],
+[data-nextjs-dev-overlay-portal],
+#nextjs-dev-overlay,
+#__next-build-watcher,
+[data-nextjs-dialog-overlay] {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
+
+

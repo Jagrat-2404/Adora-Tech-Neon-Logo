@@ -1,18 +1,52 @@
 "use client";
 
 import React, { useState } from "react";
-import { ArrowRight, ChevronDown, Globe, Smartphone, Cpu, Palette, Layout, Activity, Terminal } from "lucide-react";
+import Image from "next/image";
+import Link from "next/link";
+import { ArrowRight, Globe, Smartphone, Cpu, Palette } from "lucide-react";
 import { SITE_CONFIG, ServiceTabItem } from "@/data/content";
 
 interface ServicesProps {
   onSelectProjectType?: (type: string) => void;
 }
 
-const serviceIcons = {
-  websites: Globe,
-  "mobile-apps": Smartphone,
-  "custom-software": Cpu,
-  "ui-ux": Palette,
+const serviceMediaConfig = {
+  websites: {
+    heroImg: "/images/web_editorial_ui.jpg",
+    heroAlt: "High-Performance Editorial Web Platform by ADORA TECH",
+    leftImg: "/images/it_datacenter.jpg",
+    leftAlt: "Tier-IV Edge Infrastructure",
+    rightImg: "/images/cloud_dashboard_ui.jpg",
+    rightAlt: "Core Web Vitals & Telemetry Console",
+    heroBadge: "NEXT.JS 15 // EDGE STREAMING",
+  },
+  "mobile-apps": {
+    heroImg: "/images/mobile_app_ui.jpg",
+    heroAlt: "Native iOS & Android Mobile Application by ADORA TECH",
+    leftImg: "/images/web_editorial_ui.jpg",
+    leftAlt: "Web & Mobile Unified Design Tokens",
+    rightImg: "/images/it_soc.jpg",
+    rightAlt: "Biometric & Passkey Security Mesh",
+    heroBadge: "REACT NATIVE & SWIFTUI // 120 FPS",
+  },
+  "custom-software": {
+    heroImg: "/images/cloud_dashboard_ui.jpg",
+    heroAlt: "Enterprise Cloud Software & Telemetry Console by ADORA TECH",
+    leftImg: "/images/it_devops.jpg",
+    leftAlt: "Kubernetes Cluster Auto-Scaling",
+    rightImg: "/images/mobile_app_ui.jpg",
+    rightAlt: "Executive Companion App",
+    heroBadge: "GO & WEBSOCKET // <10MS LATENCY",
+  },
+  "ui-ux": {
+    heroImg: "/images/web_editorial_ui.jpg",
+    heroAlt: "Design System & Interaction Physics by ADORA TECH",
+    leftImg: "/images/mobile_app_ui.jpg",
+    leftAlt: "Design Token Architecture",
+    rightImg: "/images/it_datacenter.jpg",
+    rightAlt: "High-DPI Design Hierarchy",
+    heroBadge: "SYSTEM TOKENS // PHYSICS MOTION",
+  },
 };
 
 export const Services: React.FC<ServicesProps> = ({ onSelectProjectType }) => {
@@ -32,322 +66,195 @@ export const Services: React.FC<ServicesProps> = ({ onSelectProjectType }) => {
     SITE_CONFIG.numberedServices.services.find((s) => s.id === activeTabId) ||
     SITE_CONFIG.numberedServices.services[0];
 
+  const currentMedia =
+    serviceMediaConfig[activeTabId as keyof typeof serviceMediaConfig] ||
+    serviceMediaConfig.websites;
+
   return (
     <section
       id="services"
-      className="py-24 sm:py-32 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto border-b border-[#A4B7AF]/10"
+      className="py-24 sm:py-36 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto border-b border-[#A4B7AF]/10 relative overflow-hidden"
       aria-labelledby="services-heading"
     >
       {/* Section Header */}
-      <div className="max-w-3xl mb-16 sm:mb-20">
-        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#102A26] border border-[#A4B7AF]/20 text-[#8DE0C1] text-xs font-mono uppercase tracking-widest mb-4">
-          <span>{SITE_CONFIG.numberedServices.eyebrow}</span>
-        </div>
-        <h2
-          id="services-heading"
-          className="text-3xl sm:text-5xl font-light tracking-tight text-[#F1F3EB]"
-        >
-          Bespoke capabilities engineered to{" "}
-          <span className="font-serif italic font-normal text-transparent bg-clip-text bg-gradient-to-r from-[#8DE0C1] via-[#B8F2DC] to-[#D5A17D]">
-            outperform
-          </span>
-          .
-        </h2>
-      </div>
-
-      {/* Desktop Two-Column Presentation (Tabs & Interactive Preview) */}
-      <div className="hidden lg:grid grid-cols-12 gap-12 items-start">
-        {/* Left Column: Numbered Service Navigation */}
-        <div
-          role="tablist"
-          aria-label="Service capabilities"
-          className="col-span-5 space-y-3"
-        >
-          {SITE_CONFIG.numberedServices.services.map((service) => {
-            const isActive = service.id === activeTabId;
-            const Icon =
-              serviceIcons[service.id as keyof typeof serviceIcons] || Globe;
-
-            return (
-              <button
-                key={service.id}
-                role="tab"
-                id={`tab-${service.id}`}
-                aria-selected={isActive}
-                aria-controls={`panel-${service.id}`}
-                tabIndex={isActive ? 0 : -1}
-                onClick={() => setActiveTabId(service.id)}
-                className={`w-full group text-left p-6 rounded-2xl border transition-all duration-300 flex items-center justify-between focus:outline-none focus-visible:ring-2 focus-visible:ring-[#8DE0C1] ${
-                  isActive
-                    ? "bg-[#102A26] border-[#8DE0C1]/50 shadow-lg shadow-black/30"
-                    : "bg-[#081B19] border-[#A4B7AF]/15 hover:border-[#8DE0C1]/30 hover:bg-[#0D2421]"
-                }`}
-              >
-                <div className="flex items-center gap-5">
-                  <span
-                    className={`font-mono text-sm tracking-widest transition-colors ${
-                      isActive ? "text-[#8DE0C1]" : "text-[#A4B7AF]/60 group-hover:text-[#F1F3EB]"
-                    }`}
-                  >
-                    {service.number}
-                  </span>
-                  <div className="flex items-center gap-3">
-                    <Icon
-                      className={`w-5 h-5 transition-colors ${
-                        isActive ? "text-[#8DE0C1]" : "text-[#A4B7AF] group-hover:text-[#F1F3EB]"
-                      }`}
-                    />
-                    <span
-                      className={`font-[family-name:var(--font-outfit)] text-xl font-medium transition-colors ${
-                        isActive ? "text-[#F1F3EB]" : "text-[#A4B7AF] group-hover:text-[#F1F3EB]"
-                      }`}
-                    >
-                      {service.title}
-                    </span>
-                  </div>
-                </div>
-
-                <ArrowRight
-                  className={`w-4 h-4 transition-all duration-300 ${
-                    isActive
-                      ? "text-[#8DE0C1] translate-x-1"
-                      : "text-[#A4B7AF]/40 group-hover:text-[#F1F3EB] group-hover:translate-x-0.5"
-                  }`}
-                />
-              </button>
-            );
-          })}
-        </div>
-
-        {/* Right Column: Active Service Panel with Art-Directed Interface Preview */}
-        <div
-          role="tabpanel"
-          id={`panel-${activeService.id}`}
-          aria-labelledby={`tab-${activeService.id}`}
-          className="col-span-7 p-8 rounded-3xl bg-[#0D2421]/90 border border-[#A4B7AF]/15 shadow-2xl relative overflow-hidden flex flex-col justify-between min-h-[460px]"
-        >
-          {/* Ambient Corner Glow */}
-          <div
-            aria-hidden="true"
-            className="absolute top-0 right-0 w-64 h-64 rounded-full pointer-events-none opacity-25 blur-3xl -z-10"
-            style={{
-              background:
-                "radial-gradient(circle, rgba(141, 224, 193, 0.45) 0%, rgba(213, 161, 125, 0.3) 60%, transparent 80%)",
-            }}
-          />
-
-          <div>
-            {/* Header & Number Tag */}
-            <div className="flex items-center justify-between mb-4">
-              <span className="font-mono text-xs uppercase tracking-widest text-[#8DE0C1] px-2.5 py-1 rounded bg-[#153833] border border-[#8DE0C1]/20">
-                Service {activeService.number}
-              </span>
-              <span className="text-xs font-mono text-[#A4B7AF]/60">
-                ADORA TECH
-              </span>
-            </div>
-
-            <h3 className="font-[family-name:var(--font-outfit)] text-3xl font-medium text-[#F1F3EB] mb-4">
-              {activeService.title}
-            </h3>
-
-            <p className="text-base sm:text-lg text-[#A4B7AF] font-light leading-relaxed mb-6">
-              {activeService.description}
-            </p>
-
-            {/* Tag Pills */}
-            <div className="flex flex-wrap gap-2 mb-8">
-              {activeService.tags.map((tag, idx) => (
-                <span
-                  key={idx}
-                  className="px-3 py-1 rounded-full text-xs font-mono bg-[#102A26] text-[#8DE0C1] border border-[#8DE0C1]/20"
-                >
-                  {tag}
-                </span>
-              ))}
-            </div>
-
-            {/* Interactive Preview Mockup Box */}
-            <div className="rounded-2xl bg-[#081B19] border border-[#A4B7AF]/15 p-5 shadow-inner mb-8">
-              {activeService.previewType === "website" && (
-                <div className="space-y-3 font-mono text-xs">
-                  <div className="flex items-center justify-between pb-2 border-b border-[#A4B7AF]/15 text-[#A4B7AF]/60 text-[11px]">
-                    <div className="flex items-center gap-1.5">
-                      <span className="w-2 h-2 rounded-full bg-red-400/50" />
-                      <span className="w-2 h-2 rounded-full bg-yellow-400/50" />
-                      <span className="w-2 h-2 rounded-full bg-green-400/50" />
-                    </div>
-                    <span className="text-[#8DE0C1]">client-flagship.concept</span>
-                    <Layout className="w-3.5 h-3.5" />
-                  </div>
-                  <div className="grid grid-cols-2 gap-3 text-left">
-                    <div className="p-3 rounded-lg bg-[#102A26] border border-[#A4B7AF]/10">
-                      <span className="text-[10px] text-[#A4B7AF] block">
-                        PAGE SPEED
-                      </span>
-                      <span className="text-sm font-semibold text-[#8DE0C1]">
-                        99/100 Core Web Vitals
-                      </span>
-                    </div>
-                    <div className="p-3 rounded-lg bg-[#102A26] border border-[#A4B7AF]/10">
-                      <span className="text-[10px] text-[#A4B7AF] block">
-                        FRAMEWORK
-                      </span>
-                      <span className="text-sm font-semibold text-[#F1F3EB]">
-                        Next.js App Router
-                      </span>
-                    </div>
-                  </div>
-                </div>
-              )}
-
-              {activeService.previewType === "mobile" && (
-                <div className="flex items-center justify-between font-mono text-xs">
-                  <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 rounded-xl bg-[#153833] border border-[#8DE0C1]/30 flex items-center justify-center text-[#8DE0C1]">
-                      <Smartphone className="w-5 h-5" />
-                    </div>
-                    <div>
-                      <span className="text-xs font-semibold text-[#F1F3EB] block">
-                        Native Gesture Engine
-                      </span>
-                      <span className="text-[10px] text-[#A4B7AF]">
-                        Offline sync &amp; biometric auth
-                      </span>
-                    </div>
-                  </div>
-                  <span className="text-xs px-2.5 py-1 rounded bg-[#102A26] text-[#8DE0C1] border border-[#8DE0C1]/20">
-                    60 FPS
-                  </span>
-                </div>
-              )}
-
-              {activeService.previewType === "software" && (
-                <div className="space-y-2 font-mono text-xs">
-                  <div className="flex items-center justify-between text-[#8DE0C1] text-[11px]">
-                    <div className="flex items-center gap-2">
-                      <Terminal className="w-3.5 h-3.5" />
-                      <span>INTERNAL TELEMETRY</span>
-                    </div>
-                    <span>LATENCY: 14ms</span>
-                  </div>
-                  <div className="p-2.5 rounded bg-[#102A26] text-[11px] text-[#A4B7AF] flex items-center justify-between">
-                    <span>Cluster Sync</span>
-                    <span className="text-[#8DE0C1]">HEALTHY</span>
-                  </div>
-                </div>
-              )}
-
-              {activeService.previewType === "uiux" && (
-                <div className="grid grid-cols-3 gap-2 font-mono text-xs text-center">
-                  <div className="p-2.5 rounded bg-[#102A26] border border-[#A4B7AF]/10">
-                    <span className="text-[10px] text-[#A4B7AF] block">
-                      WIREFRAMES
-                    </span>
-                    <span className="text-xs font-semibold text-[#8DE0C1]">
-                      Figma
-                    </span>
-                  </div>
-                  <div className="p-2.5 rounded bg-[#102A26] border border-[#A4B7AF]/10">
-                    <span className="text-[10px] text-[#A4B7AF] block">
-                      PROTOTYPING
-                    </span>
-                    <span className="text-xs font-semibold text-[#D5A17D]">
-                      Interactive
-                    </span>
-                  </div>
-                  <div className="p-2.5 rounded bg-[#102A26] border border-[#A4B7AF]/10">
-                    <span className="text-[10px] text-[#A4B7AF] block">
-                      TOKENS
-                    </span>
-                    <span className="text-xs font-semibold text-[#F1F3EB]">
-                      Design System
-                    </span>
-                  </div>
-                </div>
-              )}
-            </div>
+      <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-14 sm:mb-18">
+        <div className="max-w-3xl">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#102A26] border border-[#8DE0C1]/30 text-[#8DE0C1] text-xs font-mono uppercase tracking-widest mb-4">
+            <span className="w-1.5 h-1.5 rounded-full bg-[#8DE0C1] animate-pulse" />
+            <span>[ {SITE_CONFIG.numberedServices.eyebrow} ]</span>
           </div>
-
-          {/* Action Row */}
-          <div className="pt-4 border-t border-[#A4B7AF]/15 flex items-center justify-between">
-            <span className="text-xs font-mono text-[#A4B7AF]">
-              Custom tailored scope
+          <h2
+            id="services-heading"
+            className="text-3xl sm:text-5xl lg:text-6xl font-normal tracking-tight text-[#F1F3EB] leading-[1.08]"
+          >
+            Capabilities Engineered to{" "}
+            <span className="font-serif italic font-normal text-transparent bg-clip-text bg-gradient-to-r from-[#8DE0C1] via-[#B8F2DC] to-[#D5A17D]">
+              Outperform
             </span>
-            <button
-              type="button"
-              onClick={() => handleDiscuss(activeService.projectType)}
-              className="inline-flex items-center gap-2 px-6 py-2.5 rounded-full text-xs font-semibold uppercase tracking-wider bg-[#8DE0C1] hover:bg-[#A1E8D0] text-[#081B19] transition-all shadow-[0_0_15px_rgba(141,224,193,0.25)] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#8DE0C1]"
-            >
-              <span>Discuss {activeService.title}</span>
-              <ArrowRight className="w-3.5 h-3.5" />
-            </button>
-          </div>
+            .
+          </h2>
         </div>
+        <p className="text-base sm:text-lg text-[#A4B7AF] font-light max-w-md leading-relaxed">
+          Stills, motion, cloud infrastructure, and custom interfaces—engineered as a unified production setup.
+        </p>
       </div>
 
-      {/* Mobile Stacked Accordion Presentation */}
-      <div className="lg:hidden space-y-4">
+      {/* Vayem Studios Inspired Horizontal Tab Bar */}
+      <div
+        role="tablist"
+        aria-label="Capabilities tabs"
+        className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 mb-10"
+      >
         {SITE_CONFIG.numberedServices.services.map((service) => {
-          const isOpen = service.id === activeTabId;
-          const Icon =
-            serviceIcons[service.id as keyof typeof serviceIcons] || Globe;
+          const isActive = service.id === activeTabId;
 
           return (
-            <div
+            <button
               key={service.id}
-              className="rounded-2xl border border-[#A4B7AF]/15 bg-[#0D2421] overflow-hidden"
+              role="tab"
+              id={`tab-${service.id}`}
+              aria-selected={isActive}
+              aria-controls={`panel-${service.id}`}
+              tabIndex={isActive ? 0 : -1}
+              onClick={() => setActiveTabId(service.id)}
+              className="group text-left pt-4 relative focus:outline-none"
             >
-              <button
-                type="button"
-                onClick={() => setActiveTabId(isOpen ? "" : service.id)}
-                aria-expanded={isOpen}
-                className="w-full p-5 flex items-center justify-between text-left focus:outline-none focus-visible:ring-2 focus-visible:ring-[#8DE0C1]"
+              {/* Progress Indicator Line */}
+              <div
+                className={`absolute top-0 left-0 right-0 h-[2px] transition-all duration-500 ${
+                  isActive ? "bg-[#8DE0C1] shadow-[0_0_12px_rgba(141,224,193,0.6)]" : "bg-[#A4B7AF]/20 group-hover:bg-[#A4B7AF]/40"
+                }`}
+              />
+              <span
+                className={`block text-xs font-mono uppercase tracking-widest mb-2 transition-colors ${
+                  isActive ? "text-[#8DE0C1]" : "text-[#A4B7AF]/60 group-hover:text-[#A4B7AF]"
+                }`}
               >
-                <div className="flex items-center gap-3">
-                  <span className="font-mono text-xs text-[#8DE0C1]">
-                    {service.number}
-                  </span>
-                  <Icon className="w-4 h-4 text-[#8DE0C1]" />
-                  <span className="font-[family-name:var(--font-outfit)] text-lg font-medium text-[#F1F3EB]">
-                    {service.title}
-                  </span>
-                </div>
-                <ChevronDown
-                  className={`w-4 h-4 text-[#A4B7AF] transition-transform duration-200 ${
-                    isOpen ? "rotate-180 text-[#8DE0C1]" : ""
-                  }`}
-                />
-              </button>
-
-              {isOpen && (
-                <div className="px-5 pb-6 pt-2 border-t border-[#A4B7AF]/10 space-y-4">
-                  <p className="text-sm text-[#A4B7AF] leading-relaxed font-light">
-                    {service.description}
-                  </p>
-                  <div className="flex flex-wrap gap-1.5">
-                    {service.tags.map((tag, idx) => (
-                      <span
-                        key={idx}
-                        className="px-2.5 py-0.5 rounded text-[11px] font-mono bg-[#102A26] text-[#8DE0C1] border border-[#8DE0C1]/20"
-                      >
-                        {tag}
-                      </span>
-                    ))}
-                  </div>
-                  <button
-                    type="button"
-                    onClick={() => handleDiscuss(service.projectType)}
-                    className="w-full mt-2 py-2.5 rounded-full text-xs font-semibold uppercase tracking-wider bg-[#8DE0C1] text-[#081B19] flex items-center justify-center gap-2"
-                  >
-                    <span>Discuss {service.title}</span>
-                    <ArrowRight className="w-3.5 h-3.5" />
-                  </button>
-                </div>
-              )}
-            </div>
+                {service.number} // PILLAR
+              </span>
+              <span
+                className={`text-base sm:text-lg lg:text-xl font-medium tracking-tight block transition-colors ${
+                  isActive ? "text-[#F1F3EB]" : "text-[#A4B7AF]/70 group-hover:text-[#F1F3EB]"
+                }`}
+              >
+                {service.title}
+              </span>
+            </button>
           );
         })}
+      </div>
+
+      {/* Vayem Studios Inspired Panoramic Interactive Stage */}
+      <div
+        role="tabpanel"
+        id={`panel-${activeService.id}`}
+        aria-labelledby={`tab-${activeService.id}`}
+        key={activeService.id}
+        className="relative rounded-3xl overflow-hidden bg-gradient-to-br from-[#102A26] to-[#0A1F1C] border border-[#8DE0C1]/25 p-8 sm:p-12 lg:p-14 shadow-2xl shadow-black/50"
+      >
+        {/* Ambient Blurred Backdrop Lighting */}
+        <div
+          aria-hidden="true"
+          className="absolute -top-32 -right-32 w-96 h-96 bg-[#8DE0C1]/10 rounded-full blur-3xl pointer-events-none"
+        />
+        <div
+          aria-hidden="true"
+          className="absolute -bottom-32 -left-32 w-96 h-96 bg-[#D5A17D]/10 rounded-full blur-3xl pointer-events-none"
+        />
+
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center relative z-10">
+          {/* Left Column: Editorial Summary & Actions */}
+          <div className="lg:col-span-5 flex flex-col justify-between gap-6">
+            <div>
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#081B19]/80 border border-[#8DE0C1]/30 text-[#8DE0C1] text-[11px] font-mono uppercase tracking-widest mb-4">
+                <span>{currentMedia.heroBadge}</span>
+              </div>
+
+              <h3 className="text-3xl sm:text-4xl lg:text-5xl font-light text-[#F1F3EB] tracking-tight leading-[1.1] mb-5">
+                {activeService.title}
+              </h3>
+
+              <p className="text-base sm:text-lg text-[#A4B7AF] font-light leading-relaxed mb-6">
+                {activeService.description}
+              </p>
+
+              {/* Tag Pills */}
+              <div className="flex flex-wrap gap-2 mb-8">
+                {activeService.tags.map((tag, idx) => (
+                  <span
+                    key={idx}
+                    className="px-3 py-1.5 rounded-full text-xs font-mono bg-[#081B19]/80 text-[#8DE0C1] border border-[#8DE0C1]/20 hover:border-[#8DE0C1]/40 transition-colors"
+                  >
+                    {tag}
+                  </span>
+                ))}
+              </div>
+            </div>
+
+            <div>
+              <button
+                onClick={() => handleDiscuss(activeService.projectType)}
+                className="inline-flex items-center gap-3 px-7 py-3.5 rounded-full text-sm font-semibold tracking-wide text-[#081B19] bg-[#8DE0C1] hover:bg-[#A3E8D0] shadow-[0_0_25px_rgba(141,224,193,0.35)] hover:shadow-[0_0_35px_rgba(141,224,193,0.5)] transition-all duration-300 hover:scale-[1.02] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#8DE0C1]"
+              >
+                <span>Scope {activeService.title}</span>
+                <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
+              </button>
+            </div>
+          </div>
+
+          {/* Right Column: 3 Staggered Overlapping 3D Preview Frames */}
+          <div className="lg:col-span-7 relative flex items-center justify-center gap-3 sm:gap-5 overflow-hidden py-4">
+            {/* Left Preview Frame (Smaller Angle) */}
+            <div className="hidden sm:block relative w-36 sm:w-44 lg:w-48 aspect-[3/4.2] rounded-2xl overflow-hidden border border-[#A4B7AF]/20 shadow-xl opacity-75 shrink-0 hover:opacity-100 transition-all duration-500 hover:scale-105">
+              <Image
+                src={currentMedia.leftImg}
+                alt={currentMedia.leftAlt}
+                fill
+                className="object-cover"
+                sizes="(max-width: 768px) 150px, 200px"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#081B19]/80 via-transparent to-transparent" />
+              <div className="absolute bottom-2.5 left-2.5 right-2.5 text-[10px] font-mono text-[#8DE0C1] truncate">
+                INFRASTRUCTURE
+              </div>
+            </div>
+
+            {/* Center Hero Frame (Primary High-Resolution Screen) */}
+            <div className="relative w-64 sm:w-72 lg:w-80 aspect-[3/4.2] rounded-2xl overflow-hidden border-2 border-[#8DE0C1]/50 shadow-2xl shadow-black/80 shrink-0 group transform hover:scale-[1.03] transition-all duration-500 z-10">
+              <Image
+                src={currentMedia.heroImg}
+                alt={currentMedia.heroAlt}
+                fill
+                className="object-cover group-hover:scale-105 transition-transform duration-700"
+                sizes="(max-width: 768px) 300px, 400px"
+                priority
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#081B19]/90 via-transparent to-transparent pointer-events-none" />
+              <div className="absolute top-3 left-3 px-2.5 py-1 rounded-full bg-[#081B19]/85 backdrop-blur-md border border-[#8DE0C1]/40 text-[10px] font-mono text-[#8DE0C1]">
+                PRODUCTION BUILD
+              </div>
+              <div className="absolute bottom-3 left-3 right-3 text-xs font-mono text-[#F1F3EB] flex items-center justify-between">
+                <span className="truncate mr-2 font-medium">{activeService.title}</span>
+                <span className="text-[#8DE0C1] shrink-0">60 FPS</span>
+              </div>
+            </div>
+
+            {/* Right Preview Frame (Smaller Angle) */}
+            <div className="hidden sm:block relative w-36 sm:w-44 lg:w-48 aspect-[3/4.2] rounded-2xl overflow-hidden border border-[#A4B7AF]/20 shadow-xl opacity-75 shrink-0 hover:opacity-100 transition-all duration-500 hover:scale-105">
+              <Image
+                src={currentMedia.rightImg}
+                alt={currentMedia.rightAlt}
+                fill
+                className="object-cover"
+                sizes="(max-width: 768px) 150px, 200px"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#081B19]/80 via-transparent to-transparent" />
+              <div className="absolute bottom-2.5 left-2.5 right-2.5 text-[10px] font-mono text-[#D5A17D] truncate">
+                TELEMETRY
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
   );
