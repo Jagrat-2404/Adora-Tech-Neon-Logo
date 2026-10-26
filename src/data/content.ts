@@ -74,12 +74,14 @@ export const SITE_CONFIG = {
 
   // 2. Service Strip
   serviceStrip: [
-    "Websites",
-    "Mobile Apps",
+    "Cloud Infrastructure",
     "Custom Software",
-    "UI & UX",
-    "E-commerce",
-    "Web Applications",
+    "Cybersecurity & SOC",
+    "DevOps & Automation",
+    "Web Engineering",
+    "Mobile Applications",
+    "Managed IT Services",
+    "Database Architecture",
   ],
 
   // 3. Editorial Introduction

@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import { Header } from "@/components/Header";
 import { Hero } from "@/components/Hero";
 import { ServiceStrip } from "@/components/ServiceStrip";
+import { ITProofMetrics } from "@/components/ITProofMetrics";
 import { StudioIntro } from "@/components/StudioIntro";
 import { Services } from "@/components/Services";
 import { SelectedWork } from "@/components/SelectedWork";
@@ -24,13 +25,16 @@ export default function Home() {
 
       {/* Main Agency Sections Architecture */}
       <main id="main-content" className="relative z-10">
-        {/* 1. Hero with Art-Directed Multi-Device Product Composition */}
+        {/* 1. Hero with Centered Layout and Crossway IT Carousel */}
         <Hero />
 
         {/* 2. Continuous Service Category Strip Marquee */}
         <ServiceStrip />
 
-        {/* 3. Asymmetric Editorial Introduction */}
+        {/* 3. IT Services Proof & Performance Metrics Cards (Moved below ServiceStrip) */}
+        <ITProofMetrics />
+
+        {/* 4. Asymmetric Editorial Introduction */}
         <StudioIntro />
 
         {/* 4. Numbered Service Navigation (01-04) with Desktop Tabs & Mobile Accordions */}
