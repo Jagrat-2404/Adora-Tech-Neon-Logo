@@ -53,10 +53,11 @@ export const SITE_CONFIG = {
   descriptor: "Websites · Mobile Apps · Custom Software",
   year: 2026,
   navLinks: [
-    { label: "Services", href: "#services" },
-    { label: "Work", href: "#work" },
-    { label: "Process", href: "#process" },
-    { label: "FAQ", href: "#faq" },
+    { label: "Home", href: "/" },
+    { label: "About us", href: "/about" },
+    { label: "Service", href: "/services" },
+    { label: "Blog", href: "/blog" },
+    { label: "Contact US", href: "/contact" },
   ],
 
   // 1. Hero
@@ -379,5 +380,59 @@ export const SITE_CONFIG = {
       "UI & UX",
       "Other",
     ] as const,
+  },
+
+  // 11. Blog & Studio Journal
+  blog: {
+    eyebrow: "JOURNAL & INSIGHTS",
+    heading: "Notes on craft, architecture, and purposeful code.",
+    subhead:
+      "Observations and engineering takeaways from the digital products we design and build.",
+    posts: [
+      {
+        slug: "designing-with-subtle-neon-glows",
+        title: "Designing for High-DPI Screens with Restrained Atmospheric Glows",
+        excerpt:
+          "Why luminous neon halos work better when paired with deep obsidian emerald palettes rather than generic saturated purples.",
+        category: "Design System",
+        readTime: "4 min read",
+        date: "Oct 24, 2026",
+        content:
+          "In digital product design, luminous accents should guide attention, not exhaust it. By restricting vivid mint (#8DE0C1) and copper (#D5A17D) to intentional focal points—such as our circular emblem—and anchoring them against deep green-black surfaces (#081B19), interfaces gain a sense of depth and tangible physical atmosphere without suffering visual fatigue.",
+      },
+      {
+        slug: "nextjs-app-router-turbopack-benefits",
+        title: "Why We Build Client Frontends with Next.js App Router and Edge Workers",
+        excerpt:
+          "A breakdown of sub-50ms TTFB, zero-bundle-overhead server components, and streaming hydration for editorial websites.",
+        category: "Engineering",
+        readTime: "6 min read",
+        date: "Oct 18, 2026",
+        content:
+          "Modern web applications often compromise between aesthetic complexity and load performance. By rendering critical markup on edge runtimes and keeping interactive motion logic localized in client islands, we achieve instant first-contentful paint while maintaining rich GSAP animation pipelines.",
+      },
+      {
+        slug: "realtime-fleet-telemetry-architecture",
+        title: "The Architecture of Zero-Latency Operations Consoles",
+        excerpt:
+          "How we engineer mission-critical dashboards that process thousands of live vehicle coordinates without UI stutter.",
+        category: "Custom Software",
+        readTime: "7 min read",
+        date: "Oct 10, 2026",
+        content:
+          "When dispatchers manage multi-region transit networks, sluggish tables and bloated DOM nodes introduce real operational hazards. We unpack how virtualized windowing, binary WebSocket streams, and canvas rendering enable buttery 60 FPS performance under high load.",
+      },
+      {
+        slug: "offline-first-mobile-sqlite-sync",
+        title: "Offline-First Mobile Architecture: Designing Resilient Sync Queues",
+        excerpt:
+          "Strategies for human-centric mobile apps that perform seamlessly on flights, subways, and low-connectivity regions.",
+        category: "Mobile Apps",
+        readTime: "5 min read",
+        date: "Sep 28, 2026",
+        content:
+          "Users do not care if their cell signal drops. A well-designed mobile application stores writes in a deterministic local SQLite queue and synchronizes conflicts gracefully upon reconnection. Here is our blueprint for local-first mobile development.",
+      },
+    ],
   },
 };

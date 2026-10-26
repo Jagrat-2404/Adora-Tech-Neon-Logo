@@ -1,22 +1,23 @@
 "use client";
 
 import React, { useEffect, useRef } from "react";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { ArrowRight, X } from "lucide-react";
 import { SITE_CONFIG } from "@/data/content";
 
 interface MobileNavigationProps {
   isOpen: boolean;
   onClose: () => void;
-  onSelectLink: (href: string) => void;
 }
 
 export const MobileNavigation: React.FC<MobileNavigationProps> = ({
   isOpen,
   onClose,
-  onSelectLink,
 }) => {
   const panelRef = useRef<HTMLDivElement>(null);
   const closeButtonRef = useRef<HTMLButtonElement>(null);
+  const pathname = usePathname();
 
   useEffect(() => {
     if (!isOpen) return;
@@ -100,37 +101,37 @@ export const MobileNavigation: React.FC<MobileNavigationProps> = ({
       {/* Main Navigation Links */}
       <div ref={panelRef} className="flex-1 flex flex-col justify-center px-8 py-8 space-y-6">
         <nav className="flex flex-col space-y-4">
-          {SITE_CONFIG.navLinks.map((link, index) => (
-            <a
-              key={link.label}
-              href={link.href}
-              onClick={(e) => {
-                e.preventDefault();
-                onSelectLink(link.href);
-              }}
-              className="group flex items-center justify-between text-2xl font-light tracking-wide text-[#F1F3EB] hover:text-[#8DE0C1] py-2 border-b border-[#A4B7AF]/10 transition-colors focus:outline-none focus-visible:text-[#8DE0C1]"
-            >
-              <span>{link.label}</span>
-              <span className="text-xs font-mono text-[#A4B7AF]/60 group-hover:text-[#8DE0C1] transition-colors">
-                0{index + 1}
-              </span>
-            </a>
-          ))}
+          {SITE_CONFIG.navLinks.map((link, index) => {
+            const isActive = pathname === link.href;
+
+            return (
+              <Link
+                key={link.label}
+                href={link.href}
+                onClick={onClose}
+                className={`group flex items-center justify-between text-2xl font-light tracking-wide py-2 border-b border-[#A4B7AF]/10 transition-colors focus:outline-none focus-visible:text-[#8DE0C1] ${
+                  isActive ? "text-[#8DE0C1]" : "text-[#F1F3EB] hover:text-[#8DE0C1]"
+                }`}
+              >
+                <span>{link.label}</span>
+                <span className="text-xs font-mono text-[#A4B7AF]/60 group-hover:text-[#8DE0C1] transition-colors">
+                  0{index + 1}
+                </span>
+              </Link>
+            );
+          })}
         </nav>
 
         {/* CTA Button */}
         <div className="pt-6">
-          <a
-            href="#contact"
-            onClick={(e) => {
-              e.preventDefault();
-              onSelectLink("#contact");
-            }}
+          <Link
+            href="/contact"
+            onClick={onClose}
             className="group flex items-center justify-center gap-2 w-full py-3.5 px-6 rounded-full font-medium text-sm tracking-wide bg-[#8DE0C1] text-[#081B19] hover:bg-[#A1E8D0] shadow-lg shadow-[#081B19]/50 transition-all duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#8DE0C1]"
           >
             <span>Start a Project</span>
             <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
-          </a>
+          </Link>
         </div>
       </div>
 

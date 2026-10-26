@@ -1,7 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
-import { IntroSequence } from "@/components/IntroSequence";
+import React, { useState } from "react";
 import { Header } from "@/components/Header";
 import { Hero } from "@/components/Hero";
 import { ServiceStrip } from "@/components/ServiceStrip";
@@ -16,57 +15,17 @@ import { ContactForm } from "@/components/ContactForm";
 import { Footer } from "@/components/Footer";
 
 export default function Home() {
-  const [isIntroActive, setIsIntroActive] = useState<boolean>(true);
   const [selectedProjectType, setSelectedProjectType] = useState<string>("Website");
-
-  useEffect(() => {
-    // Check if the user has already seen the intro during this session
-    // or if they have requested reduced motion
-    try {
-      const introSeen = sessionStorage.getItem("adora_intro_seen_v1");
-      const prefersReducedMotion = window.matchMedia(
-        "(prefers-reduced-motion: reduce)"
-      ).matches;
-
-      if (introSeen === "true" || prefersReducedMotion) {
-        setIsIntroActive(false);
-      }
-    } catch {
-      setIsIntroActive(false);
-    }
-  }, []);
-
-  const handleIntroComplete = () => {
-    setIsIntroActive(false);
-    try {
-      sessionStorage.setItem("adora_intro_seen_v1", "true");
-    } catch {
-      // Storage safe
-    }
-  };
 
   return (
     <div className="relative min-h-screen bg-[#081B19] text-[#F1F3EB] selection:bg-[#8DE0C1]/20 selection:text-[#8DE0C1]">
-      {/* 
-        Signature Opening Interaction:
-        - Highlights and animates the neon "O" first with a bloom shockwave.
-        - Assembles the letters ("AD", "RA", "TECH") around it.
-        - Smoothly glides and scales directly to the top-left corner of the header.
-      */}
-      {isIntroActive && (
-        <IntroSequence
-          onComplete={handleIntroComplete}
-          headerLogoTargetId="header-logo-target"
-        />
-      )}
-
       {/* Global Header */}
-      <Header isIntroActive={isIntroActive} />
+      <Header />
 
       {/* Main Agency Sections Architecture */}
       <main id="main-content" className="relative z-10">
         {/* 1. Hero with Art-Directed Multi-Device Product Composition */}
-        <Hero isIntroActive={isIntroActive} />
+        <Hero />
 
         {/* 2. Continuous Service Category Strip Marquee */}
         <ServiceStrip />

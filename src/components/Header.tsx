@@ -2,18 +2,23 @@
 
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { ArrowRight, Menu } from "lucide-react";
 import { BrandLogo } from "./BrandLogo";
 import { MobileNavigation } from "./MobileNavigation";
 import { SITE_CONFIG } from "@/data/content";
+import { useIntro } from "./PageTransitionProvider";
 
 interface HeaderProps {
-  isIntroActive: boolean;
+  isIntroActive?: boolean;
 }
 
-export const Header: React.FC<HeaderProps> = ({ isIntroActive }) => {
+export const Header: React.FC<HeaderProps> = ({ isIntroActive: propIntroActive }) => {
+  const { isIntroActive: contextIntroActive } = useIntro();
+  const isIntroActive = propIntroActive !== undefined ? propIntroActive : contextIntroActive;
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const pathname = usePathname();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -25,14 +30,6 @@ export const Header: React.FC<HeaderProps> = ({ isIntroActive }) => {
 
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
-
-  const handleLinkClick = (href: string) => {
-    setMobileMenuOpen(false);
-    const element = document.querySelector(href);
-    if (element) {
-      element.scrollIntoView({ behavior: "smooth" });
-    }
-  };
 
   return (
     <>
@@ -50,11 +47,7 @@ export const Header: React.FC<HeaderProps> = ({ isIntroActive }) => {
             className="relative flex items-center"
           >
             <Link
-              href="#hero"
-              onClick={(e) => {
-                e.preventDefault();
-                handleLinkClick("#hero");
-              }}
+              href="/"
               className="flex items-center group focus:outline-none focus-visible:ring-2 focus-visible:ring-[#8DE0C1] rounded-md transition-opacity duration-300"
               style={{
                 opacity: isIntroActive ? 0 : 1,
@@ -73,37 +66,39 @@ export const Header: React.FC<HeaderProps> = ({ isIntroActive }) => {
               isIntroActive ? "opacity-0 translate-y-[-4px]" : "opacity-100 translate-y-0"
             }`}
           >
-            {SITE_CONFIG.navLinks.map((item) => (
-              <a
-                key={item.label}
-                href={item.href}
-                onClick={(e) => {
-                  e.preventDefault();
-                  handleLinkClick(item.href);
-                }}
-                className="relative text-sm tracking-wide text-[#A4B7AF] hover:text-[#F1F3EB] transition-colors py-1 after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 hover:after:w-full after:h-[1.5px] after:bg-[#8DE0C1] after:transition-all after:duration-300 focus:outline-none focus-visible:text-[#8DE0C1]"
-              >
-                {item.label}
-              </a>
-            ))}
+            {SITE_CONFIG.navLinks.map((item) => {
+              const isActive = pathname === item.href;
+
+              return (
+                <Link
+                  key={item.label}
+                  href={item.href}
+                  className={`relative text-sm tracking-wide transition-colors py-1 focus:outline-none focus-visible:text-[#8DE0C1] ${
+                    isActive
+                      ? "text-[#8DE0C1] font-medium"
+                      : "text-[#A4B7AF] hover:text-[#F1F3EB]"
+                  } after:content-[''] after:absolute after:bottom-0 after:left-0 after:h-[1.5px] after:bg-[#8DE0C1] after:transition-all after:duration-300 ${
+                    isActive ? "after:w-full" : "after:w-0 hover:after:w-full"
+                  }`}
+                >
+                  {item.label}
+                </Link>
+              );
+            })}
           </nav>
 
           {/* Right Action: CTA & Mobile Hamburger */}
           <div className="flex items-center gap-4">
             {/* Desktop Start a Project CTA */}
-            <a
-              href="#contact"
-              onClick={(e) => {
-                e.preventDefault();
-                handleLinkClick("#contact");
-              }}
+            <Link
+              href="/contact"
               className={`hidden sm:inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-xs uppercase tracking-wider font-semibold text-[#081B19] bg-[#8DE0C1] hover:bg-[#A1E8D0] transition-all duration-200 group shadow-[0_0_15px_rgba(141,224,193,0.25)] hover:shadow-[0_0_25px_rgba(141,224,193,0.4)] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#8DE0C1] ${
                 isIntroActive ? "opacity-0" : "opacity-100"
               }`}
             >
               <span>Start a Project</span>
               <ArrowRight className="w-3.5 h-3.5 transition-transform duration-200 group-hover:translate-x-1" />
-            </a>
+            </Link>
 
             {/* Mobile Hamburger Button */}
             <button
@@ -125,7 +120,6 @@ export const Header: React.FC<HeaderProps> = ({ isIntroActive }) => {
       <MobileNavigation
         isOpen={mobileMenuOpen}
         onClose={() => setMobileMenuOpen(false)}
-        onSelectLink={handleLinkClick}
       />
     </>
   );

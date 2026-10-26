@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Geist, Outfit } from "next/font/google";
 import "./globals.css";
+import { PageTransitionProvider } from "@/components/PageTransitionProvider";
 
 const geist = Geist({
   variable: "--font-geist",
@@ -66,6 +67,18 @@ export default function RootLayout({
       lang="en"
       className={`${geist.variable} ${outfit.variable} dark scroll-smooth`}
     >
+      <head>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link
+          rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossOrigin="anonymous"
+        />
+        <link
+          href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital,wght@0,400;1,400&display=swap"
+          rel="stylesheet"
+        />
+      </head>
       <body
         className="min-h-screen bg-[#081B19] text-[#F1F3EB] font-sans antialiased selection:bg-[#8DE0C1]/20 selection:text-[#8DE0C1]"
         style={{ fontFamily: "var(--font-geist), system-ui, sans-serif" }}
@@ -76,7 +89,9 @@ export default function RootLayout({
         >
           Skip to main content
         </a>
-        {children}
+        <PageTransitionProvider>
+          {children}
+        </PageTransitionProvider>
       </body>
     </html>
   );

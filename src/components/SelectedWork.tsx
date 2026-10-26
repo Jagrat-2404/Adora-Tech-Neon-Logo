@@ -48,9 +48,13 @@ export const SelectedWork: React.FC<SelectedWorkProps> = ({
           </div>
           <h2
             id="work-heading"
-            className="font-[family-name:var(--font-outfit)] text-3xl sm:text-5xl font-light tracking-tight text-[#F1F3EB]"
+            className="text-3xl sm:text-5xl font-light tracking-tight text-[#F1F3EB]"
           >
-            {SITE_CONFIG.selectedWork.heading}
+            Selected projects crafted with{" "}
+            <span className="font-serif italic font-normal text-transparent bg-clip-text bg-gradient-to-r from-[#8DE0C1] via-[#B8F2DC] to-[#D5A17D]">
+              technical depth
+            </span>
+            .
           </h2>
         </div>
 

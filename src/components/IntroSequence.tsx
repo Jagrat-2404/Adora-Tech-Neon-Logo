@@ -12,12 +12,11 @@ interface IntroSequenceProps {
 /**
  * IntroSequence Component
  *
- * Implements the signature brand reveal requested:
- * 1. The glowing neon "O" is highlighted and animated first in the center of the screen
- *    with a neon shockwave, bloom pulse, and scale flare.
- * 2. The surrounding letters ("AD", "RA", "TECH") illuminate and assemble around the "O".
- * 3. The entire assembled logo smoothly glides and scales directly into the top-left corner of the header.
- * 4. The homepage unfolds seamlessly with zero layout jump.
+ * Runs on every reload and page navigation:
+ * 1. Highlights and animates the neon "O" first in the center with neon shockwave & bloom pulse.
+ * 2. Assembles surrounding ivory letters ("AD", "RA", "TECH") around it.
+ * 3. Smoothly glides and scales directly into the top-left corner of the header.
+ * 4. Dissolves cleanly to reveal page content.
  */
 export const IntroSequence: React.FC<IntroSequenceProps> = ({
   onComplete,
@@ -38,16 +37,10 @@ export const IntroSequence: React.FC<IntroSequenceProps> = ({
       timelineRef.current = null;
     }
     setIsSkipped(true);
-    try {
-      sessionStorage.setItem("adora_intro_seen_v1", "true");
-    } catch {
-      // Storage safe
-    }
     onComplete();
   }, [onComplete]);
 
   useEffect(() => {
-    // Check reduced motion preference
     const prefersReducedMotion = window.matchMedia(
       "(prefers-reduced-motion: reduce)"
     ).matches;
@@ -57,7 +50,6 @@ export const IntroSequence: React.FC<IntroSequenceProps> = ({
       return;
     }
 
-    // Escape key skips intro
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === "Escape") {
         handleFinish();
@@ -72,14 +64,13 @@ export const IntroSequence: React.FC<IntroSequenceProps> = ({
       const letters = lettersRef.current;
       const halo = haloRef.current;
       const shockwave = shockwaveRef.current;
-      const headerTarget = document.getElementById(headerLogoTargetId);
 
-      if (!container || !logoWrapper || !oRing || !letters || !headerTarget) {
+      if (!container || !logoWrapper || !oRing || !letters) {
         handleFinish();
         return;
       }
 
-      // Initial state
+      // Initial visual states
       gsap.set(logoWrapper, { opacity: 1 });
       gsap.set(letters, { opacity: 0, scale: 0.94 });
       gsap.set(oRing, { opacity: 0, scale: 0.45, rotation: -20 });
@@ -91,132 +82,115 @@ export const IntroSequence: React.FC<IntroSequenceProps> = ({
       });
       timelineRef.current = tl;
 
-      // ─────────────────────────────────────────────────────────────
       // STAGE 1: Animate the "O" First (Center stage ignition)
-      // ─────────────────────────────────────────────────────────────
-
-      // O Ring ignites with elastic scale and rotation snap
       tl.to(
         oRing,
         {
           opacity: 1,
-          scale: 1.18,
+          scale: 1.15,
           rotation: 0,
-          duration: 0.75,
-          ease: "back.out(2.2)",
+          duration: 0.45,
+          ease: "back.out(2)",
         },
         0.05
       );
 
-      // Neon dual-color halo blooms behind the O
       if (halo) {
         tl.to(
           halo,
           {
             opacity: 0.9,
             scale: 1.25,
-            duration: 0.7,
+            duration: 0.45,
             ease: "power2.out",
           },
-          0.1
+          0.08
         );
       }
 
-      // Shockwave ring expands outward from the glowing O
       if (shockwave) {
         tl.to(
           shockwave,
           {
-            opacity: 0.75,
+            opacity: 0.8,
             scale: 1.1,
-            duration: 0.2,
+            duration: 0.15,
             ease: "power1.out",
           },
-          0.2
+          0.15
         );
         tl.to(
           shockwave,
           {
             opacity: 0,
-            scale: 2.3,
-            duration: 0.65,
+            scale: 2.2,
+            duration: 0.45,
             ease: "power2.out",
           },
-          0.35
+          0.25
         );
       }
 
-      // O settles from flare to natural size with an energetic pulse
       tl.to(
         oRing,
         {
           scale: 1.0,
-          duration: 0.35,
+          duration: 0.25,
           ease: "power2.inOut",
         },
-        0.75
+        0.5
       );
 
-      if (halo) {
-        tl.to(
-          halo,
-          {
-            scale: 1.0,
-            opacity: 0.7,
-            duration: 0.35,
-            ease: "sine.inOut",
-          },
-          0.75
-        );
-      }
-
-      // ─────────────────────────────────────────────────────────────
       // STAGE 2: Reveal the letters around the "O"
-      // ─────────────────────────────────────────────────────────────
       tl.to(
         letters,
         {
           opacity: 1,
           scale: 1.0,
-          duration: 0.55,
+          duration: 0.35,
           ease: "power2.out",
         },
-        1.05
+        0.65
       );
 
-      // ─────────────────────────────────────────────────────────────
       // STAGE 3: "Put it in the corner" (Fly to header top-left)
-      // ─────────────────────────────────────────────────────────────
       tl.add(() => {
-        const targetRect = headerTarget.getBoundingClientRect();
+        const headerTarget = document.getElementById(headerLogoTargetId);
         const currentRect = logoWrapper.getBoundingClientRect();
+        if (!currentRect) return;
 
-        if (!targetRect || !currentRect) return;
+        let deltaX = -(window.innerWidth / 2 - 120);
+        let deltaY = -(window.innerHeight / 2 - 36);
+        let scaleFactor = 0.28;
 
-        const currentCenterX = currentRect.left + currentRect.width / 2;
-        const currentCenterY = currentRect.top + currentRect.height / 2;
-        const targetCenterX = targetRect.left + targetRect.width / 2;
-        const targetCenterY = targetRect.top + targetRect.height / 2;
+        if (headerTarget) {
+          const targetRect = headerTarget.getBoundingClientRect();
+          if (targetRect.width > 0) {
+            const currentCenterX = currentRect.left + currentRect.width / 2;
+            const currentCenterY = currentRect.top + currentRect.height / 2;
+            const targetCenterX = targetRect.left + targetRect.width / 2;
+            const targetCenterY = targetRect.top + targetRect.height / 2;
 
-        const deltaX = targetCenterX - currentCenterX;
-        const deltaY = targetCenterY - currentCenterY;
-        const scaleFactor = targetRect.width / currentRect.width;
+            deltaX = targetCenterX - currentCenterX;
+            deltaY = targetCenterY - currentCenterY;
+            scaleFactor = targetRect.width / currentRect.width;
+          }
+        }
 
-        // Animate flight to top-left corner
+        // Smooth flight into header
         gsap.to(logoWrapper, {
           x: deltaX,
           y: deltaY,
           scale: scaleFactor,
-          duration: 0.85,
+          duration: 0.65,
           ease: "power3.inOut",
         });
 
-        // Fade halo softly as it reaches corner
         if (halo) {
           gsap.to(halo, {
-            opacity: 0.3,
-            scale: 0.8,
-            duration: 0.6,
+            opacity: 0.15,
+            scale: 0.6,
+            duration: 0.45,
             ease: "power2.in",
           });
         }
@@ -224,15 +198,15 @@ export const IntroSequence: React.FC<IntroSequenceProps> = ({
         // Dissolve dark intro background to reveal page underneath
         gsap.to(container, {
           opacity: 0,
-          duration: 0.6,
-          delay: 0.25,
+          duration: 0.45,
+          delay: 0.15,
           ease: "power2.inOut",
         });
-      }, 1.6);
+      }, 1.0);
 
-      // Timeline padding to finish cleanly
-      tl.to({}, { duration: 0.9 });
-    }, 60);
+      // Finish cleanly
+      tl.to({}, { duration: 0.6 });
+    }, 40);
 
     return () => {
       clearTimeout(timer);
@@ -279,13 +253,10 @@ export const IntroSequence: React.FC<IntroSequenceProps> = ({
         </span>
       </button>
 
-      {/* 
-        Centered Assembled Logo Container (Aspect Ratio: 808 x 288 = ~2.805)
-        This wrapper is what glides to the top-left corner.
-      */}
+      {/* Centered Assembled Logo Container */}
       <div
         ref={logoWrapperRef}
-        className="relative w-[300px] xs:w-[360px] sm:w-[440px] md:w-[480px] aspect-[808/288] flex items-center justify-center will-change-transform"
+        className="relative w-[280px] xs:w-[340px] sm:w-[420px] md:w-[460px] aspect-[808/288] flex items-center justify-center will-change-transform"
       >
         {/* Ambient Halo behind the O position */}
         <div
@@ -315,10 +286,7 @@ export const IntroSequence: React.FC<IntroSequenceProps> = ({
           }}
         />
 
-        {/* 
-          STAGE 1 ELEMENT: The Isolated Glowing "O" Ring
-          Starts first, pulses and blooms, positioned at exact O center
-        */}
+        {/* STAGE 1: Isolated Glowing "O" Ring */}
         <div
           ref={oRingRef}
           className="absolute w-[28.59%] h-auto z-20 pointer-events-none will-change-transform"
@@ -338,10 +306,7 @@ export const IntroSequence: React.FC<IntroSequenceProps> = ({
           />
         </div>
 
-        {/* 
-          STAGE 2 ELEMENT: Surrounding Letters ("AD", "RA", "TECH")
-          Fades in around the O to complete the full logo
-        */}
+        {/* STAGE 2: Surrounding Letters ("AD", "RA", "TECH") */}
         <div
           ref={lettersRef}
           className="absolute inset-0 w-full h-full z-10 pointer-events-none will-change-transform"

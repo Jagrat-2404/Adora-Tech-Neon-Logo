@@ -43,11 +43,7 @@ export const Footer: React.FC = () => {
           {/* Brand & Descriptor */}
           <div className="flex flex-col items-center md:items-start gap-3">
             <Link
-              href="#hero"
-              onClick={(e) => {
-                e.preventDefault();
-                scrollToTop();
-              }}
+              href="/"
               aria-label="ADORA TECH home"
               className="focus:outline-none focus-visible:ring-2 focus-visible:ring-[#8DE0C1] rounded"
             >
@@ -64,28 +60,14 @@ export const Footer: React.FC = () => {
             className="flex flex-wrap items-center justify-center gap-8 text-xs sm:text-sm text-[#A4B7AF]"
           >
             {SITE_CONFIG.navLinks.map((link) => (
-              <a
+              <Link
                 key={link.label}
                 href={link.href}
-                onClick={(e) => {
-                  e.preventDefault();
-                  handleLinkClick(link.href);
-                }}
                 className="hover:text-[#8DE0C1] transition-colors focus:outline-none focus-visible:underline"
               >
                 {link.label}
-              </a>
+              </Link>
             ))}
-            <a
-              href="#contact"
-              onClick={(e) => {
-                e.preventDefault();
-                handleLinkClick("#contact");
-              }}
-              className="hover:text-[#8DE0C1] transition-colors focus:outline-none focus-visible:underline"
-            >
-              Contact
-            </a>
           </nav>
         </div>
 

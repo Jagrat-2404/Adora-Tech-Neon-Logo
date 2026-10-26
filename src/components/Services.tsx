@@ -45,9 +45,13 @@ export const Services: React.FC<ServicesProps> = ({ onSelectProjectType }) => {
         </div>
         <h2
           id="services-heading"
-          className="font-[family-name:var(--font-outfit)] text-3xl sm:text-5xl font-light tracking-tight text-[#F1F3EB]"
+          className="text-3xl sm:text-5xl font-light tracking-tight text-[#F1F3EB]"
         >
-          {SITE_CONFIG.numberedServices.heading}
+          Bespoke capabilities engineered to{" "}
+          <span className="font-serif italic font-normal text-transparent bg-clip-text bg-gradient-to-r from-[#8DE0C1] via-[#B8F2DC] to-[#D5A17D]">
+            outperform
+          </span>
+          .
         </h2>
       </div>
 
