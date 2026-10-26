@@ -130,16 +130,16 @@ export const ContactForm: React.FC<ContactFormProps> = ({
       {/* Header */}
       <div className="text-center max-w-3xl mx-auto mb-16 sm:mb-20">
         <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#102A26] border border-[#A4B7AF]/20 text-[#8DE0C1] text-xs font-mono uppercase tracking-widest mb-4">
-          <span>{SITE_CONFIG.contactSection.eyebrow}</span>
+          <span>{SITE_CONFIG.contact.eyebrow}</span>
         </div>
         <h2
           id="contact-heading"
-          className="font-[family-name:var(--font-outfit)] text-3xl sm:text-5xl font-medium tracking-tight text-[#F1F3EB] mb-4"
+          className="font-[family-name:var(--font-outfit)] text-3xl sm:text-5xl font-light tracking-tight text-[#F1F3EB] mb-4"
         >
-          {SITE_CONFIG.contactSection.heading}
+          {SITE_CONFIG.contact.heading}
         </h2>
         <p className="text-base sm:text-lg text-[#A4B7AF] font-light leading-relaxed">
-          {SITE_CONFIG.contactSection.supportingCopy}
+          {SITE_CONFIG.contact.supportingCopy}
         </p>
       </div>
 
@@ -207,7 +207,7 @@ export const ContactForm: React.FC<ContactFormProps> = ({
         </div>
 
         <form onSubmit={handleSubmit} noValidate className="space-y-6">
-          {/* Honeypot Field for Spam Prevention (Hidden from real users) */}
+          {/* Honeypot Field */}
           <div className="hidden" aria-hidden="true">
             <label htmlFor="company_honeypot_field">Leave this empty</label>
             <input
@@ -236,6 +236,7 @@ export const ContactForm: React.FC<ContactFormProps> = ({
                 id="contact-name"
                 type="text"
                 required
+                autoComplete="name"
                 aria-required="true"
                 aria-invalid={!!errors.name}
                 aria-describedby={errors.name ? "name-error" : undefined}
@@ -264,6 +265,7 @@ export const ContactForm: React.FC<ContactFormProps> = ({
                 id="contact-email"
                 type="email"
                 required
+                autoComplete="email"
                 aria-required="true"
                 aria-invalid={!!errors.email}
                 aria-describedby={errors.email ? "email-error" : undefined}
@@ -294,6 +296,7 @@ export const ContactForm: React.FC<ContactFormProps> = ({
             <input
               id="contact-company"
               type="text"
+              autoComplete="organization"
               value={formData.company}
               onChange={(e) =>
                 setFormData({ ...formData, company: e.target.value })
@@ -314,9 +317,9 @@ export const ContactForm: React.FC<ContactFormProps> = ({
             <div
               role="radiogroup"
               aria-labelledby="project-type-label"
-              className="grid grid-cols-2 sm:grid-cols-4 gap-3"
+              className="grid grid-cols-2 sm:grid-cols-5 gap-2.5"
             >
-              {SITE_CONFIG.contactSection.projectTypes.map((type) => {
+              {SITE_CONFIG.contact.projectTypes.map((type) => {
                 const isSelected = formData.projectType === type;
                 return (
                   <button
@@ -360,7 +363,7 @@ export const ContactForm: React.FC<ContactFormProps> = ({
                 setFormData({ ...formData, message: e.target.value })
               }
               className="w-full px-4 py-3 rounded-xl bg-[#081B19] border border-[#A4B7AF]/20 text-[#F1F3EB] placeholder-[#A4B7AF]/40 focus:outline-none focus:border-[#8DE0C1] focus:ring-1 focus:ring-[#8DE0C1] transition-colors text-sm resize-y"
-              placeholder="Tell us about the digital product you're building, your timeline, or any key requirements..."
+              placeholder="Tell us about the digital product you're planning, your target timeline, and what you want it to achieve..."
             />
             {errors.message && (
               <p id="message-error" className="mt-1.5 text-xs text-red-400">
@@ -376,7 +379,9 @@ export const ContactForm: React.FC<ContactFormProps> = ({
               disabled={isSubmitting}
               className="group relative w-full sm:w-auto inline-flex items-center justify-center gap-3 px-8 py-4 rounded-full text-sm font-semibold tracking-wide bg-[#8DE0C1] hover:bg-[#A1E8D0] text-[#081B19] shadow-[0_0_25px_rgba(141,224,193,0.3)] hover:shadow-[0_0_35px_rgba(141,224,193,0.5)] transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed focus:outline-none focus-visible:ring-2 focus-visible:ring-[#8DE0C1]"
             >
-              <span>{isSubmitting ? "Submitting..." : "Send Enquiry"}</span>
+              <span>
+                {isSubmitting ? "Submitting..." : SITE_CONFIG.contact.submitLabel}
+              </span>
               <ArrowRight className="w-4 h-4 transition-transform duration-200 group-hover:translate-x-1" />
             </button>
           </div>

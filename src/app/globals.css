@@ -122,6 +122,30 @@ body {
   mix-blend-mode: screen;
 }
 
+/* Marquee animation */
+@keyframes marquee {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-marquee {
+  display: flex;
+  width: max-content;
+  animation: marquee 30s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-marquee {
+    animation: none !important;
+    width: auto;
+    flex-wrap: wrap;
+  }
+}
+
 /* Scroll margin for fixed header */
 section[id] {
   scroll-margin-top: 6.5rem;

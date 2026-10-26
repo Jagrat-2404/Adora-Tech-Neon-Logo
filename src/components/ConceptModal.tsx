@@ -2,10 +2,10 @@
 
 import React, { useEffect, useRef } from "react";
 import { X, ArrowRight, ShieldCheck, Layers, Sparkles } from "lucide-react";
-import { ProjectItem } from "@/data/content";
+import { ProjectCardItem } from "@/data/content";
 
 interface ConceptModalProps {
-  project: ProjectItem | null;
+  project: ProjectCardItem | null;
   isOpen: boolean;
   onClose: () => void;
   onDiscuss: (projectType: string) => void;
@@ -115,7 +115,7 @@ export const ConceptModal: React.FC<ConceptModalProps> = ({
             {project.tagline}
           </p>
           <p className="text-sm sm:text-base text-[#A4B7AF] leading-relaxed font-light">
-            {project.fullOverview}
+            {project.fullOverview || project.summary}
           </p>
         </div>
 
@@ -127,7 +127,7 @@ export const ConceptModal: React.FC<ConceptModalProps> = ({
               <span>Considered Features</span>
             </h4>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-              {project.features.map((feature, i) => (
+              {project.features.map((feature: string, i: number) => (
                 <div
                   key={i}
                   className="p-3 rounded-xl bg-[#081B19]/50 border border-[#A4B7AF]/10 text-xs sm:text-sm text-[#F1F3EB]/90 flex items-start gap-2.5"
@@ -145,7 +145,7 @@ export const ConceptModal: React.FC<ConceptModalProps> = ({
               <span>Architecture & Stack</span>
             </h4>
             <div className="flex flex-wrap gap-2">
-              {project.architecture.map((tech, i) => (
+              {project.architecture.map((tech: string, i: number) => (
                 <span
                   key={i}
                   className="px-3 py-1 rounded-md text-xs font-mono bg-[#153833]/70 text-[#A4B7AF] border border-[#A4B7AF]/15"
@@ -179,9 +179,9 @@ export const ConceptModal: React.FC<ConceptModalProps> = ({
             onClick={() => {
               onClose();
               const type =
-                project.category === "Website Experience"
+                project.category === "Websites" || project.category === "Website Experience"
                   ? "Website"
-                  : project.category === "Mobile Application"
+                  : project.category === "Apps" || project.category === "Mobile Application"
                   ? "Mobile App"
                   : "Custom Software";
               onDiscuss(type);

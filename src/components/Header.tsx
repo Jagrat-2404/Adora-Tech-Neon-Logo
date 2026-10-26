@@ -90,18 +90,18 @@ export const Header: React.FC<HeaderProps> = ({ isIntroActive }) => {
 
           {/* Right Action: CTA & Mobile Hamburger */}
           <div className="flex items-center gap-4">
-            {/* Desktop Let's Talk CTA */}
+            {/* Desktop Start a Project CTA */}
             <a
               href="#contact"
               onClick={(e) => {
                 e.preventDefault();
                 handleLinkClick("#contact");
               }}
-              className={`hidden sm:inline-flex items-center gap-2 px-5 py-2 rounded-full text-xs uppercase tracking-wider font-semibold text-[#8DE0C1] bg-[#102A26] hover:bg-[#153833] border border-[#8DE0C1]/30 hover:border-[#8DE0C1] transition-all duration-200 group shadow-sm hover:shadow-[0_0_15px_rgba(141,224,193,0.2)] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#8DE0C1] ${
+              className={`hidden sm:inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-xs uppercase tracking-wider font-semibold text-[#081B19] bg-[#8DE0C1] hover:bg-[#A1E8D0] transition-all duration-200 group shadow-[0_0_15px_rgba(141,224,193,0.25)] hover:shadow-[0_0_25px_rgba(141,224,193,0.4)] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#8DE0C1] ${
                 isIntroActive ? "opacity-0" : "opacity-100"
               }`}
             >
-              <span>Let&apos;s Talk</span>
+              <span>Start a Project</span>
               <ArrowRight className="w-3.5 h-3.5 transition-transform duration-200 group-hover:translate-x-1" />
             </a>
 

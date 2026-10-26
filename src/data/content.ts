@@ -1,255 +1,382 @@
-export interface ServiceItem {
+export interface ServiceTabItem {
   id: string;
   number: string;
   title: string;
-  shortDescription: string;
-  extendedDescription: string;
-  deliverables: string[];
-  ctaLabel: string;
-  projectType: "Website" | "Mobile App" | "Custom Software";
+  description: string;
+  tags: string[];
+  projectType: "Website" | "Mobile App" | "Custom Software" | "UI & UX";
+  previewType: "website" | "mobile" | "software" | "uiux";
 }
 
-export interface ProjectItem {
+export interface ProjectCardItem {
   id: string;
   title: string;
-  category: "Website Experience" | "Mobile Application" | "Software Dashboard";
+  category: "Websites" | "Apps" | "Software" | "Website Experience" | "Mobile Application" | "Software Dashboard";
   summary: string;
-  fullOverview: string;
+  fullOverview?: string;
   tagline: string;
   features: string[];
   architecture: string[];
   isConcept: true;
 }
 
-export interface ProcessStep {
-  number: string;
-  title: string;
-  description: string;
-  details: string;
+export type ProjectItem = ProjectCardItem;
+
+export interface ComparisonRow {
+  friction: string;
+  approach: string;
 }
 
-export interface Principle {
+export interface ProcessStepItem {
   number: string;
   title: string;
   description: string;
+}
+
+export interface EngagementTier {
+  id: string;
+  title: string;
+  description: string;
+  highlights: string[];
+  projectType: string;
+}
+
+export interface FAQItem {
+  id: string;
+  question: string;
+  answer: string;
 }
 
 export const SITE_CONFIG = {
   brandName: "ADORA TECH",
-  tagline: "Digital experiences. Thoughtfully engineered.",
-  descriptor: "WEBSITES / APPS / SOFTWARE",
+  tagline: "Your next big idea. Built for the real world.",
+  descriptor: "Websites · Mobile Apps · Custom Software",
   year: 2026,
   navLinks: [
     { label: "Services", href: "#services" },
     { label: "Work", href: "#work" },
     { label: "Process", href: "#process" },
-    { label: "About", href: "#about" },
+    { label: "FAQ", href: "#faq" },
   ],
+
+  // 1. Hero
   hero: {
-    badge: "DIGITAL PRODUCT STUDIO",
-    headlinePart1: "Digital experiences.",
-    headlinePart2: "Thoughtfully engineered.",
+    smallLabel: "ADORA TECH · DESIGN & DEVELOPMENT",
+    headlineLine1: "Your next big idea.",
+    headlineLine2: "Built for the real world.",
     supportingText:
-      "We build websites, apps, and custom software that turn your ideas into useful digital products.",
+      "We design and develop websites, mobile apps, and custom software that help businesses move forward.",
     primaryCta: "Start a Project",
     secondaryCta: "Explore Our Work",
-    categoryLabel: "WEBSITES / APPS / SOFTWARE",
+    secondaryLine: "Websites · Mobile Apps · Custom Software",
   },
-  servicesSection: {
+
+  // 2. Service Strip
+  serviceStrip: [
+    "Websites",
+    "Mobile Apps",
+    "Custom Software",
+    "UI & UX",
+    "E-commerce",
+    "Web Applications",
+  ],
+
+  // 3. Editorial Introduction
+  studioIntro: {
+    label: "About ADORA TECH",
+    heading: "Good digital products bring clarity to complex ideas.",
+    body:
+      "Your website, app, or software should make things easier—not more complicated. We bring design and development together to create digital experiences with a clear purpose, thoughtful details, and room to grow.",
+    subText:
+      "Rather than separating strategic design from technical execution, we work as a cohesive unit. From early interface architecture to the final deployment pipeline, every detail is engineered with practical restraint.",
+  },
+
+  // 4. Numbered Services
+  numberedServices: {
     eyebrow: "CAPABILITIES",
-    heading: "Built around your next big idea.",
-    description:
-      "Every project is shaped around your strategic objectives, user expectations, and the engineering rigor required for dependable long-term performance.",
+    heading: "What we build",
     services: [
       {
         id: "websites",
         number: "01",
         title: "Websites",
-        shortDescription:
-          "Fast, responsive websites that communicate clearly and turn interest into action.",
-        extendedDescription:
-          "From brand flagships to high-conversion product sites, we combine editorial typography, resilient architecture, and smooth motion to tell your story and drive results.",
-        deliverables: [
-          "Responsive, accessible frontend",
-          "Search engine optimization (SEO)",
-          "Performance-tuned asset delivery",
-          "Headless CMS integration",
-        ],
-        ctaLabel: "Discuss a website",
+        description:
+          "Responsive websites and web experiences that communicate clearly and make it easy to take the next step.",
+        tags: ["Business websites", "E-commerce", "Landing pages"],
         projectType: "Website",
+        previewType: "website",
       },
       {
         id: "mobile-apps",
         number: "02",
         title: "Mobile Apps",
-        shortDescription:
-          "Thoughtful mobile experiences designed around the people who use them.",
-        extendedDescription:
-          "Intuitive iOS and Android applications crafted for high daily engagement, smooth gestures, offline capability, and seamless cloud synchronization.",
-        deliverables: [
-          "Cross-platform or native architecture",
-          "Fluid micro-interactions and tactile feedback",
-          "Biometric authentication & secure storage",
-          "App Store compliance and readiness",
-        ],
-        ctaLabel: "Discuss a mobile app",
+        description:
+          "Practical, intuitive mobile experiences shaped around the people who use them.",
+        tags: ["Mobile interfaces", "Product development", "User journeys"],
         projectType: "Mobile App",
+        previewType: "mobile",
       },
       {
         id: "custom-software",
         number: "03",
         title: "Custom Software",
-        shortDescription:
-          "Purpose-built tools that simplify operations and support your next stage of growth.",
-        extendedDescription:
-          "Tailored internal tools, client portals, and cloud backends engineered to replace clunky spreadsheets, eliminate bottlenecks, and automate manual routines.",
-        deliverables: [
-          "Bespoke dashboards and workflows",
-          "Granular role-based access control (RBAC)",
-          "Real-time event streams & analytics",
-          "Secure API and ERP integrations",
-        ],
-        ctaLabel: "Discuss custom software",
+        description:
+          "Purpose-built software that helps teams manage work, simplify operations, and connect their tools.",
+        tags: ["Dashboards", "Internal tools", "Web applications"],
         projectType: "Custom Software",
+        previewType: "software",
       },
-    ] as ServiceItem[],
+      {
+        id: "ui-ux",
+        number: "04",
+        title: "UI & UX Design",
+        description:
+          "Clear interfaces and considered interactions that turn complex requirements into usable experiences.",
+        tags: ["User flows", "Prototypes", "Design systems"],
+        projectType: "UI & UX",
+        previewType: "uiux",
+      },
+    ] as ServiceTabItem[],
   },
-  workSection: {
-    eyebrow: "PORTFOLIO",
-    heading: "Selected work. Considered from every angle.",
-    description:
-      "A curated preview of our design principles and engineering depth across web platforms, mobile interfaces, and operational dashboards.",
-    honestyNote:
-      "All items shown below are original design concepts and technical architecture studies created by ADORA TECH.",
+
+  // 5. Selected Work
+  selectedWork: {
+    eyebrow: "SELECTED WORK",
+    heading: "Digital ideas, brought into focus.",
+    filterCategories: ["All", "Websites", "Apps", "Software"] as const,
     projects: [
       {
-        id: "aura-architecture",
-        title: "Aura Spatial Design",
-        category: "Website Experience",
+        id: "commerce-experience",
+        title: "Commerce Experience",
+        category: "Websites",
         summary:
-          "An immersive, editorial digital presence for a contemporary architectural practice featuring spatial canvas navigation and fluid imagery.",
-        fullOverview:
-          "A bespoke web experience created to highlight high-end physical spaces through editorial typography, smooth progressive image loading, and micro-interactions that mirror architectural discipline.",
-        tagline: "Atmospheric portfolio with sub-second transitions",
+          "A high-conversion editorial storefront with instant product previews, fluid typography, and sub-second page transitions.",
+        tagline: "Fluid headless retail platform",
         features: [
-          "Smooth spatial project transitions without page reloads",
-          "Custom dark emerald & stone aesthetic tokens",
-          "Dynamic aspect-ratio preserved layout grid",
-          "Full keyboard navigation and accessibility compliance",
+          "Zero-layout-shift catalog grids",
+          "Express checkout orchestration",
+          "Edge-cached product taxonomy",
+          "Accessible keyboard cart drawers",
         ],
-        architecture: ["Next.js App Router", "Tailwind CSS", "GSAP ScrollTrigger", "Edge CDN"],
+        architecture: ["Next.js App Router", "Tailwind CSS", "Shopify Storefront API"],
         isConcept: true,
       },
       {
-        id: "pulse-health",
-        title: "Pulse Health Companion",
-        category: "Mobile Application",
+        id: "mobile-booking-app",
+        title: "Mobile Booking App",
+        category: "Apps",
         summary:
-          "A human-centric mobile interface focused on continuous biometric tracking, ambient recovery feedback, and circadian cadence.",
-        fullOverview:
-          "A native-feeling mobile app concept crafted for effortless health logging, low cognitive friction, and actionable telemetry rendered in calming emerald and warm copper palettes.",
-        tagline: "Biometric telemetry with human clarity",
+          "An intuitive scheduling companion engineered for high recurring booking retention, offline reservation queues, and calendar syncing.",
+        tagline: "Tactile scheduling without friction",
         features: [
-          "Haptic-responsive circadian dial controller",
-          "Real-time sensor sync and sleep debt visualization",
-          "Private-by-design local SQLite cache with cloud sync",
-          "Restrained dark-mode interface reducing eye fatigue",
+          "Haptic calendar slot picker",
+          "Real-time availability sync",
+          "Biometric passkey authentication",
+          "Automated SMS & push reminders",
         ],
-        architecture: ["React Native / Expo", "TypeScript", "Tailwind", "Local SQLite"],
+        architecture: ["React Native", "TypeScript", "Tailwind", "Cloud Functions"],
         isConcept: true,
       },
       {
-        id: "nexus-logistics",
-        title: "Nexus Fleet Cloud",
-        category: "Software Dashboard",
+        id: "operations-dashboard",
+        title: "Operations Dashboard",
+        category: "Software",
         summary:
-          "A high-density operational telemetry console orchestrating multimodal freight logistics, real-time routing, and exception resolution.",
-        fullOverview:
-          "A purpose-built internal web application engineered for operations dispatchers managing hundreds of transit vehicles simultaneously without visual clutter.",
+          "A real-time telemetry console orchestrating fleet dispatch, low-latency live route mapping, and automated exception triggers.",
         tagline: "Mission-critical operations console",
         features: [
-          "Sub-millisecond tabular updates with virtualized scrolling",
-          "Live telemetry map overlay with anomaly alerts",
-          "Keyboard shortcuts for rapid route adjustments",
-          "Role-based permission matrix and audit trails",
+          "Sub-millisecond data grid rendering",
+          "WebSocket telemetry feeds",
+          "Configurable alerting rules engine",
+          "Role-based permission matrix",
         ],
         architecture: ["React", "TypeScript", "WebSocket Streaming", "Tailwind CSS"],
         isConcept: true,
       },
-    ] as ProjectItem[],
+      {
+        id: "spatial-design-studio",
+        title: "Spatial Design Studio",
+        category: "Websites",
+        summary:
+          "An architectural showcase presenting physical structures through spatial layout grids and responsive typographic hierarchy.",
+        tagline: "Atmospheric portfolio architecture",
+        features: [
+          "Dynamic aspect-ratio galleries",
+          "Fluid spatial transitions",
+          "Dark emerald tonal theme",
+          "Screen-reader optimized layouts",
+        ],
+        architecture: ["Next.js", "GSAP Motion", "Tailwind CSS"],
+        isConcept: true,
+      },
+    ] as ProjectCardItem[],
   },
-  processSection: {
+
+  // 6. Approach Comparison
+  comparison: {
+    eyebrow: "OUR ADVANTAGE",
+    heading: "A clearer way to build.",
+    subhead:
+      "Same engineering rigor. Far less friction, ambiguity, and wasted time.",
+    rows: [
+      {
+        friction: "Unclear requirements and changing assumptions mid-flight",
+        approach: "Structured discovery sprint and mutually agreed scope",
+      },
+      {
+        friction: "Design and development disconnected across separate silos",
+        approach: "A unified product workflow where designers and engineers collaborate daily",
+      },
+      {
+        friction: "Limited visibility with weeks of radio silence",
+        approach: "Transparent milestones, staging previews, and weekly review checkpoints",
+      },
+      {
+        friction: "Last-minute bug fixes and frantic testing right before launch",
+        approach: "Continuous automated testing and device verification throughout the build",
+      },
+      {
+        friction: "Unclear handover with missing documentation and zero support",
+        approach: "Fully documented code, deployment walkthroughs, and agreed next steps",
+      },
+    ] as ComparisonRow[],
+  },
+
+  // 7. Process
+  process: {
     eyebrow: "METHODOLOGY",
-    heading: "A clear process. From first conversation to launch.",
-    description:
-      "We replace guesswork with structured sprints, transparent milestones, and continuous refinement.",
+    heading: "From first conversation to launch.",
     steps: [
       {
         number: "01",
         title: "Discover",
-        description: "Understand the business, audience, and goals.",
-        details:
-          "We begin by unpacking your core value proposition, interviewing stakeholders, auditing technical constraints, and mapping clear success benchmarks.",
+        description: "Understand your goals, users, requirements, and constraints.",
       },
       {
         number: "02",
         title: "Design",
-        description: "Shape the experience, interface, and visual direction.",
-        details:
-          "We construct clickable prototypes, establish the visual identity system, test ergonomic layouts, and ensure every micro-interaction has deliberate purpose.",
+        description: "Shape the structure, user experience, and visual direction.",
       },
       {
         number: "03",
-        title: "Build",
-        description: "Develop, test, and refine the product.",
-        details:
-          "We write clean, typed, modular code with automated test suites, responsive checks across devices, and performance profiling for immediate feedback.",
+        title: "Develop",
+        description: "Build, test, and refine the experience across devices.",
       },
       {
         number: "04",
         title: "Launch",
-        description: "Release carefully and plan what comes next.",
-        details:
-          "We execute zero-downtime production deployment, configure monitoring and analytics, hand over complete documentation, and outline future enhancements.",
+        description: "Prepare for release, hand over clearly, and agree on what comes next.",
       },
-    ] as ProcessStep[],
+    ] as ProcessStepItem[],
   },
-  aboutSection: {
-    eyebrow: "ABOUT ADORA TECH",
-    heading: "Thoughtful design. Purposeful technology.",
-    copy: "ADORA TECH brings design and development together to create digital products with clarity, care, and a practical purpose.",
-    subCopy:
-      "We believe that great software is neither bloated with novelty nor stripped of emotion. It exists at the intersection of aesthetic restraint and rigorous engineering.",
-    principles: [
+
+  // 8. Engagement Options
+  engagement: {
+    eyebrow: "COLLABORATION MODELS",
+    heading: "The right scope for your next step.",
+    subhead:
+      "Every project is tailored to your timeline and technical maturity. Choose the engagement shape that fits best.",
+    tiers: [
       {
-        number: "01",
-        title: "Clarity over complexity.",
+        id: "focused-website",
+        title: "Focused Website",
         description:
-          "We remove friction and eliminate superfluous layers so users immediately understand where they are and what to do next.",
+          "For a business website, landing page, or clearly scoped web experience.",
+        highlights: [
+          "Custom responsive frontend architecture",
+          "Editorial typography & design system tokens",
+          "On-page SEO & performance optimization",
+          "Headless CMS or static deployment",
+        ],
+        projectType: "Website",
       },
       {
-        number: "02",
-        title: "Details that make a difference.",
+        id: "product-build",
+        title: "Product Build",
         description:
-          "From typographic rhythm to micro-transitions and accessible contrast, subtle craftsmanship elevates everyday utility into delight.",
+          "For a mobile app, web application, or custom software project.",
+        highlights: [
+          "End-to-end interface design and development",
+          "Database modeling & secure API integrations",
+          "Authentication, roles & user permission flows",
+          "Staging environments & automated test coverage",
+        ],
+        projectType: "Custom Software",
       },
       {
-        number: "03",
-        title: "Technology that serves the goal.",
+        id: "ongoing-collaboration",
+        title: "Ongoing Collaboration",
         description:
-          "We select tools and architectures based on resilience, maintainability, and real business outcomes—never fleeting hype.",
+          "For iterative improvements and continued product development.",
+        highlights: [
+          "Dedicated monthly development sprints",
+          "Rapid feature releases & UI enhancements",
+          "Performance profiling & infrastructure care",
+          "Direct communication with lead engineers",
+        ],
+        projectType: "Other",
       },
-    ] as Principle[],
+    ] as EngagementTier[],
   },
-  contactSection: {
+
+  // 9. FAQ
+  faq: {
+    eyebrow: "CLARITY",
+    heading: "Questions before we begin.",
+    subhead:
+      "Straightforward answers to how we work, scope, and deliver digital products.",
+    items: [
+      {
+        id: "faq-1",
+        question: "What types of projects do you build?",
+        answer:
+          "We develop responsive websites, native and cross-platform mobile apps, bespoke internal tools, customer dashboards, and customized software systems. Every project is engineered from scratch around your specific business objectives.",
+      },
+      {
+        id: "faq-2",
+        question: "Can you redesign an existing website or app?",
+        answer:
+          "Yes. We frequently audit and modernize existing digital products. We can overhaul outdated frontends, migrate legacy codebases to modern frameworks like Next.js, and refine user journeys without disrupting active operations.",
+      },
+      {
+        id: "faq-3",
+        question: "How is a project scoped?",
+        answer:
+          "We start with a discovery conversation to examine your functional needs, audience expectations, and technical constraints. From there, we prepare a clear, written scope outlining deliverables, milestones, and timeline estimates before any work begins.",
+      },
+      {
+        id: "faq-4",
+        question: "How long will development take?",
+        answer:
+          "Timelines depend directly on complexity and scope. A focused website or landing page typically takes 2 to 4 weeks, while a comprehensive mobile application or multi-tier software platform ranges from 6 to 12 weeks. We establish mutually agreed sprint schedules during onboarding.",
+      },
+      {
+        id: "faq-5",
+        question: "Can you work with our existing branding?",
+        answer:
+          "Absolutely. If you already have established brand guidelines, typography, or color palettes, we implement them with high fidelity. If your branding needs refinement or digital expansion, we can expand it into a comprehensive web design system.",
+      },
+      {
+        id: "faq-6",
+        question: "What happens after launch?",
+        answer:
+          "We provide comprehensive documentation, recorded code walkthroughs, and post-launch warranty support to ensure stability. For ongoing feature development and maintenance, we offer flexible continuing collaboration sprints.",
+      },
+    ] as FAQItem[],
+  },
+
+  // 10. Contact
+  contact: {
     eyebrow: "START A CONVERSATION",
-    heading: "Let’s build something meaningful.",
+    heading: "Let’s build your next chapter.",
     supportingCopy:
-      "Tell us what you’re planning. We’ll help shape the next step.",
+      "Tell us what you’re planning and what you want it to achieve.",
+    submitLabel: "Send Project Enquiry",
     projectTypes: [
       "Website",
       "Mobile App",
       "Custom Software",
+      "UI & UX",
       "Other",
     ] as const,
   },

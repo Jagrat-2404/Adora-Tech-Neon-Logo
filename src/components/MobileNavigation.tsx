@@ -21,10 +21,7 @@ export const MobileNavigation: React.FC<MobileNavigationProps> = ({
   useEffect(() => {
     if (!isOpen) return;
 
-    // Save active element for restoration
     const previousActiveElement = document.activeElement as HTMLElement | null;
-
-    // Focus close button on open
     setTimeout(() => {
       closeButtonRef.current?.focus();
     }, 50);
@@ -35,7 +32,6 @@ export const MobileNavigation: React.FC<MobileNavigationProps> = ({
         return;
       }
 
-      // Focus trap
       if (e.key === "Tab" && panelRef.current) {
         const focusable = panelRef.current.querySelectorAll<HTMLElement>(
           'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
@@ -56,7 +52,6 @@ export const MobileNavigation: React.FC<MobileNavigationProps> = ({
     };
 
     window.addEventListener("keydown", handleKeyDown);
-    // Prevent background scrolling while modal is open
     const originalOverflow = document.body.style.overflow;
     document.body.style.overflow = "hidden";
 
@@ -76,7 +71,7 @@ export const MobileNavigation: React.FC<MobileNavigationProps> = ({
       aria-label="Mobile Navigation Menu"
       className="fixed inset-0 z-50 md:hidden flex flex-col justify-between bg-[#081B19]/95 backdrop-blur-2xl transition-all duration-300"
     >
-      {/* Subtle background glow */}
+      {/* Background ambient radial */}
       <div
         aria-hidden="true"
         className="absolute top-1/4 right-0 w-80 h-80 rounded-full pointer-events-none opacity-20 blur-3xl"
@@ -113,9 +108,6 @@ export const MobileNavigation: React.FC<MobileNavigationProps> = ({
                 e.preventDefault();
                 onSelectLink(link.href);
               }}
-              style={{
-                animationDelay: `${index * 60}ms`,
-              }}
               className="group flex items-center justify-between text-2xl font-light tracking-wide text-[#F1F3EB] hover:text-[#8DE0C1] py-2 border-b border-[#A4B7AF]/10 transition-colors focus:outline-none focus-visible:text-[#8DE0C1]"
             >
               <span>{link.label}</span>
@@ -134,9 +126,9 @@ export const MobileNavigation: React.FC<MobileNavigationProps> = ({
               e.preventDefault();
               onSelectLink("#contact");
             }}
-            className="group flex items-center justify-center gap-2 w-full py-3.5 px-6 rounded-full font-medium text-sm tracking-wide bg-[#153833] hover:bg-[#1A453F] text-[#8DE0C1] border border-[#8DE0C1]/30 hover:border-[#8DE0C1] shadow-lg shadow-[#081B19]/50 transition-all duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#8DE0C1]"
+            className="group flex items-center justify-center gap-2 w-full py-3.5 px-6 rounded-full font-medium text-sm tracking-wide bg-[#8DE0C1] text-[#081B19] hover:bg-[#A1E8D0] shadow-lg shadow-[#081B19]/50 transition-all duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#8DE0C1]"
           >
-            <span>Let&apos;s Talk</span>
+            <span>Start a Project</span>
             <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
           </a>
         </div>
