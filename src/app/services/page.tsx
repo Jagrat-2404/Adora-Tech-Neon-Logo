@@ -42,11 +42,7 @@ export default function ServicesPage() {
 
       <main
         id="main-content"
-        className={`pt-28 pb-16 sm:pt-36 transition-all duration-1000 ease-out ${
-          isIntroActive
-            ? "opacity-0 translate-y-16 pointer-events-none"
-            : "opacity-100 translate-y-0 pointer-events-auto"
-        }`}
+        className="pt-28 pb-16 sm:pt-36"
       >
         {/* 1. Hero Section */}
         <section className="px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto mb-16 sm:mb-24">

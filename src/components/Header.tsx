@@ -41,7 +41,7 @@ export const Header: React.FC<HeaderProps> = ({ isIntroActive: propIntroActive }
         }`}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
-          {/* Logo Anchor / Intro Target Container */}
+          {/* Logo Anchor */}
           <div
             id="header-logo-target"
             className="relative flex items-center"
@@ -49,10 +49,6 @@ export const Header: React.FC<HeaderProps> = ({ isIntroActive: propIntroActive }
             <Link
               href="/"
               className="flex items-center group focus:outline-none focus-visible:ring-2 focus-visible:ring-[#8DE0C1] rounded-md transition-opacity duration-300"
-              style={{
-                opacity: isIntroActive ? 0 : 1,
-                pointerEvents: isIntroActive ? "none" : "auto",
-              }}
               aria-label="ADORA TECH home"
             >
               <BrandLogo size="md" withGlow={false} interactive />
@@ -62,9 +58,7 @@ export const Header: React.FC<HeaderProps> = ({ isIntroActive: propIntroActive }
           {/* Desktop Navigation Links */}
           <nav
             aria-label="Main Navigation"
-            className={`hidden md:flex items-center gap-8 transition-opacity duration-500 ${
-              isIntroActive ? "opacity-0 translate-y-[-4px]" : "opacity-100 translate-y-0"
-            }`}
+            className="hidden md:flex items-center gap-8 transition-opacity duration-500"
           >
             {SITE_CONFIG.navLinks.map((item) => {
               const isActive = pathname === item.href;
@@ -92,9 +86,7 @@ export const Header: React.FC<HeaderProps> = ({ isIntroActive: propIntroActive }
             {/* Desktop Start a Project CTA */}
             <Link
               href="/contact"
-              className={`hidden sm:inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-xs uppercase tracking-wider font-semibold text-[#081B19] bg-[#8DE0C1] hover:bg-[#A1E8D0] transition-all duration-200 group shadow-[0_0_15px_rgba(141,224,193,0.25)] hover:shadow-[0_0_25px_rgba(141,224,193,0.4)] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#8DE0C1] ${
-                isIntroActive ? "opacity-0" : "opacity-100"
-              }`}
+              className="hidden sm:inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-xs uppercase tracking-wider font-semibold text-[#081B19] bg-[#8DE0C1] hover:bg-[#A1E8D0] transition-all duration-200 group shadow-[0_0_15px_rgba(141,224,193,0.25)] hover:shadow-[0_0_25px_rgba(141,224,193,0.4)] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#8DE0C1]"
             >
               <span>Start a Project</span>
               <ArrowRight className="w-3.5 h-3.5 transition-transform duration-200 group-hover:translate-x-1" />
@@ -106,9 +98,7 @@ export const Header: React.FC<HeaderProps> = ({ isIntroActive: propIntroActive }
               onClick={() => setMobileMenuOpen(true)}
               aria-label="Open mobile navigation menu"
               aria-expanded={mobileMenuOpen}
-              className={`md:hidden p-2 text-[#A4B7AF] hover:text-[#F1F3EB] hover:bg-[#102A26] rounded-md transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-[#8DE0C1] ${
-                isIntroActive ? "opacity-0" : "opacity-100"
-              }`}
+              className="md:hidden p-2 text-[#A4B7AF] hover:text-[#F1F3EB] hover:bg-[#102A26] rounded-md transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-[#8DE0C1]"
             >
               <Menu className="w-6 h-6" />
             </button>

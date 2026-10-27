@@ -273,8 +273,8 @@ export const Hero: React.FC<HeroProps> = ({ isIntroActive: propIntroActive }) =>
       <div className="relative z-20 max-w-4xl mx-auto flex flex-col items-center text-center my-auto px-4">
         {/* Status Eyebrow Badge with Radar Sonar Beacon */}
         <div
-          className={`inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-[#102A26]/90 border border-[#8DE0C1]/40 text-[#8DE0C1] text-xs font-mono uppercase tracking-widest mb-8 backdrop-blur-md transition-all duration-700 shadow-xl shadow-black/40 ${
-            isIntroActive ? "opacity-0 translate-y-3" : "opacity-100 translate-y-0"
+          className={`inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-[#102A26]/90 border border-[#8DE0C1]/40 text-[#8DE0C1] text-xs font-mono uppercase tracking-widest mb-8 backdrop-blur-md transition-opacity duration-700 shadow-xl shadow-black/40 ${
+            isIntroActive ? "opacity-0" : "opacity-100"
           }`}
           style={{ transitionDelay: "150ms" }}
         >
@@ -287,8 +287,8 @@ export const Hero: React.FC<HeroProps> = ({ isIntroActive: propIntroActive }) =>
 
         {/* Centered Headline with Luxury Serif Italic Accent and High Legibility Drop Shadow */}
         <h1
-          className={`text-4xl sm:text-6xl md:text-7xl font-normal tracking-tight text-white leading-[1.08] mb-8 transition-all duration-800 drop-shadow-[0_4px_24px_rgba(0,0,0,0.85)] ${
-            isIntroActive ? "opacity-0 translate-y-6" : "opacity-100 translate-y-0"
+          className={`text-4xl sm:text-6xl md:text-7xl font-normal tracking-tight text-white leading-[1.08] mb-8 transition-opacity duration-800 drop-shadow-[0_4px_24px_rgba(0,0,0,0.85)] ${
+            isIntroActive ? "opacity-0" : "opacity-100"
           }`}
           style={{ transitionDelay: "250ms" }}
         >
@@ -301,8 +301,8 @@ export const Hero: React.FC<HeroProps> = ({ isIntroActive: propIntroActive }) =>
 
         {/* Centered Supporting Paragraph */}
         <p
-          className={`text-base sm:text-xl text-[#F1F3EB] font-light max-w-2xl leading-relaxed mb-10 transition-all duration-800 drop-shadow-[0_2px_14px_rgba(0,0,0,0.9)] ${
-            isIntroActive ? "opacity-0 translate-y-4" : "opacity-100 translate-y-0"
+          className={`text-base sm:text-xl text-[#F1F3EB] font-light max-w-2xl leading-relaxed mb-10 transition-opacity duration-800 drop-shadow-[0_2px_14px_rgba(0,0,0,0.9)] ${
+            isIntroActive ? "opacity-0" : "opacity-100"
           }`}
           style={{ transitionDelay: "350ms" }}
         >
@@ -312,8 +312,8 @@ export const Hero: React.FC<HeroProps> = ({ isIntroActive: propIntroActive }) =>
 
         {/* Centered Action Button Row */}
         <div
-          className={`flex flex-wrap items-center justify-center gap-4 transition-all duration-800 mb-12 ${
-            isIntroActive ? "opacity-0 translate-y-4" : "opacity-100 translate-y-0"
+          className={`flex flex-wrap items-center justify-center gap-4 transition-opacity duration-800 mb-12 ${
+            isIntroActive ? "opacity-0" : "opacity-100"
           }`}
           style={{ transitionDelay: "450ms" }}
         >

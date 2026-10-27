@@ -6,21 +6,22 @@ import gsap from "gsap";
 
 interface IntroSequenceProps {
   onComplete: () => void;
+  onStartReveal?: () => void;
   headerLogoTargetId?: string;
 }
 
 /**
- * IntroSequence Component
+ * IntroSequence Component (Home Page Signature Animation)
  *
- * Runs on every reload and page navigation:
  * 1. Highlights and animates the neon "O" first in the center with neon shockwave & bloom pulse.
  * 2. Assembles surrounding ivory letters ("AD", "RA", "TECH") around it.
- * 3. Smoothly glides and scales directly into the top-left corner of the header.
- * 4. Dissolves cleanly to reveal page content.
+ * 3. Holds in center with warm glowing appreciation plateau.
+ * 4. The logo dissolves away in place (NO sliding to corner!).
+ * 5. Simultaneously triggers the website to appear from the back with a fade effect.
  */
 export const IntroSequence: React.FC<IntroSequenceProps> = ({
   onComplete,
-  headerLogoTargetId = "header-logo-target",
+  onStartReveal,
 }) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const logoWrapperRef = useRef<HTMLDivElement>(null);
@@ -71,7 +72,8 @@ export const IntroSequence: React.FC<IntroSequenceProps> = ({
       }
 
       // Initial visual states
-      gsap.set(logoWrapper, { opacity: 1 });
+      gsap.set(container, { opacity: 1 });
+      gsap.set(logoWrapper, { opacity: 1, x: 0, y: 0, scale: 1 });
       gsap.set(letters, { opacity: 0, scale: 0.94 });
       gsap.set(oRing, { opacity: 0, scale: 0.45, rotation: -20 });
       if (halo) gsap.set(halo, { opacity: 0, scale: 0.5 });
@@ -167,44 +169,26 @@ export const IntroSequence: React.FC<IntroSequenceProps> = ({
         );
       }
 
-      // STAGE 3: "Put it in the corner" (Smooth glide into header top-left)
+      // STAGE 3: Dissolve logo in place & reveal website from back (NO sliding!)
       tl.add(() => {
-        const headerTarget = document.getElementById(headerLogoTargetId);
-        const currentRect = logoWrapper.getBoundingClientRect();
-        if (!currentRect) return;
-
-        let deltaX = -(window.innerWidth / 2 - 120);
-        let deltaY = -(window.innerHeight / 2 - 36);
-        let scaleFactor = 0.28;
-
-        if (headerTarget) {
-          const targetRect = headerTarget.getBoundingClientRect();
-          if (targetRect.width > 0) {
-            const currentCenterX = currentRect.left + currentRect.width / 2;
-            const currentCenterY = currentRect.top + currentRect.height / 2;
-            const targetCenterX = targetRect.left + targetRect.width / 2;
-            const targetCenterY = targetRect.top + targetRect.height / 2;
-
-            deltaX = targetCenterX - currentCenterX;
-            deltaY = targetCenterY - currentCenterY;
-            scaleFactor = targetRect.width / currentRect.width;
-          }
+        // Trigger the website underneath to begin appearing from the back
+        if (onStartReveal) {
+          onStartReveal();
         }
 
-        // Smooth flight into header (extended for luxury fluid motion)
+        // Dissolve the logo in place without any sliding
         gsap.to(logoWrapper, {
-          x: deltaX,
-          y: deltaY,
-          scale: scaleFactor,
-          duration: 1.0,
-          ease: "power3.inOut",
+          opacity: 0,
+          scale: 0.96,
+          duration: 0.65,
+          ease: "power2.inOut",
         });
 
         if (halo) {
           gsap.to(halo, {
-            opacity: 0.15,
-            scale: 0.6,
-            duration: 0.7,
+            opacity: 0,
+            scale: 0.7,
+            duration: 0.5,
             ease: "power2.in",
           });
         }
@@ -212,14 +196,13 @@ export const IntroSequence: React.FC<IntroSequenceProps> = ({
         // Dissolve dark intro background to reveal page underneath
         gsap.to(container, {
           opacity: 0,
-          duration: 0.65,
-          delay: 0.35,
+          duration: 0.7,
           ease: "power2.inOut",
         });
       }, 2.0);
 
-      // Finish cleanly after full flight and dissolve
-      tl.to({}, { duration: 1.1 });
+      // Finish cleanly after full dissolve
+      tl.to({}, { duration: 0.75 });
     }, 40);
 
     return () => {
@@ -229,7 +212,7 @@ export const IntroSequence: React.FC<IntroSequenceProps> = ({
         timelineRef.current.kill();
       }
     };
-  }, [handleFinish, headerLogoTargetId]);
+  }, [handleFinish, onStartReveal]);
 
   if (isSkipped) {
     return null;

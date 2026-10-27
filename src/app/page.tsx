@@ -23,14 +23,10 @@ export default function Home() {
       {/* Global Header (Logo sits static in corner while rest of site fades up) */}
       <Header />
 
-      {/* Main Agency Sections Architecture: Fades Up from Bottom After Animation */}
+      {/* Main Agency Sections Architecture: Appears from Back with Fade Effect */}
       <main
         id="main-content"
-        className={`relative z-10 transition-all duration-1000 ease-out ${
-          isIntroActive
-            ? "opacity-0 translate-y-16 pointer-events-none"
-            : "opacity-100 translate-y-0 pointer-events-auto"
-        }`}
+        className="relative z-10"
       >
         {/* 1. Hero with 5-Column Vertical Background Carousel */}
         <Hero />
@@ -75,15 +71,7 @@ export default function Home() {
       </main>
 
       {/* Global Footer with Giant "ADORA TECH" Typographic Watermark */}
-      <div
-        className={`transition-all duration-1000 ease-out ${
-          isIntroActive
-            ? "opacity-0 translate-y-16 pointer-events-none"
-            : "opacity-100 translate-y-0 pointer-events-auto"
-        }`}
-      >
-        <Footer />
-      </div>
+      <Footer />
     </div>
   );
 }
