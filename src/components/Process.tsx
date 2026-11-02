@@ -79,18 +79,16 @@ export const Process: React.FC = () => {
         {steps.map((step) => (
           <div
             key={step.number}
-            className={`relative rounded-3xl p-8 sm:p-10 flex flex-col justify-between border transition-all duration-500 min-h-[340px] group reveal-item ${
-              step.highlight
+            className={`relative rounded-3xl p-8 sm:p-10 flex flex-col justify-between border transition-all duration-500 min-h-[340px] group reveal-item ${step.highlight
                 ? "bg-gradient-to-b from-[#183933] to-[#0E2622] border-[#8DE0C1]/60 shadow-2xl shadow-black/50 hover:border-[#8DE0C1]"
                 : "bg-[#0B201D]/60 border-[#A4B7AF]/15 hover:border-[#8DE0C1]/40 hover:bg-[#102A26]/80"
-            }`}
+              }`}
           >
             {/* Top Bar: Step Number & Differentiator Badge */}
             <div className="flex items-center justify-between">
               <span
-                className={`font-mono text-sm tracking-widest ${
-                  step.highlight ? "text-[#8DE0C1]" : "text-[#A4B7AF]/60"
-                }`}
+                className={`font-mono text-sm tracking-widest ${step.highlight ? "text-[#8DE0C1]" : "text-[#A4B7AF]/60"
+                  }`}
               >
                 {step.number} //
               </span>

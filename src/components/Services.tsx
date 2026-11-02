@@ -121,21 +121,18 @@ export const Services: React.FC<ServicesProps> = ({ onSelectProjectType }) => {
             >
               {/* Progress Indicator Line */}
               <div
-                className={`absolute top-0 left-0 right-0 h-[2px] transition-all duration-500 ${
-                  isActive ? "bg-[#8DE0C1] shadow-[0_0_12px_rgba(141,224,193,0.6)]" : "bg-[#A4B7AF]/20 group-hover:bg-[#A4B7AF]/40"
-                }`}
+                className={`absolute top-0 left-0 right-0 h-[2px] transition-all duration-500 ${isActive ? "bg-[#8DE0C1] shadow-[0_0_12px_rgba(141,224,193,0.6)]" : "bg-[#A4B7AF]/20 group-hover:bg-[#A4B7AF]/40"
+                  }`}
               />
               <span
-                className={`block text-xs font-mono uppercase tracking-widest mb-2 transition-colors ${
-                  isActive ? "text-[#8DE0C1]" : "text-[#A4B7AF]/60 group-hover:text-[#A4B7AF]"
-                }`}
+                className={`block text-xs font-mono uppercase tracking-widest mb-2 transition-colors ${isActive ? "text-[#8DE0C1]" : "text-[#A4B7AF]/60 group-hover:text-[#A4B7AF]"
+                  }`}
               >
                 {service.number} // PILLAR
               </span>
               <span
-                className={`text-base sm:text-lg lg:text-xl font-medium tracking-tight block transition-colors ${
-                  isActive ? "text-[#F1F3EB]" : "text-[#A4B7AF]/70 group-hover:text-[#F1F3EB]"
-                }`}
+                className={`text-base sm:text-lg lg:text-xl font-medium tracking-tight block transition-colors ${isActive ? "text-[#F1F3EB]" : "text-[#A4B7AF]/70 group-hover:text-[#F1F3EB]"
+                  }`}
               >
                 {service.title}
               </span>

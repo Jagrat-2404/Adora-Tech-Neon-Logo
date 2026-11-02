@@ -11,13 +11,15 @@ interface IntroSequenceProps {
 }
 
 /**
- * IntroSequence Component (Home Page Signature Animation)
+ * IntroSequence Component (Signature Logo Animation)
  *
  * 1. Highlights and animates the neon "O" first in the center with neon shockwave & bloom pulse.
  * 2. Assembles surrounding ivory letters ("AD", "RA", "TECH") around it.
  * 3. Holds in center with warm glowing appreciation plateau.
- * 4. The logo dissolves away in place (NO sliding to corner!).
- * 5. Simultaneously triggers the website to appear from the back with a fade effect.
+ * 4. Dissolves away in place smoothly to reveal the website underneath.
+ *
+ * CRITICAL FIX: All animated elements start with inline `opacity: 0` so there is ZERO
+ * flash of unstyled content or placeholder visibility before the animation starts.
  */
 export const IntroSequence: React.FC<IntroSequenceProps> = ({
   onComplete,
@@ -58,155 +60,151 @@ export const IntroSequence: React.FC<IntroSequenceProps> = ({
     };
     window.addEventListener("keydown", handleKeyDown);
 
-    const timer = setTimeout(() => {
-      const container = containerRef.current;
-      const logoWrapper = logoWrapperRef.current;
-      const oRing = oRingRef.current;
-      const letters = lettersRef.current;
-      const halo = haloRef.current;
-      const shockwave = shockwaveRef.current;
+    const container = containerRef.current;
+    const logoWrapper = logoWrapperRef.current;
+    const oRing = oRingRef.current;
+    const letters = lettersRef.current;
+    const halo = haloRef.current;
+    const shockwave = shockwaveRef.current;
 
-      if (!container || !logoWrapper || !oRing || !letters) {
-        handleFinish();
-        return;
-      }
+    if (!container || !logoWrapper || !oRing || !letters) {
+      handleFinish();
+      return;
+    }
 
-      // Initial visual states
-      gsap.set(container, { opacity: 1 });
-      gsap.set(logoWrapper, { opacity: 1, x: 0, y: 0, scale: 1 });
-      gsap.set(letters, { opacity: 0, scale: 0.94 });
-      gsap.set(oRing, { opacity: 0, scale: 0.45, rotation: -20 });
-      if (halo) gsap.set(halo, { opacity: 0, scale: 0.5 });
-      if (shockwave) gsap.set(shockwave, { opacity: 0, scale: 0.8 });
+    // Set initial visual states synchronously (no setTimeout delay)
+    gsap.set(container, { opacity: 1 });
+    gsap.set(logoWrapper, { opacity: 1, x: 0, y: 0, scale: 1 });
+    gsap.set(letters, { opacity: 0, scale: 0.94 });
+    gsap.set(oRing, { opacity: 0, scale: 0.45, rotation: -20 });
+    if (halo) gsap.set(halo, { opacity: 0, scale: 0.5 });
+    if (shockwave) gsap.set(shockwave, { opacity: 0, scale: 0.8 });
 
-      const tl = gsap.timeline({
-        onComplete: handleFinish,
-      });
-      timelineRef.current = tl;
+    const tl = gsap.timeline({
+      onComplete: handleFinish,
+    });
+    timelineRef.current = tl;
 
-      // STAGE 1: Animate the "O" First (Center stage ignition & shockwave)
+    // STAGE 1: Animate the "O" First (Center stage ignition & shockwave)
+    tl.to(
+      oRing,
+      {
+        opacity: 1,
+        scale: 1.18,
+        rotation: 0,
+        duration: 0.5,
+        ease: "back.out(1.8)",
+      },
+      0.05
+    );
+
+    if (halo) {
       tl.to(
-        oRing,
+        halo,
         {
           opacity: 1,
-          scale: 1.18,
-          rotation: 0,
-          duration: 0.8,
-          ease: "back.out(1.8)",
+          scale: 1.35,
+          duration: 0.55,
+          ease: "power2.out",
+        },
+        0.08
+      );
+    }
+
+    if (shockwave) {
+      tl.to(
+        shockwave,
+        {
+          opacity: 0.85,
+          scale: 1.15,
+          duration: 0.2,
+          ease: "power1.out",
         },
         0.1
       );
-
-      if (halo) {
-        tl.to(
-          halo,
-          {
-            opacity: 1,
-            scale: 1.35,
-            duration: 0.85,
-            ease: "power2.out",
-          },
-          0.15
-        );
-      }
-
-      if (shockwave) {
-        tl.to(
-          shockwave,
-          {
-            opacity: 0.85,
-            scale: 1.15,
-            duration: 0.25,
-            ease: "power1.out",
-          },
-          0.2
-        );
-        tl.to(
-          shockwave,
-          {
-            opacity: 0,
-            scale: 2.5,
-            duration: 0.75,
-            ease: "power2.out",
-          },
-          0.4
-        );
-      }
-
       tl.to(
-        oRing,
+        shockwave,
         {
-          scale: 1.0,
-          duration: 0.45,
-          ease: "power2.inOut",
+          opacity: 0,
+          scale: 2.2,
+          duration: 0.5,
+          ease: "power2.out",
+        },
+        0.25
+      );
+    }
+
+    tl.to(
+      oRing,
+      {
+        scale: 1.0,
+        duration: 0.3,
+        ease: "power2.inOut",
+      },
+      0.55
+    );
+
+    // STAGE 2: Reveal the letters around the "O"
+    tl.to(
+      letters,
+      {
+        opacity: 1,
+        scale: 1.0,
+        duration: 0.5,
+        ease: "power2.out",
+      },
+      0.65
+    );
+
+    // Extra center-stage appreciation plateau (glow pulse while fully assembled)
+    if (halo) {
+      tl.to(
+        halo,
+        {
+          opacity: 0.85,
+          scale: 1.15,
+          duration: 0.35,
+          ease: "sine.inOut",
         },
         0.85
       );
+    }
 
-      // STAGE 2: Reveal the letters around the "O"
-      tl.to(
-        letters,
-        {
-          opacity: 1,
-          scale: 1.0,
-          duration: 0.75,
-          ease: "power2.out",
-        },
-        1.1
-      );
-
-      // Extra center-stage appreciation plateau (glow pulse while fully assembled)
-      if (halo) {
-        tl.to(
-          halo,
-          {
-            opacity: 0.85,
-            scale: 1.2,
-            duration: 0.5,
-            ease: "sine.inOut",
-          },
-          1.5
-        );
+    // STAGE 3: Dissolve logo in place & reveal website from back
+    tl.add(() => {
+      if (container) {
+        container.style.pointerEvents = "none";
+      }
+      if (onStartReveal) {
+        onStartReveal();
       }
 
-      // STAGE 3: Dissolve logo in place & reveal website from back (NO sliding!)
-      tl.add(() => {
-        // Trigger the website underneath to begin appearing from the back
-        if (onStartReveal) {
-          onStartReveal();
-        }
+      gsap.to(logoWrapper, {
+        opacity: 0,
+        scale: 0.96,
+        duration: 0.4,
+        ease: "power2.inOut",
+      });
 
-        // Dissolve the logo in place without any sliding
-        gsap.to(logoWrapper, {
+      if (halo) {
+        gsap.to(halo, {
           opacity: 0,
-          scale: 0.96,
-          duration: 0.65,
-          ease: "power2.inOut",
+          scale: 0.7,
+          duration: 0.35,
+          ease: "power2.in",
         });
+      }
 
-        if (halo) {
-          gsap.to(halo, {
-            opacity: 0,
-            scale: 0.7,
-            duration: 0.5,
-            ease: "power2.in",
-          });
-        }
+      gsap.to(container, {
+        opacity: 0,
+        duration: 0.4,
+        ease: "power2.inOut",
+      });
+    }, 1.25);
 
-        // Dissolve dark intro background to reveal page underneath
-        gsap.to(container, {
-          opacity: 0,
-          duration: 0.7,
-          ease: "power2.inOut",
-        });
-      }, 2.0);
-
-      // Finish cleanly after full dissolve
-      tl.to({}, { duration: 0.75 });
-    }, 40);
+    tl.to({}, { duration: 0.45 });
 
     return () => {
-      clearTimeout(timer);
       window.removeEventListener("keydown", handleKeyDown);
       if (timelineRef.current) {
         timelineRef.current.kill();
@@ -220,11 +218,13 @@ export const IntroSequence: React.FC<IntroSequenceProps> = ({
 
   return (
     <div
+      id="intro-sequence-overlay"
       ref={containerRef}
       role="dialog"
       aria-modal="true"
       aria-label="ADORA TECH introduction"
-      className="fixed inset-0 z-[100] flex items-center justify-center bg-[#081B19] select-none pointer-events-auto"
+      onClick={handleFinish}
+      className="fixed inset-0 z-40 flex items-center justify-center bg-[#081B19] select-none"
       style={{ isolation: "isolate" }}
     >
       {/* Background ambient radial glow */}
@@ -255,42 +255,45 @@ export const IntroSequence: React.FC<IntroSequenceProps> = ({
         ref={logoWrapperRef}
         className="relative w-[280px] xs:w-[340px] sm:w-[420px] md:w-[460px] aspect-[808/288] flex items-center justify-center will-change-transform"
       >
-        {/* Ambient Halo behind the O position */}
+        {/* Ambient Halo behind the O position - initial opacity 0 */}
         <div
           ref={haloRef}
           aria-hidden="true"
-          className="absolute w-[36%] h-[78%] rounded-full pointer-events-none blur-xl -z-10"
+          className="intro-anim-halo absolute w-[36%] h-[78%] rounded-full pointer-events-none blur-xl -z-10"
           style={{
             left: "52.29%",
             top: "38.89%",
-            transform: "translate(-50%, -50%)",
+            transform: "translate(-50%, -50%) scale(0.5)",
+            opacity: 0,
             background:
               "radial-gradient(circle at 35% 50%, rgba(141, 224, 193, 0.85) 0%, transparent 65%), radial-gradient(circle at 65% 50%, rgba(213, 161, 125, 0.75) 0%, transparent 65%)",
           }}
         />
 
-        {/* Shockwave expanding ripple on ignition */}
+        {/* Shockwave expanding ripple on ignition - initial opacity 0 */}
         <div
           ref={shockwaveRef}
           aria-hidden="true"
-          className="absolute w-[28.59%] aspect-square rounded-full pointer-events-none border border-[#8DE0C1] -z-10"
+          className="intro-anim-shockwave absolute w-[28.59%] aspect-square rounded-full pointer-events-none border border-[#8DE0C1] -z-10"
           style={{
             left: "52.29%",
             top: "38.89%",
-            transform: "translate(-50%, -50%)",
+            transform: "translate(-50%, -50%) scale(0.8)",
+            opacity: 0,
             boxShadow:
               "0 0 18px rgba(141, 224, 193, 0.6), inset 0 0 18px rgba(213, 161, 125, 0.4)",
           }}
         />
 
-        {/* STAGE 1: Isolated Glowing "O" Ring */}
+        {/* STAGE 1: Isolated Glowing "O" Ring - initial opacity 0 prevents microsecond flash */}
         <div
           ref={oRingRef}
-          className="absolute w-[28.59%] h-auto z-20 pointer-events-none will-change-transform"
+          className="intro-anim-ring absolute w-[28.59%] h-auto z-20 pointer-events-none will-change-transform"
           style={{
             left: "52.29%",
             top: "38.89%",
-            transform: "translate(-50%, -50%)",
+            transform: "translate(-50%, -50%) scale(0.45)",
+            opacity: 0,
           }}
         >
           <Image
@@ -303,10 +306,14 @@ export const IntroSequence: React.FC<IntroSequenceProps> = ({
           />
         </div>
 
-        {/* STAGE 2: Surrounding Letters ("AD", "RA", "TECH") */}
+        {/* STAGE 2: Surrounding Letters ("AD", "RA", "TECH") - initial opacity 0 prevents microsecond flash */}
         <div
           ref={lettersRef}
-          className="absolute inset-0 w-full h-full z-10 pointer-events-none will-change-transform"
+          className="intro-anim-letters absolute inset-0 w-full h-full z-10 pointer-events-none will-change-transform"
+          style={{
+            opacity: 0,
+            transform: "scale(0.94)",
+          }}
         >
           <Image
             src="/logo-letters-only.png"

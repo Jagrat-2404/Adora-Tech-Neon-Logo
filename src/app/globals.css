@@ -181,7 +181,7 @@ body {
 
 /* Subtle background subtle noise / glow utilities */
 .bg-atmospheric {
-  background: 
+  background:
     radial-gradient(circle at 50% 0%, rgba(141, 224, 193, 0.08) 0%, transparent 60%),
     radial-gradient(circle at 100% 50%, rgba(213, 161, 125, 0.05) 0%, transparent 50%),
     radial-gradient(circle at 0% 80%, rgba(16, 42, 38, 0.5) 0%, transparent 50%),
@@ -205,14 +205,12 @@ body {
 
 /* Neon halo ring */
 .neon-halo {
-  background: conic-gradient(
-    from 210deg at 50% 50%,
-    #8DE0C1 0deg,
-    #5bc8a5 110deg,
-    #D5A17D 180deg,
-    #f3be9b 270deg,
-    #8DE0C1 360deg
-  );
+  background: conic-gradient(from 210deg at 50% 50%,
+      #8DE0C1 0deg,
+      #5bc8a5 110deg,
+      #D5A17D 180deg,
+      #f3be9b 270deg,
+      #8DE0C1 360deg);
   filter: blur(18px);
 }
 
@@ -270,8 +268,8 @@ body {
   pointer-events: none;
   filter: contrast(115%);
   transform: perspective(1200px) rotateX(8deg) rotateY(-6deg) scale(1.1);
-  mask-image: radial-gradient(ellipse at 60% 45%, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 75%);
-  -webkit-mask-image: radial-gradient(ellipse at 60% 45%, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 75%);
+  mask-image: radial-gradient(ellipse at 60% 45%, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0) 75%);
+  -webkit-mask-image: radial-gradient(ellipse at 60% 45%, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0) 75%);
 }
 
 .media-wall-col {
@@ -286,6 +284,7 @@ body {
   0% {
     transform: translateY(0%);
   }
+
   100% {
     transform: translateY(-50%);
   }
@@ -314,6 +313,7 @@ body {
   0% {
     transform: translate3d(0, 0, 0);
   }
+
   100% {
     transform: translate3d(-50%, 0, 0);
   }
@@ -335,13 +335,16 @@ section[id] {
 ::-webkit-scrollbar {
   width: 8px;
 }
+
 ::-webkit-scrollbar-track {
   background: #081B19;
 }
+
 ::-webkit-scrollbar-thumb {
   background: #163631;
   border-radius: 4px;
 }
+
 ::-webkit-scrollbar-thumb:hover {
   background: #23544d;
 }
@@ -352,10 +355,12 @@ section[id] {
     transform: scale(0.95);
     opacity: 0.8;
   }
+
   50% {
     transform: scale(1.6);
     opacity: 0;
   }
+
   100% {
     transform: scale(0.95);
     opacity: 0;
@@ -367,9 +372,12 @@ section[id] {
 }
 
 @keyframes float-slow {
-  0%, 100% {
+
+  0%,
+  100% {
     transform: translateY(0px);
   }
+
   50% {
     transform: translateY(-8px);
   }
@@ -394,6 +402,7 @@ section[id] {
   0% {
     transform: translate3d(0, 0, 0);
   }
+
   100% {
     transform: translate3d(0, -50%, 0);
   }
@@ -403,6 +412,7 @@ section[id] {
   0% {
     transform: translate3d(0, -50%, 0);
   }
+
   100% {
     transform: translate3d(0, 0, 0);
   }
@@ -434,6 +444,7 @@ section[id] {
 }
 
 @media (prefers-reduced-motion: reduce) {
+
   .animate-col-up-1,
   .animate-col-down-2,
   .animate-col-up-3,
@@ -443,58 +454,58 @@ section[id] {
   }
 }
 
-/* Vayem Studios High-Impact Section Animation Suite */
-.reveal-section {
-  transition: opacity 0.85s cubic-bezier(0.16, 1, 0.3, 1),
-              transform 0.85s cubic-bezier(0.16, 1, 0.3, 1),
-              filter 0.75s cubic-bezier(0.16, 1, 0.3, 1);
-  will-change: opacity, transform, filter;
-}
-
-/* Below-the-fold sections waiting for scroll reveal */
-.reveal-section.will-reveal {
-  opacity: 0 !important;
-  transform: translateY(36px) scale(0.985) !important;
-  filter: blur(4px) !important;
-}
-
-/* Revealed and default state - always fully visible and sharp */
+/* All sections fully visible and sharp immediately - no scroll hiding or delayed animation */
+.reveal-section,
+.reveal-section.will-reveal,
 .reveal-section.is-revealed,
 .reveal-section:not(.will-reveal) {
   opacity: 1 !important;
-  transform: translateY(0) scale(1) !important;
-  filter: blur(0) !important;
+  transform: none !important;
+  filter: none !important;
 }
 
-/* Staggered Children inside Revealed Sections */
-.reveal-section.will-reveal .reveal-item {
-  opacity: 0 !important;
-  transform: translateY(24px) !important;
-}
-
+.reveal-section .reveal-item,
+.reveal-section.will-reveal .reveal-item,
 .reveal-section.is-revealed .reveal-item,
 .reveal-section:not(.will-reveal) .reveal-item {
   opacity: 1 !important;
-  transform: translateY(0) !important;
-  transition: opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1),
-              transform 0.75s cubic-bezier(0.16, 1, 0.3, 1);
+  transform: none !important;
+  filter: none !important;
+  transition: none !important;
 }
 
-.reveal-section.is-revealed .reveal-item:nth-child(1) { transition-delay: 0.08s; }
-.reveal-section.is-revealed .reveal-item:nth-child(2) { transition-delay: 0.16s; }
-.reveal-section.is-revealed .reveal-item:nth-child(3) { transition-delay: 0.24s; }
-.reveal-section.is-revealed .reveal-item:nth-child(4) { transition-delay: 0.32s; }
+.d1 {
+  transition-delay: 0.1s !important;
+}
 
-.d1 { transition-delay: 0.1s !important; }
-.d2 { transition-delay: 0.2s !important; }
-.d3 { transition-delay: 0.3s !important; }
-.d4 { transition-delay: 0.4s !important; }
-.d5 { transition-delay: 0.5s !important; }
+.d2 {
+  transition-delay: 0.2s !important;
+}
+
+.d3 {
+  transition-delay: 0.3s !important;
+}
+
+.d4 {
+  transition-delay: 0.4s !important;
+}
+
+.d5 {
+  transition-delay: 0.5s !important;
+}
 
 @keyframes ambient-drift {
-  0% { transform: translate(0, 0) scale(1); }
-  50% { transform: translate(18px, -18px) scale(1.06); }
-  100% { transform: translate(-12px, 12px) scale(0.96); }
+  0% {
+    transform: translate(0, 0) scale(1);
+  }
+
+  50% {
+    transform: translate(18px, -18px) scale(1.06);
+  }
+
+  100% {
+    transform: translate(-12px, 12px) scale(0.96);
+  }
 }
 
 .animate-ambient-drift {
@@ -514,4 +525,43 @@ nextjs-portal,
   pointer-events: none !important;
 }
 
+/* Subtle and reliable pointer rules - keep native cursor visible */
+button,
+a,
+[role="button"] {
+  cursor: pointer;
+}
 
+/* Soundbar animation */
+@keyframes soundbar {
+  0%, 100% {
+    transform: scaleY(0.25);
+  }
+  50% {
+    transform: scaleY(1);
+  }
+}
+
+/* Cinematic Anamorphic Horizon Flare Pulse */
+@keyframes anamorphic-pulse {
+  0%, 100% {
+    opacity: 0.55;
+    transform: scaleX(0.98);
+  }
+  50% {
+    opacity: 0.9;
+    transform: scaleX(1.02);
+  }
+}
+
+.animate-flare {
+  animation: anamorphic-pulse 8s ease-in-out infinite;
+}
+
+/* Zero-opacity enforcement on initial render before GSAP timeline begins */
+#intro-sequence-overlay .intro-anim-ring,
+#intro-sequence-overlay .intro-anim-letters,
+#intro-sequence-overlay .intro-anim-halo,
+#intro-sequence-overlay .intro-anim-shockwave {
+  opacity: 0;
+}

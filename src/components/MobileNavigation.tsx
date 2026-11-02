@@ -70,7 +70,7 @@ export const MobileNavigation: React.FC<MobileNavigationProps> = ({
       role="dialog"
       aria-modal="true"
       aria-label="Mobile Navigation Menu"
-      className="fixed inset-0 z-50 md:hidden flex flex-col justify-between bg-[#081B19]/95 backdrop-blur-2xl transition-all duration-300"
+      className="fixed inset-0 z-[60] md:hidden flex flex-col justify-between bg-[#081B19]/95 backdrop-blur-2xl transition-all duration-300"
     >
       {/* Background ambient radial */}
       <div

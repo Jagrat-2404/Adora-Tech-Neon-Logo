@@ -49,11 +49,10 @@ export const EditorialStatement: React.FC = () => {
                   0{idx + 1} // {col.title}
                 </h3>
                 <p
-                  className={`text-base leading-relaxed font-light ${
-                    col.highlight
+                  className={`text-base leading-relaxed font-light ${col.highlight
                       ? "text-[#F1F3EB] font-normal"
                       : "text-[#A4B7AF]"
-                  }`}
+                    }`}
                 >
                   {col.text}
                 </p>

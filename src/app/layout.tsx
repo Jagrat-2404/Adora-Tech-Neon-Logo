@@ -4,6 +4,7 @@ import "./globals.css";
 import { PageTransitionProvider } from "@/components/PageTransitionProvider";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import { MouseSpotlight } from "@/components/MouseSpotlight";
+import { CustomCursor } from "@/components/CustomCursor";
 import { ScrollAnimationObserver } from "@/components/ScrollAnimationObserver";
 
 const geist = Geist({
@@ -215,6 +216,7 @@ export default function RootLayout({
         </a>
         <ThemeProvider>
           <MouseSpotlight />
+          <CustomCursor />
           <PageTransitionProvider>
             <ScrollAnimationObserver />
             {children}

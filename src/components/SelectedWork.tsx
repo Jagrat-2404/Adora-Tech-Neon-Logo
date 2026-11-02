@@ -59,8 +59,8 @@ export const SelectedWork: React.FC<SelectedWorkProps> = ({
     activeFilter === "All"
       ? SITE_CONFIG.selectedWork.projects
       : SITE_CONFIG.selectedWork.projects.filter(
-          (p) => p.category === activeFilter
-        );
+        (p) => p.category === activeFilter
+      );
 
   const handleScroll = () => {
     const el = trackRef.current;
@@ -129,11 +129,10 @@ export const SelectedWork: React.FC<SelectedWorkProps> = ({
                     type="button"
                     aria-pressed={isSelected}
                     onClick={() => setActiveFilter(category)}
-                    className={`px-4 py-2 rounded-full text-xs font-mono uppercase tracking-wider transition-all duration-300 border whitespace-nowrap focus:outline-none ${
-                      isSelected
+                    className={`px-4 py-2 rounded-full text-xs font-mono uppercase tracking-wider transition-all duration-300 border whitespace-nowrap focus:outline-none ${isSelected
                         ? "bg-[#8DE0C1] text-[#081B19] font-semibold border-[#8DE0C1] shadow-[0_0_15px_rgba(141,224,193,0.35)]"
                         : "bg-[#081B19] text-[#A4B7AF] border-[#A4B7AF]/20 hover:border-[#8DE0C1]/40 hover:text-[#F1F3EB]"
-                    }`}
+                      }`}
                   >
                     {category}
                   </button>

@@ -34,10 +34,10 @@ export const Header: React.FC<HeaderProps> = ({ isIntroActive: propIntroActive }
   return (
     <>
       <header
-        className={`fixed top-0 left-0 right-0 z-40 transition-all duration-300 ${
+        className={`fixed top-0 left-0 right-0 z-50 pointer-events-auto transition-all duration-300 ${
           isScrolled
-            ? "bg-[#081B19]/85 backdrop-blur-md border-b border-[#A4B7AF]/15 py-3 shadow-lg shadow-black/20"
-            : "bg-transparent border-b border-transparent py-4 sm:py-5"
+            ? "bg-[#081B19]/90 backdrop-blur-md border-b border-[#A4B7AF]/15 py-3 shadow-xl shadow-black/40"
+            : "bg-transparent border-b border-transparent shadow-none py-4 sm:py-5"
         }`}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
@@ -69,7 +69,7 @@ export const Header: React.FC<HeaderProps> = ({ isIntroActive: propIntroActive }
                   href={item.href}
                   className={`relative text-sm tracking-wide transition-colors py-1 focus:outline-none focus-visible:text-[#8DE0C1] ${
                     isActive
-                      ? "text-[#8DE0C1] font-medium"
+                      ? "text-[#8DE0C1] font-semibold"
                       : "text-[#A4B7AF] hover:text-[#F1F3EB]"
                   } after:content-[''] after:absolute after:bottom-0 after:left-0 after:h-[1.5px] after:bg-[#8DE0C1] after:transition-all after:duration-300 ${
                     isActive ? "after:w-full" : "after:w-0 hover:after:w-full"
@@ -81,12 +81,12 @@ export const Header: React.FC<HeaderProps> = ({ isIntroActive: propIntroActive }
             })}
           </nav>
 
-          {/* Right Action: CTA & Mobile Hamburger */}
+          {/* Right Action: Start Project CTA + Mobile Hamburger (Audio button removed) */}
           <div className="flex items-center gap-4">
             {/* Desktop Start a Project CTA */}
             <Link
               href="/contact"
-              className="hidden sm:inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-xs uppercase tracking-wider font-semibold text-[#081B19] bg-[#8DE0C1] hover:bg-[#A1E8D0] transition-all duration-200 group shadow-[0_0_15px_rgba(141,224,193,0.25)] hover:shadow-[0_0_25px_rgba(141,224,193,0.4)] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#8DE0C1]"
+              className="hidden sm:inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-xs uppercase tracking-wider font-semibold text-[#081B19] bg-[#8DE0C1] hover:bg-[#A1E8D0] transition-all duration-200 group shadow-[0_0_20px_rgba(141,224,193,0.35)] hover:shadow-[0_0_30px_rgba(141,224,193,0.55)] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#8DE0C1]"
             >
               <span>Start a Project</span>
               <ArrowRight className="w-3.5 h-3.5 transition-transform duration-200 group-hover:translate-x-1" />
