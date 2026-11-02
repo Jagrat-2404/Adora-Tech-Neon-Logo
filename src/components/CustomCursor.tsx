@@ -3,14 +3,18 @@
 import React, { useEffect, useRef, useState } from "react";
 
 /**
- * CustomCursor Component (Luxury Ambient Follower)
+ * CustomCursor Component (Ultra-Luxury Minimalist Cursor)
  *
- * 1. Native pointer remains fully visible & standard (0 latency, 100% reliable, never disappears on reload).
- * 2. Follower is a hollow, non-intrusive ambient halo (transparent center, NO blur overlay, text is 100% visible).
- * 3. Click scale is applied to an inner element, completely isolating it from the outer RAF translation to prevent glitching.
+ * Replaces the default OS arrow with an elegant, cinematic precision pointer:
+ * 1. Zero-latency precision dot (5px -> 8px) directly tracks exact mouse coords.
+ * 2. Fluid trailing ambient halo ring (28px -> 46px on hover) with smooth lerp easing.
+ * 3. Expands and glows softly over interactive elements with transparent center.
+ * 4. Micro-press tactile bounce on click.
  */
 export const CustomCursor: React.FC = () => {
+  const dotRef = useRef<HTMLDivElement>(null);
   const followerRef = useRef<HTMLDivElement>(null);
+
   const mousePos = useRef({ x: -100, y: -100 });
   const followerPos = useRef({ x: -100, y: -100 });
 
@@ -19,7 +23,7 @@ export const CustomCursor: React.FC = () => {
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
-    // Only mount on fine pointer devices (mouse / trackpad)
+    // Only mount on desktop/fine-pointer devices
     if (!window.matchMedia("(pointer: fine)").matches) return;
 
     let animId: number;
@@ -30,6 +34,13 @@ export const CustomCursor: React.FC = () => {
 
       if (!isVisible) {
         setIsVisible(true);
+        followerPos.current.x = e.clientX;
+        followerPos.current.y = e.clientY;
+      }
+
+      // Update the zero-latency precision dot synchronously for instantaneous feedback
+      if (dotRef.current) {
+        dotRef.current.style.transform = `translate3d(${e.clientX}px, ${e.clientY}px, 0)`;
       }
     };
 
@@ -39,7 +50,7 @@ export const CustomCursor: React.FC = () => {
 
       const isInteractive = Boolean(
         target.closest(
-          'a, button, [role="button"], input[type="submit"], input[type="button"], label, summary, .cursor-pointer'
+          'a, button, [role="button"], input[type="submit"], input[type="button"], label, summary, .cursor-pointer, [tabindex="0"]'
         )
       );
 
@@ -58,7 +69,8 @@ export const CustomCursor: React.FC = () => {
     document.addEventListener("mouseleave", handleMouseLeave);
     document.addEventListener("mouseenter", handleMouseEnter);
 
-    const lerp = 0.18;
+    // Smooth physics loop for the trailing ambient ring
+    const lerp = 0.16;
 
     const renderLoop = () => {
       followerPos.current.x += (mousePos.current.x - followerPos.current.x) * lerp;
@@ -84,42 +96,81 @@ export const CustomCursor: React.FC = () => {
     };
   }, [isVisible]);
 
-  const size = isHovered ? 40 : 26;
-  const offset = size / 2;
+  const followerSize = isHovered ? 46 : 28;
+  const followerOffset = followerSize / 2;
+
+  const dotSize = isHovered ? 8 : 5;
+  const dotOffset = dotSize / 2;
 
   return (
-    <div
-      ref={followerRef}
-      aria-hidden="true"
-      className={`pointer-events-none fixed top-0 left-0 z-30 select-none will-change-transform ${
-        isVisible ? "opacity-100" : "opacity-0"
-      }`}
-      style={{
-        transition: "opacity 0.3s ease",
-      }}
-    >
+    <>
       {/* 
-        Inner ring handles click compression and sizing.
-        Completely isolated from the parent translate3d to guarantee ZERO glitching!
-        Center is 100% transparent so button and menu text is always razor-sharp.
+        1. Precision Center Dot: 
+        Tracks the mouse with ZERO latency (instant 1:1 hardware responsiveness).
+        Never lags or detaches from your hand.
       */}
       <div
-        className="rounded-full pointer-events-none transition-all duration-200 ease-out"
+        ref={dotRef}
+        aria-hidden="true"
+        className={`pointer-events-none fixed top-0 left-0 z-[9999] select-none will-change-transform ${
+          isVisible ? "opacity-100" : "opacity-0"
+        }`}
         style={{
-          width: `${size}px`,
-          height: `${size}px`,
-          marginLeft: `-${offset}px`,
-          marginTop: `-${offset}px`,
-          border: isHovered
-            ? "1.5px solid rgba(141, 224, 193, 0.75)"
-            : "1px solid rgba(141, 224, 193, 0.4)",
-          background: "transparent",
-          boxShadow: isHovered
-            ? "0 0 14px rgba(141, 224, 193, 0.35)"
-            : "0 0 8px rgba(141, 224, 193, 0.15)",
-          transform: isClicking ? "scale(0.72)" : "scale(1)",
+          transition: "opacity 0.2s ease",
         }}
-      />
-    </div>
+      >
+        <div
+          className="rounded-full pointer-events-none transition-all duration-150 ease-out"
+          style={{
+            width: `${dotSize}px`,
+            height: `${dotSize}px`,
+            marginLeft: `-${dotOffset}px`,
+            marginTop: `-${dotOffset}px`,
+            background: isHovered ? "#8DE0C1" : "#F1F3EB",
+            boxShadow: isHovered
+              ? "0 0 10px rgba(141, 224, 193, 0.9), 0 0 4px #8DE0C1"
+              : "0 0 6px rgba(141, 224, 193, 0.7), 0 0 2px #F1F3EB",
+            transform: isClicking ? "scale(0.65)" : "scale(1)",
+          }}
+        />
+      </div>
+
+      {/* 
+        2. Elegant Ambient Halo Follower:
+        Gracefully glides behind the precision dot with buttery smooth RAF easing.
+        Expands into a glowing boundary ring on interactive elements.
+        Center is 100% transparent so button and menu text is always crystal clear.
+      */}
+      <div
+        ref={followerRef}
+        aria-hidden="true"
+        className={`pointer-events-none fixed top-0 left-0 z-[9998] select-none will-change-transform ${
+          isVisible ? "opacity-100" : "opacity-0"
+        }`}
+        style={{
+          transition: "opacity 0.25s ease",
+        }}
+      >
+        <div
+          className="rounded-full pointer-events-none transition-all duration-200 ease-out"
+          style={{
+            width: `${followerSize}px`,
+            height: `${followerSize}px`,
+            marginLeft: `-${followerOffset}px`,
+            marginTop: `-${followerOffset}px`,
+            border: isHovered
+              ? "1.5px solid rgba(141, 224, 193, 0.85)"
+              : "1px solid rgba(141, 224, 193, 0.35)",
+            background: isHovered
+              ? "radial-gradient(circle, rgba(141, 224, 193, 0.08) 0%, transparent 70%)"
+              : "transparent",
+            boxShadow: isHovered
+              ? "0 0 16px rgba(141, 224, 193, 0.4), inset 0 0 10px rgba(141, 224, 193, 0.15)"
+              : "0 0 8px rgba(141, 224, 193, 0.12)",
+            transform: isClicking ? "scale(0.78)" : "scale(1)",
+          }}
+        />
+      </div>
+    </>
   );
 };

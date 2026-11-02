@@ -525,11 +525,21 @@ nextjs-portal,
   pointer-events: none !important;
 }
 
-/* Subtle and reliable pointer rules - keep native cursor visible */
-button,
-a,
-[role="button"] {
-  cursor: pointer;
+/* Elegant Studio Custom Cursor: replaces default OS arrow with precision dot & luxury halo */
+@media (pointer: fine) {
+  html,
+  body,
+  a,
+  button,
+  [role="button"],
+  input,
+  select,
+  textarea,
+  label,
+  summary,
+  .cursor-pointer {
+    cursor: none !important;
+  }
 }
 
 /* Soundbar animation */
